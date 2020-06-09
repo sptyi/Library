@@ -1,0 +1,19 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "TOP Library Project",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sptyi/Library.git"
+  },
+  "author": "sptyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sptyi/Library/issues"
+  },
+  "homepage": "https://github.com/sptyi/Library#readme"
+}

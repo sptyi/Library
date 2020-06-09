@@ -1,0 +1,137 @@
+* {
+	margin: auto;
+	text-align: center;
+	padding: 0;
+	background-color: #333;
+	color: ghostwhite;
+	text-shadow: 2px 2px 5px black;
+}
+
+h1 {
+	margin: 50px;
+	font-size: 45px;
+}
+
+#bookGrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+	gap: 25px;
+	align-items: center;
+	justify-items: center;
+}
+
+#bookGrid div {
+	padding: 5px;
+	background-color: rgb(75, 75, 255);
+	min-width: 75%;
+}
+
+.card {
+	box-shadow: 0 0 10px 3px black;
+}
+
+.deleteBtn {
+	background-color: crimson;
+	border-radius: 50%;
+	border: none;
+	box-shadow: 2px 2px 5px black;
+	color: black;
+	width: 40px;
+	height: 40px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	outline: none;
+}
+
+#addBookBtn {
+	outline: none;
+	box-shadow: 2px 2px 5px black;
+	border-radius: 7px;
+	width: 100px;
+	height: 25px;
+	position: absolute;
+	top: 25px;
+	right: 25px;
+	background-color: rgb(100, 100, 255);
+}
+
+:root {
+	--popup-duration: 0.5s;
+}
+
+#popup {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.5);
+	animation-name: popupopen;
+	animation-duration: var(--popup-duration);
+}
+
+#popupContent {
+	margin-top: 10%;
+	left: 50%;
+	width: 25%;
+	height: 0%;
+}
+
+#popupContent p {
+	font-size: 20px;
+	padding: 10px 5px;
+}
+
+#bookTitle {
+	margin: 10px 5px 5px 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#bookAuthor {
+	margin: 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#bookPages {
+	margin: 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#bookRead {
+	margin: 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#bookSubmitBtn {
+	margin: 25px;
+	border-radius: 7px;
+	width: 100px;
+	height: 25px;
+	box-shadow: 2px 2px 5px black;
+	outline: none;
+}
+
+@keyframes popupopen {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

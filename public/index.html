@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Library</title>
+
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
+		
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<h1>Library</h1>
+		<div id="bookGrid"></div>
+		<div>
+			<button id="addBookBtn">Add a Book</button>
+		</div>
+		<div id="popup">
+			<div id="popupContent">
+				<p>Enter information for your new book:</p>
+				<form id="booksForm">
+					<label for="title">Title: </label>
+					<input type="text" name="title" id="bookTitle" required />
+					<br />
+					<label for="author">Author: </label>
+					<input type="text" name="author" id="bookAuthor" required />
+					<br />
+					<label for="pages">Pages: </label>
+					<input type="text" name="pages" id="bookPages" />
+					<br />
+					<label for="read">Read: </label>
+					<input type="checkbox" name="read" id="bookRead" />
+					<br />
+					<input type="submit" value="Submit Book" id="bookSubmitBtn"></input>
+				</form>
+			</div>
+		</div>
+	<script>
+	var firebaseConfig = {
+		apiKey: "AIzaSyCR7ctwDeT3SvS4OqZXzqsi8FypBlumA2A",
+		authDomain: "library-sptyi.firebaseapp.com",
+		databaseURL: "https://library-sptyi.firebaseio.com",
+		projectId: "library-sptyi",
+		storageBucket: "library-sptyi.appspot.com",
+		messagingSenderId: "917004024144",
+		appId: "1:917004024144:web:75ea723ad31de4f266d455",
+		measurementId: "G-091E60BMHL"
+	};
+	firebase.initializeApp(firebaseConfig);
+	firebase.analytics();
+	const db = firebase.firestore();
+	</script>
+	<script type="text/javascript" src="app.js"></script>
+	</body>
+</html>
