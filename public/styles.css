@@ -5,11 +5,61 @@
 	background-color: #333;
 	color: ghostwhite;
 	text-shadow: 2px 2px 5px black;
+	font-family: 'Cormorant Garamond', serif;
+}
+
+:root {
+	--popup-duration: 0.5s;
+}
+
+header {
+	background-color: gray;
+	height: 55px;
+	width: 100vw;
+	margin-bottom: 50px;
+}
+
+#menuBtn {
+	position: fixed;
+	left: 25px;
+	background-color: transparent;
+	font-size: 3rem;
+	cursor: pointer;
+	transition: all 0.5s ease-in-out;
+	text-shadow: none;
+}
+
+.menuOpen {
+	transform: rotate(-90deg) scale(0.5);
 }
 
 h1 {
-	margin: 50px;
-	font-size: 45px;
+	font-size: 2.5rem;
+	background-color: transparent;
+	width: 200px;
+}
+
+#addBookBtn {
+	position: fixed;
+	top: 13px;
+	right: 25px;
+	outline: none;
+	text-shadow: none;
+	border-radius: 7px;
+	border: none;
+	width: 100px;
+	height: 25px;
+	background-color: forestgreen;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+#addBookBtn:hover {
+	transform: scale(1.1);
+}
+
+#addBookBtn:active {
+	transform: scale(0.9);
 }
 
 #bookGrid {
@@ -25,6 +75,7 @@ h1 {
 	padding: 5px;
 	background-color: rgb(75, 75, 255);
 	min-width: 75%;
+	border-radius: 10px;
 }
 
 .card {
@@ -32,7 +83,7 @@ h1 {
 }
 
 .deleteBtn {
-	background-color: crimson;
+	background-color: ghostwhite;
 	border-radius: 50%;
 	border: none;
 	box-shadow: 2px 2px 5px black;
@@ -41,23 +92,30 @@ h1 {
 	height: 40px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	padding-bottom: 7px;
 	outline: none;
+	text-shadow: none;
+	font-size: 30px;
+	cursor: pointer;
 }
 
-#addBookBtn {
-	outline: none;
-	box-shadow: 2px 2px 5px black;
-	border-radius: 7px;
-	width: 100px;
-	height: 25px;
-	position: absolute;
-	top: 25px;
-	right: 25px;
-	background-color: rgb(100, 100, 255);
+.deleteBtn:hover {
+	transform: scale(1.1);
+	background-color: crimson;
 }
 
-:root {
-	--popup-duration: 0.5s;
+.deleteBtn:active {
+	transform: scale(0.9);
+}
+
+#booksForm {
+	border-radius: 0 0 10px 10px;
+	background-color: grey;
+}
+
+#booksForm label {
+	background-color: grey;
+	text-shadow: none;
 }
 
 #popup {
@@ -74,20 +132,31 @@ h1 {
 	animation-duration: var(--popup-duration);
 }
 
+@keyframes popupopen {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 #popupContent {
 	margin-top: 10%;
 	left: 50%;
-	width: 25%;
+	max-width: 35%;
 	height: 0%;
 }
 
 #popupContent p {
-	font-size: 20px;
+	font-size: 25px;
 	padding: 10px 5px;
+	border-radius: 10px 10px 0 0;
+	background-color: grey;
 }
 
 #bookTitle {
-	margin: 10px 5px 5px 5px;
+	margin: 5px;
 	background-color: ghostwhite;
 	border-radius: 7px;
 	color: black;
@@ -113,9 +182,9 @@ h1 {
 #bookRead {
 	margin: 5px;
 	background-color: ghostwhite;
-	border-radius: 7px;
 	color: black;
 	outline: none;
+	cursor: pointer;
 }
 
 #bookSubmitBtn {
@@ -125,13 +194,122 @@ h1 {
 	height: 25px;
 	box-shadow: 2px 2px 5px black;
 	outline: none;
+	background-color: forestgreen;
+	border: none;
+	font-size: 15px;
+	cursor: pointer;
 }
 
-@keyframes popupopen {
+#bookSubmitBtn:hover {
+	transform: scale(1.1);
+}
+
+#bookSubmitBtn:active {
+	transform: scale(0.9);
+}
+
+#menu {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.5);
+	animation-name: menuopen;
+	animation-duration: var(--popup-duration);
+}
+
+#menuContent {
+	margin-top: 50px;
+	left: 0;
+	height: 0%;
+}
+
+@keyframes menuopen {
 	from {
 		opacity: 0;
 	}
 	to {
 		opacity: 1;
 	}
+}
+
+#signInBtn {
+	position: fixed;
+	top: 2%;
+	left: 25px;
+	outline: none;
+	text-shadow: none;
+	border-radius: 7px;
+	border: none;
+	width: 100px;
+	height: 25px;
+	background-color: forestgreen;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+#signInBtn:hover {
+	transform: scale(1.1);
+}
+
+#signInBtn:active {
+	transform: scale(0.9);
+}
+
+#signUpBtn {
+	position: fixed;
+	top: 6%;
+	left: 25px;
+	outline: none;
+	text-shadow: none;
+	border-radius: 7px;
+	border: none;
+	width: 100px;
+	height: 25px;
+	background-color: forestgreen;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+#signUpBtn:hover {
+	transform: scale(1.1);
+}
+
+#signUpBtn:active {
+	transform: scale(0.9);
+}
+
+#accountBtn {
+	position: fixed;
+	top: 10%;
+	left: 25px;
+	outline: none;
+	text-shadow: none;
+	border-radius: 7px;
+	border: none;
+	width: 100px;
+	height: 25px;
+	background-color: forestgreen;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+#accountBtn:hover {
+	transform: scale(1.1);
+}
+
+#accountBtn:active {
+	transform: scale(0.9);
+}
+
+#signInForm {
+	display: none;
+}
+
+#signUpForm {
+	display: none;
 }

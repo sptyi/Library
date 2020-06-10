@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Library</title>
+		<title>My Library</title>
 
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
@@ -12,25 +12,27 @@
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
 		
 		<link rel="stylesheet" href="styles.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<h1>Library</h1>
-		<div id="bookGrid"></div>
-		<div>
+		<header id="navbar">
+			<span id="menuBtn">&equiv;</span>
+			<h1>My Library</h1>
 			<button id="addBookBtn">Add a Book</button>
-		</div>
+		</header>
+		<div id="bookGrid"></div>
 		<div id="popup">
 			<div id="popupContent">
 				<p>Enter information for your new book:</p>
 				<form id="booksForm">
-					<label for="title">Title: </label>
+					<label for="title">Title: </label><br>
 					<input type="text" name="title" id="bookTitle" required />
 					<br />
-					<label for="author">Author: </label>
+					<label for="author">Author: </label><br>
 					<input type="text" name="author" id="bookAuthor" required />
 					<br />
-					<label for="pages">Pages: </label>
-					<input type="text" name="pages" id="bookPages" />
+					<label for="pages">Pages: </label><br>
+					<input type="number" name="pages" id="bookPages" />
 					<br />
 					<label for="read">Read: </label>
 					<input type="checkbox" name="read" id="bookRead" />
@@ -39,8 +41,32 @@
 				</form>
 			</div>
 		</div>
-	<script>
-	var firebaseConfig = {
+		<div id='menu'>
+			<div id="menuContent">
+				<button id="signInBtn">Sign In</button><br>
+				<button id="signUpBtn">Sign Up</button><br>
+				<button id="accountBtn">Account</button><br>
+			</div>
+		</div>
+
+		<form id="signInForm">
+			<p>Sign In:</p>
+			<label for="signInEmail">Email: </label><br>
+			<input type="email" name="signInEmail" id="signInEmail" required /><br>
+			<label for="signInPassword">Password: </label><br>
+			<input type="password" name="signInPassword" id="signInPassword" required /><br>
+		</form>
+
+		<form id="signUpForm">
+			<p>Sign Up:</p>
+			<label for="signUpEmail">Email: </label><br>
+			<input type="email" name="signUpEmail" id="signUpEmail" required /><br>
+			<label for="signUpPassword">Password: </label><br>
+			<input type="password" name="signUpPassword" id="signUpPassword" required /><br>
+		</form>
+
+		<script>
+		var firebaseConfig = {
 		apiKey: "AIzaSyCR7ctwDeT3SvS4OqZXzqsi8FypBlumA2A",
 		authDomain: "library-sptyi.firebaseapp.com",
 		databaseURL: "https://library-sptyi.firebaseio.com",
@@ -53,6 +79,7 @@
 	firebase.initializeApp(firebaseConfig);
 	firebase.analytics();
 	const db = firebase.firestore();
+	const auth = firebase.auth();
 	</script>
 	<script type="text/javascript" src="app.js"></script>
 	</body>

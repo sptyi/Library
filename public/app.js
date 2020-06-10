@@ -2,6 +2,12 @@ const bookGrid = document.querySelector('#bookGrid');
 const addBookBtn = document.querySelector('#addBookBtn');
 const popup = document.querySelector('#popup');
 const booksForm = document.querySelector('#booksForm');
+const menuBtn = document.querySelector('#menuBtn');
+const menu = document.querySelector('#menu');
+const signInBtn = document.querySelector('#signInBtn');
+const signUpBtn = document.querySelector('#signUpBtn');
+const signInForm = document.querySelector('#signInForm');
+const signUpForm = document.querySelector('#signUpForm');
 let myLibrary = [];
 
 addBookBtn.addEventListener('click', () => {
@@ -36,7 +42,7 @@ function renderBook(doc) {
 
 	let deleteBtn = document.createElement('button');
 	deleteBtn.setAttribute('class', 'deleteBtn');
-	deleteBtn.textContent = 'x';
+	deleteBtn.textContent = '\u00D7';
 	div.appendChild(deleteBtn);
 
 	deleteBtn.addEventListener('click', (e) => {
@@ -46,6 +52,7 @@ function renderBook(doc) {
 	});
 }
 
+/*
 db.collection('books')
 	.get()
 	.then((snapshot) => {
@@ -59,7 +66,7 @@ function Book(title, author, pages, read) {
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
-	//	console.log(this);
+	console.log(this);
 }
 
 var theFellowshipOfTheRing = new Book(
@@ -68,10 +75,12 @@ var theFellowshipOfTheRing = new Book(
 	'479',
 	true
 );
+*/
 
 booksForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	addBookToLibrary();
+	closePopup();
 });
 
 function addBookToLibrary() {
@@ -81,12 +90,26 @@ function addBookToLibrary() {
 		pages: booksForm.pages.value,
 		read: booksForm.read.value,
 	});
-	title.booksForm.value = '';
-	author.booksForm.value = '';
-	pages.booksForm.value = '';
-	read.booksForm.value = '';
-	closePopup();
+	booksForm.title.value = '';
+	booksForm.author.value = '';
+	booksForm.pages.value = '';
+	booksForm.read.value = '';
 }
+
+db.collection('books')
+	.orderBy('author')
+	.onSnapshot((snapshot) => {
+		let changes = snapshot.docChanges();
+		changes.forEach((change) => {
+			console.log(change.doc.data());
+			if (change.type == 'added') {
+				renderBook(change.doc);
+			} else if (change.type == 'removed') {
+				let div = bookGrid.querySelector('[data-id=' + change.doc.id + ']');
+				bookGrid.removeChild(div);
+			}
+		});
+	});
 
 window.addEventListener('click', outsidePopupClick);
 
@@ -95,11 +118,43 @@ function closePopup() {
 }
 
 function outsidePopupClick(e) {
-	if (e.target == popup) {
+	if ((e.target == popup) | (e.target == menu)) {
 		closePopup();
+		closeMenu();
 	}
 }
 
 function openPopup() {
 	popup.style.display = 'block';
 }
+
+function closeMenu() {
+	menu.style.display = 'none';
+}
+
+menuBtn.addEventListener('click', () => {
+	if (menuBtn.classList.contains('menuOpen')) {
+		menuBtn.classList.remove('menuOpen');
+	} else {
+		menuBtn.setAttribute('class', 'menuOpen');
+		menu.style.display = 'block';
+	}
+});
+
+signInBtn.addEventListener('click', () => {
+	if (signInForm.classList.contains('signInOpen')) {
+		signInForm.classList.remove('signInOpen');
+	} else {
+		signInForm.setAttribute('class', 'signInOpen');
+		signInForm.style.display = 'block';
+	}
+});
+
+signUpBtn.addEventListener('click', () => {
+	if (signUpForm.classList.contains('signUpOpen')) {
+		signUpForm.classList.remove('signUpOpen');
+	} else {
+		signUpForm.setAttribute('class', 'signUpOpen');
+		signUpForm.style.display = 'block';
+	}
+});
