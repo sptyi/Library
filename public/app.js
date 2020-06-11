@@ -1,18 +1,17 @@
 const bookGrid = document.querySelector('#bookGrid');
 const addBookBtn = document.querySelector('#addBookBtn');
-const popup = document.querySelector('#popup');
+const addBookModal = document.querySelector('#addBookModal');
 const booksForm = document.querySelector('#booksForm');
 const menuBtn = document.querySelector('#menuBtn');
-const menu = document.querySelector('#menu');
+const menuModal = document.querySelector('#menuModal');
 const signInBtn = document.querySelector('#signInBtn');
-const signUpBtn = document.querySelector('#signUpBtn');
-const signInForm = document.querySelector('#signInForm');
-const signUpForm = document.querySelector('#signUpForm');
-let myLibrary = [];
-
-addBookBtn.addEventListener('click', () => {
-	openPopup();
-});
+const createAccountBtn = document.querySelector('#createAccountBtn');
+const signInModal = document.querySelector('#signInModal');
+const createAccountModal = document.querySelector('#createAccountModal');
+const accountModal = document.querySelector('#accountModal');
+const deleteWarningModal = document.querySelector('#deleteWarningModal');
+const yesDelete = document.querySelector('#yesDelete');
+const noDelete = document.querySelector('#noDelete');
 
 function renderBook(doc) {
 	let div = document.createElement('div');
@@ -48,39 +47,47 @@ function renderBook(doc) {
 	deleteBtn.addEventListener('click', (e) => {
 		e.stopPropagation();
 		let id = e.target.parentElement.getAttribute('data-id');
-		db.collection('books').doc(id).delete();
+		deleteWarningModal.style.display = 'block';
+		yesDelete.addEventListener('click', () => {
+			deleteWarningModal.style.display = 'none';
+			db.collection('books').doc(id).delete();
+		});
+	});
+
+	noDelete.addEventListener('click', () => {
+		deleteWarningModal.style.display = 'none';
+	});
+
+	let editBtn = document.createElement('button');
+	editBtn.setAttribute('class', 'editBtn');
+	editBtn.textContent = '\u270D';
+	div.appendChild(editBtn);
+
+	editBtn.addEventListener('click', (e) => {
+		e.stopPropagation();
+		let id = e.target.parentElement.getAttribute('data-id');
+		// db.collection('books').doc(id).edit();
 	});
 }
+
+addBookBtn.addEventListener('click', () => {
+	openaddBookModal();
+});
 
 /*
 db.collection('books')
 	.get()
-	.then((snapshot) => {
+	.then(snapshot => {
 		snapshot.docs.forEach((doc) => {
 			renderBook(doc);
 		});
 	});
-
-function Book(title, author, pages, read) {
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.read = read;
-	console.log(this);
-}
-
-var theFellowshipOfTheRing = new Book(
-	'The Lord of the Rings: The Fellowship of the Ring',
-	'J. R. R. Tolkien',
-	'479',
-	true
-);
 */
 
 booksForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	addBookToLibrary();
-	closePopup();
+	closeaddBookModal();
 });
 
 function addBookToLibrary() {
@@ -96,65 +103,75 @@ function addBookToLibrary() {
 	booksForm.read.value = '';
 }
 
-db.collection('books')
-	.orderBy('author')
-	.onSnapshot((snapshot) => {
-		let changes = snapshot.docChanges();
-		changes.forEach((change) => {
-			console.log(change.doc.data());
-			if (change.type == 'added') {
-				renderBook(change.doc);
-			} else if (change.type == 'removed') {
-				let div = bookGrid.querySelector('[data-id=' + change.doc.id + ']');
-				bookGrid.removeChild(div);
-			}
-		});
-	});
+window.addEventListener('click', outsideModalClick);
 
-window.addEventListener('click', outsidePopupClick);
-
-function closePopup() {
-	popup.style.display = 'none';
+function closeaddBookModal() {
+	addBookModal.style.display = 'none';
 }
 
-function outsidePopupClick(e) {
-	if ((e.target == popup) | (e.target == menu)) {
-		closePopup();
-		closeMenu();
+function outsideModalClick(e) {
+	if (
+		(e.target == addBookModal) |
+		(e.target == menuModal) |
+		(e.target == signInModal) |
+		(e.target == createAccountModal) |
+		(e.target == accountModal) |
+		(e.target == deleteWarningModal)
+	) {
+		closeaddBookModal();
+		closeMenuModal();
+		closeSignInModal();
+		closeCreateAccountModal();
+		// closeAccountModal();
+		closeDeleteWarningModal();
 	}
 }
 
-function openPopup() {
-	popup.style.display = 'block';
+function openaddBookModal() {
+	addBookModal.style.display = 'block';
 }
 
-function closeMenu() {
-	menu.style.display = 'none';
+function closeMenuModal() {
+	menuModal.style.display = 'none';
+	menuBtn.classList.remove('menuModalOpen');
+}
+
+function closeSignInModal() {
+	signInModalContent.signInEmail.value = '';
+	signInModalContent.signInPassword.value = '';
+	signInModal.style.display = 'none';
+}
+
+function closeCreateAccountModal() {
+	createAccountModal.style.display = 'none';
+	createAccountModalContent.email.value = '';
+	createAccountModalContent.password.value = '';
+	createAccountModalContent.username.value = '';
+}
+
+// function closeAccountModal() {
+// 	accountModal.style.display = 'none';
+// }
+
+function closeDeleteWarningModal() {
+	deleteWarningModal.style.display = 'none';
 }
 
 menuBtn.addEventListener('click', () => {
-	if (menuBtn.classList.contains('menuOpen')) {
-		menuBtn.classList.remove('menuOpen');
+	if (menuBtn.classList.contains('menuModalOpen')) {
+		menuBtn.classList.remove('menuModalOpen');
 	} else {
-		menuBtn.setAttribute('class', 'menuOpen');
-		menu.style.display = 'block';
+		menuBtn.setAttribute('class', 'menuModalOpen');
+		menuModal.style.display = 'block';
 	}
 });
 
 signInBtn.addEventListener('click', () => {
-	if (signInForm.classList.contains('signInOpen')) {
-		signInForm.classList.remove('signInOpen');
-	} else {
-		signInForm.setAttribute('class', 'signInOpen');
-		signInForm.style.display = 'block';
-	}
+	closeMenuModal();
+	signInModal.style.display = 'block';
 });
 
-signUpBtn.addEventListener('click', () => {
-	if (signUpForm.classList.contains('signUpOpen')) {
-		signUpForm.classList.remove('signUpOpen');
-	} else {
-		signUpForm.setAttribute('class', 'signUpOpen');
-		signUpForm.style.display = 'block';
-	}
+createAccountBtn.addEventListener('click', () => {
+	closeMenuModal();
+	createAccountModal.style.display = 'block';
 });

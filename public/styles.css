@@ -9,7 +9,7 @@
 }
 
 :root {
-	--popup-duration: 0.5s;
+	--addBookModal-duration: 0.5s;
 }
 
 header {
@@ -17,6 +17,12 @@ header {
 	height: 55px;
 	width: 100vw;
 	margin-bottom: 50px;
+}
+
+h2 {
+	display: none;
+	color: rgb(75, 75, 255);
+	margin: 100px 25px;
 }
 
 #menuBtn {
@@ -29,8 +35,8 @@ header {
 	text-shadow: none;
 }
 
-.menuOpen {
-	transform: rotate(-90deg) scale(0.5);
+.menuModalOpen {
+	transform: scale(0);
 }
 
 h1 {
@@ -56,6 +62,7 @@ h1 {
 
 #addBookBtn:hover {
 	transform: scale(1.1);
+	box-shadow: 2px 2px 5px black;
 }
 
 #addBookBtn:active {
@@ -86,13 +93,12 @@ h1 {
 	background-color: ghostwhite;
 	border-radius: 50%;
 	border: none;
-	box-shadow: 2px 2px 5px black;
 	color: black;
 	width: 40px;
 	height: 40px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 10px 0;
 	padding-bottom: 7px;
+	float: left;
 	outline: none;
 	text-shadow: none;
 	font-size: 30px;
@@ -102,9 +108,30 @@ h1 {
 .deleteBtn:hover {
 	transform: scale(1.1);
 	background-color: crimson;
+	color: ghostwhite;
+	box-shadow: 0 0 10px 3px crimson;
 }
 
 .deleteBtn:active {
+	transform: scale(0.9);
+}
+
+.editBtn {
+	background-color: transparent;
+	border: none;
+	outline: none;
+	text-shadow: none;
+	font-size: 30px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	float: right;
+}
+
+.editBtn:hover {
+	transform: scale(1.1);
+}
+
+.editBtn:active {
 	transform: scale(0.9);
 }
 
@@ -118,7 +145,7 @@ h1 {
 	text-shadow: none;
 }
 
-#popup {
+#addBookModal {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -128,11 +155,11 @@ h1 {
 	width: 100%;
 	overflow: hidden;
 	background-color: rgba(0, 0, 0, 0.5);
-	animation-name: popupopen;
-	animation-duration: var(--popup-duration);
+	animation-name: addBookModalopen;
+	animation-duration: var(--addBookModal-duration);
 }
 
-@keyframes popupopen {
+@keyframes addBookModalopen {
 	from {
 		opacity: 0;
 	}
@@ -141,14 +168,12 @@ h1 {
 	}
 }
 
-#popupContent {
+#addBookModalContent {
 	margin-top: 10%;
-	left: 50%;
 	max-width: 35%;
-	height: 0%;
 }
 
-#popupContent p {
+#addBookModalContent p {
 	font-size: 25px;
 	padding: 10px 5px;
 	border-radius: 10px 10px 0 0;
@@ -192,7 +217,6 @@ h1 {
 	border-radius: 7px;
 	width: 100px;
 	height: 25px;
-	box-shadow: 2px 2px 5px black;
 	outline: none;
 	background-color: forestgreen;
 	border: none;
@@ -202,13 +226,14 @@ h1 {
 
 #bookSubmitBtn:hover {
 	transform: scale(1.1);
+	box-shadow: 2px 2px 5px black;
 }
 
 #bookSubmitBtn:active {
 	transform: scale(0.9);
 }
 
-#menu {
+#menuModal {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -218,17 +243,18 @@ h1 {
 	width: 100%;
 	overflow: hidden;
 	background-color: rgba(0, 0, 0, 0.5);
-	animation-name: menuopen;
-	animation-duration: var(--popup-duration);
 }
 
-#menuContent {
+#menuModalContent {
 	margin-top: 50px;
 	left: 0;
 	height: 0%;
+	background-color: grey;
+	animation-name: menuModalopen;
+	animation-duration: var(--addBookModal-duration);
 }
 
-@keyframes menuopen {
+@keyframes menuModalopen {
 	from {
 		opacity: 0;
 	}
@@ -239,8 +265,8 @@ h1 {
 
 #signInBtn {
 	position: fixed;
-	top: 2%;
-	left: 25px;
+	top: 7%;
+	left: 50px;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
@@ -254,16 +280,17 @@ h1 {
 
 #signInBtn:hover {
 	transform: scale(1.1);
+	box-shadow: 0 0 10px 3px ghostwhite;
 }
 
 #signInBtn:active {
 	transform: scale(0.9);
 }
 
-#signUpBtn {
+#createAccountBtn {
 	position: fixed;
-	top: 6%;
-	left: 25px;
+	top: 12%;
+	left: 50px;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
@@ -275,41 +302,280 @@ h1 {
 	font-size: 18px;
 }
 
-#signUpBtn:hover {
+#createAccountBtn:hover {
 	transform: scale(1.1);
+	box-shadow: 0 0 10px 3px ghostwhite;
 }
 
-#signUpBtn:active {
+#createAccountBtn:active {
 	transform: scale(0.9);
 }
 
-#accountBtn {
+#signOutBtn {
 	position: fixed;
-	top: 10%;
-	left: 25px;
+	top: 17%;
+	left: 50px;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
 	border: none;
 	width: 100px;
 	height: 25px;
-	background-color: forestgreen;
+	background-color: crimson;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+#signOutBtn:hover {
+	transform: scale(1.1);
+	box-shadow: 0 0 10px 3px ghostwhite;
+}
+
+#signOutBtn:active {
+	transform: scale(0.9);
+}
+
+#accountBtn {
+	position: fixed;
+	top: 22%;
+	left: 50px;
+	outline: none;
+	text-shadow: none;
+	border-radius: 7px;
+	border: none;
+	width: 100px;
+	height: 25px;
+	background-color: rgb(75, 75, 255);
 	cursor: pointer;
 	font-size: 18px;
 }
 
 #accountBtn:hover {
 	transform: scale(1.1);
+	box-shadow: 0 0 10px 3px ghostwhite;
 }
 
 #accountBtn:active {
 	transform: scale(0.9);
 }
 
-#signInForm {
+#signInModal {
 	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
-#signUpForm {
+#signInModalContent {
+	margin-top: 10%;
+	max-width: 35%;
+}
+
+#signInModal p {
+	font-size: 25px;
+	padding: 20px 5px;
+	background-color: grey;
+	border-radius: 10px;
+}
+
+#signInModal form {
+	border-radius: 10px;
+	background-color: grey;
+}
+
+#signInModal label {
+	background-color: grey;
+	text-shadow: none;
+}
+
+#signInEmail {
+	margin: 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#signInPassword {
+	margin: 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#signInSubmitBtn {
+	margin: 25px;
+	border-radius: 7px;
+	width: 100px;
+	height: 25px;
+	outline: none;
+	background-color: forestgreen;
+	border: none;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+#signInSubmitBtn:hover {
+	transform: scale(1.1);
+	box-shadow: 2px 2px 5px black;
+}
+
+#signInSubmitBtn:active {
+	transform: scale(0.9);
+}
+
+#createAccountModal {
 	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#createAccountModalContent {
+	margin-top: 10%;
+	max-width: 35%;
+}
+
+#createAccountModal p {
+	font-size: 25px;
+	padding: 20px 5px;
+	background-color: grey;
+	border-radius: 10px;
+}
+
+#createAccountModal form {
+	border-radius: 10px;
+	background-color: grey;
+}
+
+#createAccountModal label {
+	background-color: grey;
+	text-shadow: none;
+}
+
+#createAccountEmail {
+	margin: 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#createAccountPassword {
+	margin: 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#createAccountUsername {
+	margin: 5px;
+	background-color: ghostwhite;
+	border-radius: 7px;
+	color: black;
+	outline: none;
+}
+
+#createAccountSubmitBtn {
+	margin: 25px;
+	border-radius: 7px;
+	width: 100px;
+	height: 25px;
+	outline: none;
+	background-color: forestgreen;
+	border: none;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+#createAccountSubmitBtn:hover {
+	transform: scale(1.1);
+	box-shadow: 2px 2px 5px black;
+}
+
+#createAccountSubmitBtn:active {
+	transform: scale(0.9);
+}
+
+#deleteWarningModal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#deleteWarningModalContent {
+	margin-top: 10%;
+	max-width: 35%;
+	height: 150px;
+	background-color: grey;
+	border-radius: 10px;
+}
+
+#deleteWarningModal p {
+	font-size: 25px;
+	padding: 20px 5px;
+	background-color: grey;
+	border-radius: 10px;
+}
+
+#yesDelete {
+	margin: 10px 50px;
+	border-radius: 7px;
+	width: 75px;
+	height: 25px;
+	outline: none;
+	background-color: forestgreen;
+	border: none;
+	font-size: 15px;
+	cursor: pointer;
+	float: left;
+}
+
+#yesDelete:hover {
+	transform: scale(1.1);
+	box-shadow: 2px 2px 5px black;
+}
+
+#yesDelete:active {
+	transform: scale(0.9);
+}
+
+#noDelete {
+	margin: 10px 50px;
+	border-radius: 7px;
+	width: 75px;
+	height: 25px;
+	outline: none;
+	background-color: crimson;
+	border: none;
+	font-size: 15px;
+	cursor: pointer;
+	float: right;
+}
+
+#noDelete:hover {
+	transform: scale(1.1);
+	box-shadow: 2px 2px 5px black;
+}
+
+#noDelete:active {
+	transform: scale(0.9);
 }
