@@ -2,6 +2,14 @@ auth.onAuthStateChanged((user) => {
 	if (user) {
 		closeSignInModal();
 		h2.style.display = 'none';
+		h1.textContent = `${auth.currentUser.displayName}'s Library`;
+		addBookBtn.style.display = 'block';
+		signInBtn.style.display = 'none';
+		createAccountBtn.style.display = 'none';
+		signOut.style.display = 'block';
+		divSignOut.style.gridRow = '2 / 2';
+		accountBtn.style.display = 'block';
+		divAccount.style.gridRow = '1 / 1';
 		db.collection('books')
 			.orderBy('author')
 			.onSnapshot((snapshot) => {
@@ -18,27 +26,37 @@ auth.onAuthStateChanged((user) => {
 	} else {
 		closeMenuModal();
 		bookGrid.innerHTML = '';
+		h1.textContent = 'My Library';
 		h2.style.display = 'block';
+		addBookBtn.style.display = 'none';
+		signInBtn.style.display = 'block';
+		createAccountBtn.style.display = 'block';
+		signOut.style.display = 'none';
+		divSignOut.style.gridRow = '3 / 3';
+		accountBtn.style.display = 'none';
+		divAccount.style.gridRow = '4 / 4';
 	}
 });
-
-const h2 = document.querySelector('h2');
-
-const createAccountModalContent = document.querySelector(
-	'#createAccountModalContent'
-);
-const signIn = document.querySelector('#signInModalContent');
-const signOut = document.querySelector('#signOutBtn');
 
 createAccountModalContent.addEventListener('submit', (e) => {
 	e.preventDefault();
 
 	const email = createAccountModalContent['createAccountEmail'].value;
 	const password = createAccountModalContent['createAccountPassword'].value;
+	const displayName =
+		createAccountModalContent['createAccountDisplayName'].value;
 
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
 		const modal = document.querySelector('#createAccountModal');
-		closecreateAccountModal();
+
+		auth.currentUser.updateProfile({
+			displayName: displayName,
+		});
+		h1.textContent = `${auth.currentUser.displayName}'s Library`;
+
+		auth.currentUser.sendEmailVerification();
+
+		closeCreateAccountModal();
 	});
 });
 

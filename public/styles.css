@@ -21,7 +21,7 @@ header {
 
 h2 {
 	display: none;
-	color: rgb(75, 75, 255);
+	color: royalblue;
 	margin: 100px 25px;
 }
 
@@ -42,10 +42,12 @@ h2 {
 h1 {
 	font-size: 2.5rem;
 	background-color: transparent;
-	width: 200px;
+	width: max-content;
+	max-width: 1000px;
 }
 
 #addBookBtn {
+	display: none;
 	position: fixed;
 	top: 13px;
 	right: 25px;
@@ -58,11 +60,11 @@ h1 {
 	background-color: forestgreen;
 	cursor: pointer;
 	font-size: 18px;
+	box-shadow: 2px 2px 5px black;
 }
 
 #addBookBtn:hover {
 	transform: scale(1.1);
-	box-shadow: 2px 2px 5px black;
 }
 
 #addBookBtn:active {
@@ -80,7 +82,7 @@ h1 {
 
 #bookGrid div {
 	padding: 5px;
-	background-color: rgb(75, 75, 255);
+	background-color: royalblue;
 	min-width: 75%;
 	border-radius: 10px;
 }
@@ -92,13 +94,12 @@ h1 {
 .deleteBtn {
 	background-color: ghostwhite;
 	border-radius: 50%;
-	border: none;
+	border: solid 2px crimson;
 	color: black;
 	width: 40px;
 	height: 40px;
-	margin: 10px 0;
-	padding-bottom: 7px;
-	float: left;
+	margin: 10px;
+	line-height: 1em;
 	outline: none;
 	text-shadow: none;
 	font-size: 30px;
@@ -113,25 +114,6 @@ h1 {
 }
 
 .deleteBtn:active {
-	transform: scale(0.9);
-}
-
-.editBtn {
-	background-color: transparent;
-	border: none;
-	outline: none;
-	text-shadow: none;
-	font-size: 30px;
-	margin-bottom: 10px;
-	cursor: pointer;
-	float: right;
-}
-
-.editBtn:hover {
-	transform: scale(1.1);
-}
-
-.editBtn:active {
 	transform: scale(0.9);
 }
 
@@ -246,10 +228,11 @@ h1 {
 }
 
 #menuModalContent {
-	margin-top: 50px;
-	left: 0;
-	height: 0%;
-	background-color: grey;
+	width: min-content;
+	display: grid;
+	grid-gap: 50px;
+	place-content: center;
+	margin: 50px;
 	animation-name: menuModalopen;
 	animation-duration: var(--addBookModal-duration);
 }
@@ -257,16 +240,16 @@ h1 {
 @keyframes menuModalopen {
 	from {
 		opacity: 0;
+		transform: translate(0px, -100px);
 	}
 	to {
 		opacity: 1;
+		transform: translate(0px, 0px);
 	}
 }
 
 #signInBtn {
 	position: fixed;
-	top: 7%;
-	left: 50px;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
@@ -289,8 +272,6 @@ h1 {
 
 #createAccountBtn {
 	position: fixed;
-	top: 12%;
-	left: 50px;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
@@ -313,8 +294,6 @@ h1 {
 
 #signOutBtn {
 	position: fixed;
-	top: 17%;
-	left: 50px;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
@@ -337,15 +316,13 @@ h1 {
 
 #accountBtn {
 	position: fixed;
-	top: 22%;
-	left: 50px;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
 	border: none;
 	width: 100px;
 	height: 25px;
-	background-color: rgb(75, 75, 255);
+	background-color: royalblue;
 	cursor: pointer;
 	font-size: 18px;
 }
@@ -480,7 +457,7 @@ h1 {
 	outline: none;
 }
 
-#createAccountUsername {
+#createAccountDisplayName {
 	margin: 5px;
 	background-color: ghostwhite;
 	border-radius: 7px;
@@ -547,11 +524,11 @@ h1 {
 	font-size: 15px;
 	cursor: pointer;
 	float: left;
+	box-shadow: 2px 2px 5px black;
 }
 
 #yesDelete:hover {
 	transform: scale(1.1);
-	box-shadow: 2px 2px 5px black;
 }
 
 #yesDelete:active {
@@ -569,11 +546,11 @@ h1 {
 	font-size: 15px;
 	cursor: pointer;
 	float: right;
+	box-shadow: 2px 2px 5px black;
 }
 
 #noDelete:hover {
 	transform: scale(1.1);
-	box-shadow: 2px 2px 5px black;
 }
 
 #noDelete:active {

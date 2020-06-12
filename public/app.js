@@ -1,3 +1,4 @@
+const h1 = document.querySelector('#h1');
 const bookGrid = document.querySelector('#bookGrid');
 const addBookBtn = document.querySelector('#addBookBtn');
 const addBookModal = document.querySelector('#addBookModal');
@@ -12,6 +13,12 @@ const accountModal = document.querySelector('#accountModal');
 const deleteWarningModal = document.querySelector('#deleteWarningModal');
 const yesDelete = document.querySelector('#yesDelete');
 const noDelete = document.querySelector('#noDelete');
+const h2 = document.querySelector('h2');
+const divSignOut = document.querySelector('#divSignOut');
+const divAccount = document.querySelector('#divAccount');
+const createAccountModalContent = document.querySelector('#createAccountModalContent');
+const signIn = document.querySelector('#signInModalContent');
+const signOut = document.querySelector('#signOutBtn');
 
 function renderBook(doc) {
 	let div = document.createElement('div');
@@ -29,13 +36,15 @@ function renderBook(doc) {
 
 	let pages = document.createElement('div');
 	pages.textContent = `${doc.data().pages} pages`;
-	div.appendChild(pages);
+	if (doc.data().pages) {
+		div.appendChild(pages);
+	}
 
 	let read = document.createElement('div');
-	if (doc.data().read) {
-		read.textContent = `I've already read this book`;
+	if (doc.data().read.checked) {
+		read.textContent = 'I have already read this book!';
 	} else {
-		read.textContent = `I haven't read this book yet`;
+		read.textContent = 'I should read this book...';
 	}
 	div.appendChild(read);
 
@@ -57,21 +66,10 @@ function renderBook(doc) {
 	noDelete.addEventListener('click', () => {
 		deleteWarningModal.style.display = 'none';
 	});
-
-	let editBtn = document.createElement('button');
-	editBtn.setAttribute('class', 'editBtn');
-	editBtn.textContent = '\u270D';
-	div.appendChild(editBtn);
-
-	editBtn.addEventListener('click', (e) => {
-		e.stopPropagation();
-		let id = e.target.parentElement.getAttribute('data-id');
-		// db.collection('books').doc(id).edit();
-	});
 }
 
 addBookBtn.addEventListener('click', () => {
-	openaddBookModal();
+		openaddBookModal();
 });
 
 /*
@@ -146,7 +144,7 @@ function closeCreateAccountModal() {
 	createAccountModal.style.display = 'none';
 	createAccountModalContent.email.value = '';
 	createAccountModalContent.password.value = '';
-	createAccountModalContent.username.value = '';
+	createAccountModalContent.displayName.value = '';
 }
 
 // function closeAccountModal() {

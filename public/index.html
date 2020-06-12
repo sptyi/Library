@@ -20,7 +20,7 @@
 	<body id="body">
 		<header id="navbar">
 			<span id="menuBtn">&equiv;</span>
-			<h1>My Library</h1>
+			<h1 id="h1">My Library</h1>
 			<button id="addBookBtn">Add a Book</button>
 		</header>
 		<h2>Sign in to create and save your own library of books!</h2>
@@ -48,10 +48,10 @@
 
 		<div id="menuModal">
 			<div id="menuModalContent">
-				<button id="signInBtn">Sign In</button><br />
-				<button id="createAccountBtn">Sign Up</button><br />
-				<button id="signOutBtn">Sign Out</button>
-				<button id="accountBtn">Account</button><br />
+				<div id="divSignIn"><button id="signInBtn">Sign In</button></div>
+				<div id="divCreateAccount"><button id="createAccountBtn">Sign Up</button></div>
+				<div id="divAccount"><button id="accountBtn">Account</button></div>
+				<div id="divSignOut"><button id="signOutBtn">Sign Out</button></div>
 			</div>
 		</div>
 
@@ -93,8 +93,8 @@
 					id="createAccountPassword"
 					required
 				/><br />
-				<label for="username">Choose a display name: </label><br />
-				<input type="text" name="username" id="createAccountUsername" /><br />
+				<label for="displayName">Choose a display name: </label><br />
+				<input type="text" name="displayName" id="createAccountDisplayName" required /><br />
 				<input
 					type="submit"
 					value="Create Account"
