@@ -10,6 +10,7 @@
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
+		<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 
 		<link rel="stylesheet" href="styles.css" />
 		<link
@@ -23,7 +24,7 @@
 			<h1 id="h1">My Library</h1>
 			<button id="addBookBtn">Add a Book</button>
 		</header>
-		<h2>Sign in to create and save your own library of books!</h2>
+		<h2 id="loginMessage">Sign in to create and save your own library of books!</h2>
 		<div id="bookGrid"></div>
 		<div id="addBookModal">
 			<div id="addBookModalContent">
@@ -49,7 +50,9 @@
 		<div id="menuModal">
 			<div id="menuModalContent">
 				<div id="divSignIn"><button id="signInBtn">Sign In</button></div>
-				<div id="divCreateAccount"><button id="createAccountBtn">Sign Up</button></div>
+				<div id="divCreateAccount">
+					<button id="createAccountBtn">Sign Up</button>
+				</div>
 				<div id="divAccount"><button id="accountBtn">Account</button></div>
 				<div id="divSignOut"><button id="signOutBtn">Sign Out</button></div>
 			</div>
@@ -94,7 +97,12 @@
 					required
 				/><br />
 				<label for="displayName">Choose a display name: </label><br />
-				<input type="text" name="displayName" id="createAccountDisplayName" required /><br />
+				<input
+					type="text"
+					name="displayName"
+					id="createAccountDisplayName"
+					required
+				/><br />
 				<input
 					type="submit"
 					value="Create Account"
@@ -108,6 +116,41 @@
 				<p>Are you sure that you want to delete this book from your library?</p>
 				<button id="yesDelete">Yes</button>
 				<button id="noDelete">No!</button><br />
+			</div>
+		</div>
+
+		<div id="updateBookModal">
+			<div id="updateBookModalContent">
+				<p>Enter information to update your book:</p>
+				<form id="updateBookForm">
+					<label for="title">Title: </label><br />
+					<input type="text" name="title" id="updateBookTitle" required />
+					<br />
+					<label for="author">Author: </label><br />
+					<input type="text" name="author" id="updateBookAuthor" required />
+					<br />
+					<label for="pages">Pages: </label><br />
+					<input type="number" name="pages" id="updateBookPages" />
+					<br />
+					<label for="read">Read: </label>
+					<input type="checkbox" name="read" id="updateBookRead" />
+					<br />
+					<input type="submit" value="Update Book" id="updateBookSubmitBtn" />
+				</form>
+			</div>
+		</div>
+
+		<div id="accountInfoModal">
+			<div id="accountInfoModalContent">
+				<h2 id="accountInfoHeader">Your Account Details:</h2>
+				<span>
+					<p class="accountInfoTag">Display Name:</p>
+					<p id="accountDisplayName"></h3>
+				</span>
+				<span>
+					<p class="accountInfoTag">Email Address:</p>
+					<p id="accountEmail"></p>
+				</span>
 			</div>
 		</div>
 

@@ -3,7 +3,7 @@
 	text-align: center;
 	padding: 0;
 	background-color: #333;
-	color: ghostwhite;
+	color: white;
 	text-shadow: 2px 2px 5px black;
 	font-family: 'Cormorant Garamond', serif;
 }
@@ -15,7 +15,7 @@ header {
 	margin-bottom: 50px;
 }
 
-h2 {
+#loginMessage {
 	display: none;
 	color: royalblue;
 	margin: 100px 25px;
@@ -60,14 +60,6 @@ h1 {
 	box-shadow: 2px 2px 5px black;
 }
 
-#addBookBtn:hover {
-	transform: scale(1.1);
-}
-
-#addBookBtn:active {
-	transform: scale(0.9);
-}
-
 #bookGrid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -76,10 +68,6 @@ h1 {
 	align-items: center;
 	justify-items: center;
 	height: 200px;
-}
-
-#bookGrid > div:hover {
-	transform: scale(1.1);
 }
 
 #bookGrid div {
@@ -95,7 +83,7 @@ h1 {
 }
 
 .deleteBtn {
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 50%;
 	border: none;
 	color: black;
@@ -113,16 +101,12 @@ h1 {
 .deleteBtn:hover {
 	transform: scale(1.1);
 	background-color: crimson;
-	color: ghostwhite;
+	color: white;
 	box-shadow: 0 0 10px 3px crimson;
 }
 
-.deleteBtn:active {
-	transform: scale(0.9);
-}
-
 .editBtn {
-	background-color: ghostwhite;
+	background-color: white;
 	transform: rotate(90deg);
 	border-radius: 50%;
 	border: none;
@@ -141,27 +125,33 @@ h1 {
 .editBtn:hover {
 	transform: scale(1.1);
 	background-color: forestgreen;
-	color: ghostwhite;
+	color: white;
 	box-shadow: 0 0 10px 3px forestgreen;
 	transform: rotate(90deg);
 }
 
 .editBtn:active {
-	transform: scale(0.9);
-	transform: rotate(90deg);
+	transform: scale(0.9) rotate(90deg);
 }
 
-#booksForm {
+#booksForm,
+#updateBookForm {
 	border-radius: 0 0 10px 10px;
 	background-color: grey;
 }
 
-#booksForm label {
+#booksForm > label,
+#updateBookForm > label {
 	background-color: grey;
 	text-shadow: none;
 }
 
-#addBookModal {
+#addBookModal,
+#updateBookModal,
+#accountInfoModal,
+#signInModal,
+#createAccountModal,
+#deleteWarningModal {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -171,11 +161,11 @@ h1 {
 	width: 100%;
 	overflow: hidden;
 	background-color: rgba(0, 0, 0, 0.5);
-	animation-name: addBookModalopen;
+	animation-name: modalAnimation;
 	animation-duration: 0.5s;
 }
 
-@keyframes addBookModalopen {
+@keyframes modalAnimation {
 	from {
 		opacity: 0;
 	}
@@ -184,51 +174,90 @@ h1 {
 	}
 }
 
-#addBookModalContent {
+#addBookModalContent,
+#updateBookModalContent,
+#accountInfoModalContent,
+#signInModalContent,
+#createAccountModalContent {
 	margin-top: 10%;
 	max-width: 35%;
+	background-color: transparent;
+	opacity: 0.9;
 }
 
-#addBookModalContent p {
+#addBookModalContent > p,
+#updateBookModalContent > p,
+#signInModal p,
+#createAccountModal p,
+#deleteWarningModal p {
 	font-size: 25px;
 	padding: 10px 5px;
 	border-radius: 10px 10px 0 0;
 	background-color: grey;
+	opacity: 0.9;
 }
 
-#bookTitle {
+#accountInfoModalContent > h2 {
+	font-size: 30px;
+	padding: 10px 5px;
+	background-color: grey;
+	border-radius: 10px 10px 0 0;
+	opacity: 0.9;
+}
+
+#accountInfoModalContent p {
+	font-size: 25px;
+	padding: 10px 5px;
+	background-color: grey;
+	opacity: 0.9;
+}
+
+#accountInfoModalContent p:last-child {
+	border-radius: 0 0 10px 10px;
+}
+
+.accountInfoTag {
+	font-weight: bold;
+}
+
+#bookTitle,
+#updateBookTitle {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 7px;
 	color: black;
 	outline: none;
 }
 
-#bookAuthor {
+#bookAuthor,
+#updateBookAuthor {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 7px;
 	color: black;
 	outline: none;
 }
 
-#bookPages {
+#bookPages,
+#updateBookPages {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 7px;
 	color: black;
 	outline: none;
 }
 
-#bookRead {
+#bookRead,
+#updateBookRead {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	color: black;
 	outline: none;
 	cursor: pointer;
 }
 
-#bookSubmitBtn {
+#bookSubmitBtn,
+#updateBookSubmitBtn {
 	margin: 25px;
 	border-radius: 7px;
 	width: 100px;
@@ -238,15 +267,6 @@ h1 {
 	border: none;
 	font-size: 15px;
 	cursor: pointer;
-}
-
-#bookSubmitBtn:hover {
-	transform: scale(1.1);
-	box-shadow: 2px 2px 5px black;
-}
-
-#bookSubmitBtn:active {
-	transform: scale(0.9);
 }
 
 #menuModal {
@@ -267,11 +287,11 @@ h1 {
 	grid-gap: 50px;
 	place-content: center;
 	margin: 60px 10px;
-	animation-name: menuModalopen;
+	animation-name: menuModalAnimation;
 	animation-duration: 0.3s;
 }
 
-@keyframes menuModalopen {
+@keyframes menuModalAnimation {
 	from {
 		opacity: 0;
 		transform: translate(0px, -25px);
@@ -282,28 +302,7 @@ h1 {
 	}
 }
 
-#signInBtn {
-	position: fixed;
-	outline: none;
-	text-shadow: none;
-	border-radius: 7px;
-	border: none;
-	width: 100px;
-	height: 25px;
-	background-color: forestgreen;
-	cursor: pointer;
-	font-size: 18px;
-}
-
-#signInBtn:hover {
-	transform: scale(1.1);
-	box-shadow: 0 0 10px 3px ghostwhite;
-}
-
-#signInBtn:active {
-	transform: scale(0.9);
-}
-
+#signInBtn,
 #createAccountBtn {
 	position: fixed;
 	outline: none;
@@ -315,15 +314,6 @@ h1 {
 	background-color: forestgreen;
 	cursor: pointer;
 	font-size: 18px;
-}
-
-#createAccountBtn:hover {
-	transform: scale(1.1);
-	box-shadow: 0 0 10px 3px ghostwhite;
-}
-
-#createAccountBtn:active {
-	transform: scale(0.9);
 }
 
 #signOutBtn {
@@ -339,15 +329,6 @@ h1 {
 	font-size: 18px;
 }
 
-#signOutBtn:hover {
-	transform: scale(1.1);
-	box-shadow: 0 0 10px 3px ghostwhite;
-}
-
-#signOutBtn:active {
-	transform: scale(0.9);
-}
-
 #accountBtn {
 	position: fixed;
 	outline: none;
@@ -359,39 +340,6 @@ h1 {
 	background-color: royalblue;
 	cursor: pointer;
 	font-size: 18px;
-}
-
-#accountBtn:hover {
-	transform: scale(1.1);
-	box-shadow: 0 0 10px 3px ghostwhite;
-}
-
-#accountBtn:active {
-	transform: scale(0.9);
-}
-
-#signInModal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-#signInModalContent {
-	margin-top: 10%;
-	max-width: 35%;
-}
-
-#signInModal p {
-	font-size: 25px;
-	padding: 20px 5px;
-	background-color: grey;
-	border-radius: 10px;
 }
 
 #signInModal form {
@@ -406,7 +354,7 @@ h1 {
 
 #signInEmail {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 7px;
 	color: black;
 	outline: none;
@@ -414,7 +362,7 @@ h1 {
 
 #signInPassword {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 7px;
 	color: black;
 	outline: none;
@@ -432,39 +380,6 @@ h1 {
 	cursor: pointer;
 }
 
-#signInSubmitBtn:hover {
-	transform: scale(1.1);
-	box-shadow: 2px 2px 5px black;
-}
-
-#signInSubmitBtn:active {
-	transform: scale(0.9);
-}
-
-#createAccountModal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-#createAccountModalContent {
-	margin-top: 10%;
-	max-width: 35%;
-}
-
-#createAccountModal p {
-	font-size: 25px;
-	padding: 20px 5px;
-	background-color: grey;
-	border-radius: 10px;
-}
-
 #createAccountModal form {
 	border-radius: 10px;
 	background-color: grey;
@@ -477,7 +392,7 @@ h1 {
 
 #createAccountEmail {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 7px;
 	color: black;
 	outline: none;
@@ -485,7 +400,7 @@ h1 {
 
 #createAccountPassword {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 7px;
 	color: black;
 	outline: none;
@@ -493,7 +408,7 @@ h1 {
 
 #createAccountDisplayName {
 	margin: 5px;
-	background-color: ghostwhite;
+	background-color: white;
 	border-radius: 7px;
 	color: black;
 	outline: none;
@@ -511,40 +426,13 @@ h1 {
 	cursor: pointer;
 }
 
-#createAccountSubmitBtn:hover {
-	transform: scale(1.1);
-	box-shadow: 2px 2px 5px black;
-}
-
-#createAccountSubmitBtn:active {
-	transform: scale(0.9);
-}
-
-#deleteWarningModal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
 #deleteWarningModalContent {
 	margin-top: 10%;
 	max-width: 35%;
 	height: 150px;
 	background-color: grey;
 	border-radius: 10px;
-}
-
-#deleteWarningModal p {
-	font-size: 25px;
-	padding: 20px 5px;
-	background-color: grey;
-	border-radius: 10px;
+	opacity: 0.9;
 }
 
 #yesDelete {
@@ -561,14 +449,6 @@ h1 {
 	box-shadow: 2px 2px 5px black;
 }
 
-#yesDelete:hover {
-	transform: scale(1.1);
-}
-
-#yesDelete:active {
-	transform: scale(0.9);
-}
-
 #noDelete {
 	margin: 10px 50px;
 	border-radius: 7px;
@@ -583,10 +463,40 @@ h1 {
 	box-shadow: 2px 2px 5px black;
 }
 
+#addBookBtn:hover,
+#bookGrid > div:hover,
+#yesDelete:hover,
 #noDelete:hover {
 	transform: scale(1.1);
 }
 
+#bookSubmitBtn:hover,
+#updateBookSubmitBtn:hover,
+#signInSubmitBtn:hover,
+#createAccountSubmitBtn:hover {
+	transform: scale(1.1);
+	box-shadow: 2px 2px 5px black;
+}
+
+#signInBtn:hover,
+#createAccountBtn:hover,
+#signOutBtn:hover,
+#accountBtn:hover {
+	transform: scale(1.1);
+	box-shadow: 0 0 10px 3px white;
+}
+
+#addBookBtn:active,
+.deleteBtn:active,
+#bookSubmitBtn:active,
+#updateBookSubmitBtn:active,
+#signInBtn:active,
+#createAccountBtn:active,
+#signOutBtn:active,
+#accountBtn:active,
+#signInSubmitBtn:active,
+#createAccountSubmitBtn:active,
+#yesDelete:active,
 #noDelete:active {
 	transform: scale(0.9);
 }
