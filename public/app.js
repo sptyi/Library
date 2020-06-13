@@ -16,15 +16,26 @@ const noDelete = document.querySelector('#noDelete');
 const h2 = document.querySelector('h2');
 const divSignOut = document.querySelector('#divSignOut');
 const divAccount = document.querySelector('#divAccount');
-const createAccountModalContent = document.querySelector('#createAccountModalContent');
 const signIn = document.querySelector('#signInModalContent');
 const signOut = document.querySelector('#signOutBtn');
+const createAccountModalContent = document.querySelector(
+	'#createAccountModalContent'
+);
 
 function renderBook(doc) {
 	let div = document.createElement('div');
 	div.setAttribute('data-id', doc.id);
 	div.setAttribute('class', 'card');
 	bookGrid.appendChild(div);
+	div.addEventListener('mouseenter', () => {
+		deleteBtn.style.display = 'block';
+		editBtn.style.display = 'block';
+	});
+
+	div.addEventListener('mouseleave', () => {
+		deleteBtn.style.display = 'none';
+		editBtn.style.display = 'none';
+	});
 
 	let title = document.createElement('div');
 	title.textContent = doc.data().title;
@@ -51,6 +62,7 @@ function renderBook(doc) {
 	let deleteBtn = document.createElement('button');
 	deleteBtn.setAttribute('class', 'deleteBtn');
 	deleteBtn.textContent = '\u00D7';
+	deleteBtn.style.display = 'none';
 	div.appendChild(deleteBtn);
 
 	deleteBtn.addEventListener('click', (e) => {
@@ -63,13 +75,23 @@ function renderBook(doc) {
 		});
 	});
 
+	let editBtn = document.createElement('button');
+	editBtn.setAttribute('class', 'editBtn');
+	editBtn.textContent = '\u270E';
+	editBtn.style.display = 'none';
+	div.appendChild(editBtn);
+
 	noDelete.addEventListener('click', () => {
 		deleteWarningModal.style.display = 'none';
 	});
+
+	if (div) {
+		div.style.cursor = 'pointer';
+	}
 }
 
 addBookBtn.addEventListener('click', () => {
-		openaddBookModal();
+	openaddBookModal();
 });
 
 /*

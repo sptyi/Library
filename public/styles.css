@@ -8,10 +8,6 @@
 	font-family: 'Cormorant Garamond', serif;
 }
 
-:root {
-	--addBookModal-duration: 0.5s;
-}
-
 header {
 	background-color: gray;
 	height: 55px;
@@ -27,16 +23,17 @@ h2 {
 
 #menuBtn {
 	position: fixed;
-	left: 25px;
+	left: 45px;
 	background-color: transparent;
 	font-size: 3rem;
 	cursor: pointer;
 	transition: all 0.5s ease-in-out;
 	text-shadow: none;
+	transition-duration: 0.3s;
 }
 
 .menuModalOpen {
-	transform: scale(0);
+	transform: translate(0, -100px);
 }
 
 h1 {
@@ -75,9 +72,14 @@ h1 {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: auto;
-	gap: 25px;
+	gap: 200px 50px;
 	align-items: center;
 	justify-items: center;
+	height: 200px;
+}
+
+#bookGrid > div:hover {
+	transform: scale(1.1);
 }
 
 #bookGrid div {
@@ -88,13 +90,14 @@ h1 {
 }
 
 .card {
+	min-height: 10px;
 	box-shadow: 0 0 10px 3px black;
 }
 
 .deleteBtn {
 	background-color: ghostwhite;
 	border-radius: 50%;
-	border: solid 2px crimson;
+	border: none;
 	color: black;
 	width: 40px;
 	height: 40px;
@@ -104,6 +107,7 @@ h1 {
 	text-shadow: none;
 	font-size: 30px;
 	cursor: pointer;
+	float: left;
 }
 
 .deleteBtn:hover {
@@ -115,6 +119,36 @@ h1 {
 
 .deleteBtn:active {
 	transform: scale(0.9);
+}
+
+.editBtn {
+	background-color: ghostwhite;
+	transform: rotate(90deg);
+	border-radius: 50%;
+	border: none;
+	color: black;
+	width: 40px;
+	height: 40px;
+	margin: 10px;
+	line-height: 1em;
+	outline: none;
+	text-shadow: none;
+	font-size: 30px;
+	cursor: pointer;
+	float: right;
+}
+
+.editBtn:hover {
+	transform: scale(1.1);
+	background-color: forestgreen;
+	color: ghostwhite;
+	box-shadow: 0 0 10px 3px forestgreen;
+	transform: rotate(90deg);
+}
+
+.editBtn:active {
+	transform: scale(0.9);
+	transform: rotate(90deg);
 }
 
 #booksForm {
@@ -138,7 +172,7 @@ h1 {
 	overflow: hidden;
 	background-color: rgba(0, 0, 0, 0.5);
 	animation-name: addBookModalopen;
-	animation-duration: var(--addBookModal-duration);
+	animation-duration: 0.5s;
 }
 
 @keyframes addBookModalopen {
@@ -232,15 +266,15 @@ h1 {
 	display: grid;
 	grid-gap: 50px;
 	place-content: center;
-	margin: 50px;
+	margin: 60px 10px;
 	animation-name: menuModalopen;
-	animation-duration: var(--addBookModal-duration);
+	animation-duration: 0.3s;
 }
 
 @keyframes menuModalopen {
 	from {
 		opacity: 0;
-		transform: translate(0px, -100px);
+		transform: translate(0px, -25px);
 	}
 	to {
 		opacity: 1;
