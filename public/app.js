@@ -59,7 +59,7 @@ function renderBook(doc) {
 		}
 
 		let read = document.createElement('div');
-		if (doc.data().read.checked) {
+		if (doc.data().read) {
 			read.textContent = 'I have already read this book!';
 		} else {
 			read.textContent = 'I should read this book...';
@@ -95,7 +95,7 @@ function renderBook(doc) {
 			updateBookForm.title.value = doc.data().title;
 			updateBookForm.author.value = doc.data().author;
 			updateBookForm.pages.value = doc.data().pages;
-			updateBookForm.read.value = doc.data().read;
+			updateBookForm.read.checked = doc.data().read;
 			updateBookModal.style.display = 'block';
 		});
 
@@ -120,13 +120,13 @@ function addBookToLibrary() {
 		title: booksForm.title.value,
 		author: booksForm.author.value,
 		pages: booksForm.pages.value,
-		read: booksForm.read.value,
+		read: booksForm.read.checked,
 		user: firebase.auth().currentUser.uid,
 	});
 	booksForm.title.value = '';
 	booksForm.author.value = '';
 	booksForm.pages.value = '';
-	booksForm.read.value = '';
+	booksForm.read = false;
 }
 
 updateBookForm.addEventListener('submit', (e) => {
@@ -140,12 +140,12 @@ function updateBook() {
 		title: updateBookForm.title.value,
 		author: updateBookForm.author.value,
 		pages: updateBookForm.pages.value,
-		read: updateBookForm.read.value,
+		read: updateBookForm.read.checked,
 	});
 	updateBookForm.title.value = '';
 	updateBookForm.author.value = '';
 	updateBookForm.pages.value = '';
-	updateBookForm.read.value = '';
+	updateBookForm.read.checked = false;
 }
 
 window.addEventListener('click', outsideModalClick);
