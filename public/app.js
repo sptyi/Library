@@ -26,7 +26,7 @@ const signOut = document.querySelector('#signOutBtn');
 const createAccountModalContent = document.querySelector(
 	'#createAccountModalContent'
 );
-var bookId = '';
+let bookId = '';
 
 function renderBook(doc) {
 	if (firebase.auth().currentUser.uid == doc.data().user) {

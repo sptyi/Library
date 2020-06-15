@@ -21,14 +21,9 @@ auth.onAuthStateChanged((user, doc) => {
 						let div = bookGrid.querySelector('[data-id=' + change.doc.id + ']');
 						bookGrid.removeChild(div);
 					} else if (change.type == 'modified') {
-						title.textContent = doc.data().title;
-						author.textContent = `by ${doc.data().author}`;
-						pages.textContent = `${doc.data().pages} pages`;
-						if (doc.data().read.checked) {
-							read.textContent = 'I have already read this book!';
-						} else {
-							read.textContent = 'I should read this book...';
-						}
+						let div = bookGrid.querySelector('[data-id=' + change.doc.id + ']');
+						bookGrid.removeChild(div);
+						renderBook(change.doc);
 					}
 				});
 			});
