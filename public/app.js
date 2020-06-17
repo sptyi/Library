@@ -1,33 +1,3 @@
-const h1 = document.querySelector('#h1');
-const bookGrid = document.querySelector('#bookGrid');
-const addBookBtn = document.querySelector('#addBookBtn');
-const addBookModal = document.querySelector('#addBookModal');
-const updateBookModal = document.querySelector('#updateBookModal');
-const updateBookForm = document.querySelector('#updateBookForm');
-const booksForm = document.querySelector('#booksForm');
-const menuBtn = document.querySelector('#menuBtn');
-const menuModal = document.querySelector('#menuModal');
-const signInBtn = document.querySelector('#signInBtn');
-const createAccountBtn = document.querySelector('#createAccountBtn');
-const signInModal = document.querySelector('#signInModal');
-const createAccountModal = document.querySelector('#createAccountModal');
-const accountInfoModal = document.querySelector('#accountInfoModal');
-const accountBtn = document.querySelector('#accountBtn');
-const accountDisplayName = document.querySelector('#accountDisplayName');
-const accountEmail = document.querySelector('#accountEmail');
-const deleteWarningModal = document.querySelector('#deleteWarningModal');
-const yesDelete = document.querySelector('#yesDelete');
-const noDelete = document.querySelector('#noDelete');
-const h2 = document.querySelector('h2');
-const divSignOut = document.querySelector('#divSignOut');
-const divAccount = document.querySelector('#divAccount');
-const signIn = document.querySelector('#signInModalContent');
-const signOut = document.querySelector('#signOutBtn');
-const createAccountModalContent = document.querySelector(
-	'#createAccountModalContent'
-);
-let bookId = '';
-
 function renderBook(doc) {
 	if (firebase.auth().currentUser.uid == doc.data().user) {
 		let div = document.createElement('div');
@@ -82,6 +52,10 @@ function renderBook(doc) {
 			});
 		});
 
+		noDelete.addEventListener('click', () => {
+			deleteWarningModal.style.display = 'none';
+		});
+
 		let editBtn = document.createElement('button');
 		editBtn.setAttribute('class', 'editBtn');
 		editBtn.textContent = '\u270E';
@@ -97,10 +71,6 @@ function renderBook(doc) {
 			updateBookForm.pages.value = doc.data().pages;
 			updateBookForm.read.checked = doc.data().read;
 			updateBookModal.style.display = 'block';
-		});
-
-		noDelete.addEventListener('click', () => {
-			deleteWarningModal.style.display = 'none';
 		});
 	}
 }
@@ -162,6 +132,7 @@ function outsideModalClick(e) {
 		(e.target == createAccountModal) |
 		(e.target == accountInfoModal) |
 		(e.target == deleteWarningModal) |
+		(e.target == signOutWarningModal) |
 		(e.target == updateBookModal)
 	) {
 		closeAddBookModal();
@@ -171,6 +142,7 @@ function outsideModalClick(e) {
 		closeCreateAccountModal();
 		closeAccountModal();
 		closeDeleteWarningModal();
+		closeSignOutWarningModal();
 	}
 }
 
@@ -208,6 +180,10 @@ function closeDeleteWarningModal() {
 	deleteWarningModal.style.display = 'none';
 }
 
+function closeSignOutWarningModal() {
+	signOutWarningModal.style.display = 'none';
+}
+
 menuBtn.addEventListener('click', () => {
 	if (menuBtn.classList.contains('menuModalOpen')) {
 		menuBtn.classList.remove('menuModalOpen');
@@ -231,6 +207,64 @@ accountBtn.addEventListener('click', () => {
 	closeMenuModal();
 	accountDisplayName.textContent = auth.currentUser.displayName;
 	accountEmail.textContent = auth.currentUser.email;
-	accountInfoHeader.textContent = `${auth.currentUser.displayName}'s Account Details`;
+	editAccountEmailConfirmBtn.style.display = 'none';
+	editAccountEmailBtn.style.display = 'inline-block';
+	editAccountPasswordConfirmBtn.style.display = 'none';
+	editAccountPasswordBtn.style.display = 'inline-block';
+	accountPasswordDots = '';
+	for (let i = accountPasswordLength; i > 0; i--) {
+		accountPasswordDots += '\u{000B7}';
+	}
+	accountPassword.textContent = accountPasswordDots;
+	editAccountDisplayName.style.display = 'none';
+	editAccountDisplayNameConfirmBtn.style.display = 'none';
+	editAccountDisplayNameBtn.style.display = 'inline-block';
+	accountDisplayName.style.display = 'block';
+	accountDisplayName.textContent = auth.currentUser.displayName;
 	accountInfoModal.style.display = 'block';
+});
+
+editAccountDisplayNameBtn.addEventListener('click', () => {
+	accountDisplayName.textContent = 'Enter new display name below:';
+	editAccountDisplayNameBtn.style.display = 'none';
+	editAccountDisplayName.style.display = 'inline-block';
+	editAccountDisplayNameConfirmBtn.style.display = 'inline-block';
+});
+
+editAccountDisplayNameConfirmBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+});
+
+editAccountEmailBtn.addEventListener('click', () => {
+	accountEmail.textContent =
+		'Click Okay below to receive an email at your current email address to change to a new email address.';
+	editAccountEmailBtn.style.display = 'none';
+	editAccountEmailConfirmBtn.style.display = 'inline-block';
+});
+
+editAccountPasswordBtn.addEventListener('click', () => {
+	accountPassword.textContent =
+		'Click Okay below to receive an email with a link to change your password.';
+	editAccountPasswordBtn.style.display = 'none';
+	editAccountPasswordConfirmBtn.style.display = 'inline-block';
+});
+
+signOutBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	signOutWarningModal.style.display = 'block';
+	menuBtn.classList.remove('menuModalOpen');
+	menuModal.style.display = 'none';
+});
+
+noSignOut.addEventListener('click', () => {
+	signOutWarningModal.style.display = 'none';
+});
+
+deleteAccountBtn.addEventListener('click', () => {
+	closeAccountModal();
+	deleteAccountWarningModal.style.display = 'block';
+});
+
+noDeleteAccountBtn.addEventListener('click', () => {
+	deleteAccountWarningModal.style.display = 'none';
 });

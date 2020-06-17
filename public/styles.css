@@ -1,4 +1,4 @@
-* {
+*{
 	margin: auto;
 	text-align: center;
 	padding: 0;
@@ -6,26 +6,30 @@
 	color: white;
 	text-shadow: 2px 2px 5px black;
 	font-family: 'Cormorant Garamond', serif;
+	font-size: 18px;
 }
 
-header {
-	background-color: gray;
-	height: 55px;
+#navbar {
+	background-color: grey;
+	height: 3.5rem;
 	width: 100vw;
 	margin-bottom: 50px;
 }
 
 #loginMessage {
 	display: none;
-	color: royalblue;
+	color: cadetblue;
 	margin: 100px 25px;
+	font-size: 1.5rem;
 }
 
 #menuBtn {
-	position: fixed;
-	left: 45px;
+	position: relative;
+	left: 40px;
+	bottom: 0.5rem;
+	float: left;
 	background-color: transparent;
-	font-size: 3rem;
+	font-size: 4rem;
 	cursor: pointer;
 	transition: all 0.5s ease-in-out;
 	text-shadow: none;
@@ -45,29 +49,28 @@ h1 {
 
 #addBookBtn {
 	display: none;
-	position: fixed;
-	top: 13px;
+	position: relative;
+	bottom: 2rem;
 	right: 25px;
+	float: right;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
 	border: none;
 	width: 100px;
-	height: 25px;
+	height: 1.5rem;
 	background-color: forestgreen;
 	cursor: pointer;
-	font-size: 18px;
 	box-shadow: 2px 2px 5px black;
 }
 
 #bookGrid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: auto;
-	gap: 200px 50px;
+	grid-auto-rows: 10rem;
+	gap: 2rem;
 	align-items: center;
 	justify-items: center;
-	height: 200px;
 }
 
 #bookGrid div {
@@ -75,6 +78,7 @@ h1 {
 	background-color: royalblue;
 	min-width: 75%;
 	border-radius: 10px;
+	margin: 0.25rem;
 }
 
 .card {
@@ -82,7 +86,8 @@ h1 {
 	box-shadow: 0 0 10px 3px black;
 }
 
-.deleteBtn {
+.deleteBtn,
+.editBtn {
 	background-color: white;
 	border-radius: 50%;
 	border: none;
@@ -98,7 +103,9 @@ h1 {
 	float: left;
 }
 
-.deleteBtn:hover {
+.deleteBtn:hover,
+#deleteAccountBtn:hover,
+#yesDeleteAccountBtn:hover {
 	transform: scale(1.1);
 	background-color: crimson;
 	color: white;
@@ -106,23 +113,12 @@ h1 {
 }
 
 .editBtn {
-	background-color: white;
 	transform: rotate(90deg);
-	border-radius: 50%;
-	border: none;
-	color: black;
-	width: 40px;
-	height: 40px;
-	margin: 10px;
-	line-height: 1em;
-	outline: none;
-	text-shadow: none;
-	font-size: 30px;
-	cursor: pointer;
 	float: right;
 }
 
-.editBtn:hover {
+.editBtn:hover,
+#noDeleteAccountBtn:hover {
 	transform: scale(1.1);
 	background-color: forestgreen;
 	color: white;
@@ -137,13 +133,16 @@ h1 {
 #booksForm,
 #updateBookForm {
 	border-radius: 0 0 10px 10px;
-	background-color: grey;
+	background-color: black;
 }
 
+#signInModal label,
+#createAccountModal label,
 #booksForm > label,
 #updateBookForm > label {
-	background-color: grey;
+	background-color: black;
 	text-shadow: none;
+	color: grey;
 }
 
 #addBookModal,
@@ -151,7 +150,9 @@ h1 {
 #accountInfoModal,
 #signInModal,
 #createAccountModal,
-#deleteWarningModal {
+#deleteWarningModal,
+#signOutWarningModal,
+#deleteAccountWarningModal {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -178,38 +179,48 @@ h1 {
 #updateBookModalContent,
 #accountInfoModalContent,
 #signInModalContent,
-#createAccountModalContent {
+#createAccountModalContent,
+#deleteAccountWarningModalContent {
 	margin-top: 10%;
-	max-width: 35%;
+	max-width: 40%;
 	background-color: transparent;
-	opacity: 0.9;
+}
+
+#accountInfoModalContent {
+	margin-top: 4rem;
 }
 
 #addBookModalContent > p,
 #updateBookModalContent > p,
 #signInModal p,
 #createAccountModal p,
-#deleteWarningModal p {
-	font-size: 25px;
+#deleteWarningModal p,
+#signOutWarningModal p,
+#accountInfoModalContent p,
+#accountInfoModalContent > h2,
+#deleteAccountWarningModal p {
+	font-size: 1.5rem;
 	padding: 10px 5px;
 	border-radius: 10px 10px 0 0;
-	background-color: grey;
-	opacity: 0.9;
+	background-color: black;
+}
+
+#accountInfoModalContent button {
+	margin: 0 0 20px 0;
+	width: 60px;
 }
 
 #accountInfoModalContent > h2 {
-	font-size: 30px;
-	padding: 10px 5px;
-	background-color: grey;
-	border-radius: 10px 10px 0 0;
+	font-size: 2rem;
 	opacity: 0.9;
+	background-color: black;
 }
 
 #accountInfoModalContent p {
-	font-size: 25px;
-	padding: 10px 5px;
-	background-color: grey;
 	opacity: 0.9;
+	border-radius: 0;
+	padding: 10px 0 0 0;
+	background-color: black;
 }
 
 #accountInfoModalContent p:last-child {
@@ -218,55 +229,72 @@ h1 {
 
 .accountInfoTag {
 	font-weight: bold;
+	color: grey;
+}
+
+#signInModalContent > h2,
+#createAccountModalContent > h2 {
+	font-size: 1.5rem;
+	opacity: 0.9;
+	background-color: black;
+	padding: 20px 0 20px 0;
+	border-radius: 10px;
 }
 
 #bookTitle,
-#updateBookTitle {
-	margin: 5px;
-	background-color: white;
-	border-radius: 7px;
-	color: black;
-	outline: none;
-}
-
+#updateBookTitle,
 #bookAuthor,
-#updateBookAuthor {
-	margin: 5px;
-	background-color: white;
-	border-radius: 7px;
-	color: black;
-	outline: none;
-}
-
+#updateBookAuthor,
 #bookPages,
-#updateBookPages {
-	margin: 5px;
+#updateBookPages,
+#bookRead,
+#updateBookRead,
+#signInEmail,
+#signInPassword,
+#createAccountEmail,
+#createAccountPassword,
+#createAccountDisplayName,
+#editAccountDisplayName {
+	margin: 5px 0 20px 0;
 	background-color: white;
-	border-radius: 7px;
+	border-radius: 20px;
 	color: black;
 	outline: none;
+	border: none;
+	height: 1.5rem;
+	width: 50%;
 }
 
 #bookRead,
 #updateBookRead {
-	margin: 5px;
-	background-color: white;
-	color: black;
-	outline: none;
+	width: 1rem;
 	cursor: pointer;
+	height: 1rem;
 }
 
 #bookSubmitBtn,
-#updateBookSubmitBtn {
+#updateBookSubmitBtn,
+#editAccountDisplayNameBtn,
+#editAccountDisplayNameConfirmBtn,
+#editAccountEmailBtn,
+#editAccountEmailConfirmBtn,
+#editAccountPasswordBtn,
+#editAccountPasswordConfirmBtn,
+#deleteAccountBtn:last-child {
 	margin: 25px;
 	border-radius: 7px;
-	width: 100px;
-	height: 25px;
+	width: 110px;
+	height: 30px;
 	outline: none;
 	background-color: forestgreen;
 	border: none;
-	font-size: 15px;
 	cursor: pointer;
+}
+
+#deleteAccountBtn:last-child {
+	background-color: crimson;
+	width: 125px;
+	margin: 0 0 10px 0;
 }
 
 #menuModal {
@@ -286,7 +314,7 @@ h1 {
 	display: grid;
 	grid-gap: 50px;
 	place-content: center;
-	margin: 60px 10px;
+	margin: 70px 10px;
 	animation-name: menuModalAnimation;
 	animation-duration: 0.3s;
 }
@@ -303,179 +331,96 @@ h1 {
 }
 
 #signInBtn,
-#createAccountBtn {
+#createAccountBtn,
+#signOutBtn,
+#accountBtn,
+#signInSubmitBtn,
+#createAccountSubmitBtn,
+#yesDelete,
+#yesSignOut,
+#noDelete,
+#noSignOut {
 	position: fixed;
 	outline: none;
 	text-shadow: none;
 	border-radius: 7px;
 	border: none;
 	width: 100px;
-	height: 25px;
+	height: 1.5rem;
 	background-color: forestgreen;
 	cursor: pointer;
-	font-size: 18px;
 }
 
-#signOutBtn {
-	position: fixed;
-	outline: none;
-	text-shadow: none;
-	border-radius: 7px;
-	border: none;
-	width: 100px;
-	height: 25px;
+#yesDelete,
+#yesSignOut,
+#noDelete,
+#noSignOut {
+	position: relative;
+	margin: 10px 50px;
+	float: left;
+}
+
+#noDelete,
+#noSignOut {
 	background-color: crimson;
-	cursor: pointer;
-	font-size: 18px;
+	float: right;
 }
 
-#accountBtn {
-	position: fixed;
-	outline: none;
-	text-shadow: none;
-	border-radius: 7px;
-	border: none;
-	width: 100px;
-	height: 25px;
-	background-color: royalblue;
-	cursor: pointer;
-	font-size: 18px;
-}
-
-#signInModal form {
-	border-radius: 10px;
-	background-color: grey;
-}
-
-#signInModal label {
-	background-color: grey;
-	text-shadow: none;
-}
-
-#signInEmail {
-	margin: 5px;
-	background-color: white;
-	border-radius: 7px;
-	color: black;
-	outline: none;
-}
-
-#signInPassword {
-	margin: 5px;
-	background-color: white;
-	border-radius: 7px;
-	color: black;
-	outline: none;
-}
-
-#signInSubmitBtn {
+#signInSubmitBtn,
+#createAccountSubmitBtn {
 	margin: 25px;
-	border-radius: 7px;
-	width: 100px;
-	height: 25px;
-	outline: none;
-	background-color: forestgreen;
-	border: none;
-	font-size: 15px;
-	cursor: pointer;
-}
-
-#createAccountModal form {
-	border-radius: 10px;
-	background-color: grey;
-}
-
-#createAccountModal label {
-	background-color: grey;
-	text-shadow: none;
-}
-
-#createAccountEmail {
-	margin: 5px;
-	background-color: white;
-	border-radius: 7px;
-	color: black;
-	outline: none;
-}
-
-#createAccountPassword {
-	margin: 5px;
-	background-color: white;
-	border-radius: 7px;
-	color: black;
-	outline: none;
-}
-
-#createAccountDisplayName {
-	margin: 5px;
-	background-color: white;
-	border-radius: 7px;
-	color: black;
-	outline: none;
+	position: relative;
 }
 
 #createAccountSubmitBtn {
-	margin: 25px;
-	border-radius: 7px;
-	width: 100px;
-	height: 25px;
-	outline: none;
-	background-color: forestgreen;
-	border: none;
-	font-size: 15px;
-	cursor: pointer;
+	width: 125px;
 }
 
-#deleteWarningModalContent {
+#signOutBtn {
+	background-color: crimson;
+}
+
+#accountBtn {
+	background-color: royalblue;
+}
+
+#signInModal form,
+#createAccountModal form {
+	border-radius: 10px;
+	background-color: black;
+	opacity: 0.9;
+}
+
+#deleteWarningModalContent,
+#signOutWarningModalContent {
 	margin-top: 10%;
 	max-width: 35%;
-	height: 150px;
-	background-color: grey;
+	height: 140px;
+	background-color: black;
 	border-radius: 10px;
 	opacity: 0.9;
 }
 
-#yesDelete {
-	margin: 10px 50px;
-	border-radius: 7px;
-	width: 75px;
-	height: 25px;
-	outline: none;
-	background-color: forestgreen;
-	border: none;
-	font-size: 15px;
-	cursor: pointer;
-	float: left;
-	box-shadow: 2px 2px 5px black;
-}
-
-#noDelete {
-	margin: 10px 50px;
-	border-radius: 7px;
-	width: 75px;
-	height: 25px;
-	outline: none;
-	background-color: crimson;
-	border: none;
-	font-size: 15px;
-	cursor: pointer;
-	float: right;
-	box-shadow: 2px 2px 5px black;
+#signOutWarningModalContent {
+	height: 110px;
 }
 
 #addBookBtn:hover,
-#bookGrid > div:hover,
 #yesDelete:hover,
-#noDelete:hover {
-	transform: scale(1.1);
-}
-
+#noDelete:hover,
+#yesSignOut:hover,
+#noSignOut:hover,
 #bookSubmitBtn:hover,
 #updateBookSubmitBtn:hover,
 #signInSubmitBtn:hover,
-#createAccountSubmitBtn:hover {
+#createAccountSubmitBtn:hover,
+#editAccountDisplayNameBtn:hover,
+#editAccountEmailBtn:hover,
+#editAccountEmailConfirmBtn:hover,
+#editAccountPasswordBtn:hover,
+#editAccountPasswordConfirmBtn:hover,
+#editAccountDisplayNameConfirmBtn:hover {
 	transform: scale(1.1);
-	box-shadow: 2px 2px 5px black;
 }
 
 #signInBtn:hover,
@@ -497,6 +442,15 @@ h1 {
 #signInSubmitBtn:active,
 #createAccountSubmitBtn:active,
 #yesDelete:active,
-#noDelete:active {
+#noDelete:active,
+#yesSignOut:active,
+#noSignOut:active,
+#deleteAccountBtn:active,
+#editAccountDisplayNameBtn:active,
+#editAccountEmailBtn:active,
+#editAccountEmailConfirmBtn:active,
+#editAccountPasswordBtn:active,
+#editAccountPasswordConfirmBtn:active,
+#editAccountDisplayNameConfirmBtn:active {
 	transform: scale(0.9);
 }
