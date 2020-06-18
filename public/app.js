@@ -37,7 +37,7 @@ function renderBook(doc) {
 		div.appendChild(read);
 
 		let deleteBtn = document.createElement('button');
-		deleteBtn.setAttribute('class', 'deleteBtn');
+		deleteBtn.setAttribute('class', 'deleteBtn active');
 		deleteBtn.textContent = '\u00D7';
 		deleteBtn.style.display = 'none';
 		div.appendChild(deleteBtn);

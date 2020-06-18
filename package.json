@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/sptyi/Library/issues"
   },
-  "homepage": "https://github.com/sptyi/Library#readme"
+  "homepage": "https://github.com/sptyi/Library#readme",
+  "dependencies": {
+    "firebase-admin": "^8.12.1",
+    "firebase-functions": "^3.7.0"
+  }
 }

@@ -19,54 +19,55 @@
 	</head>
 	<body id="body">
 		<header id="navbar">
-			<span id="menuBtn">&equiv;</span>
+			<div id="menuBtn">&equiv;</div>
 			<h1 id="h1">My Library</h1>
-			<button id="addBookBtn">Add Book</button>
+			<button id="addBookBtn" class="hover active">Add Book</button>
 		</header>
 		<h2 id="loginMessage">
 			Sign in to create and save your own library of books!
 		</h2>
 		<div id="bookGrid"></div>
-		<div id="addBookModal">
-			<div id="addBookModalContent">
+		<div id="addBookModal" class="modal">
+			<div id="addBookModalContent" class = "modalContent">
 				<p>Enter information for your new book:</p>
 				<form id="booksForm">
 					<label for="title">Title: </label><br />
-					<input type="text" name="title" id="bookTitle" required />
+					<input type="text" name="title" id="bookTitle" class="textField" required />
 					<br />
 					<label for="author">Author: </label><br />
-					<input type="text" name="author" id="bookAuthor" required />
+					<input type="text" name="author" id="bookAuthor" class="error" required />
 					<br />
 					<label for="pages">Pages: </label><br />
-					<input type="number" name="pages" id="bookPages" />
+					<input type="number" name="pages" id="bookPages" class="error" />
 					<br />
 					<label for="read">Read: </label>
-					<input type="checkbox" name="read" id="bookRead" />
+					<input type="checkbox" name="read" id="bookRead" class="error" />
 					<br />
-					<input type="submit" value="Submit Book" id="bookSubmitBtn" />
+					<input type="submit" value="Submit Book" id="bookSubmitBtn" class="btn active" />
 				</form>
 			</div>
 		</div>
 
 		<div id="menuModal">
 			<div id="menuModalContent">
-				<div id="divSignIn"><button id="signInBtn">Sign In</button></div>
+				<div id="divSignIn"><button id="signInBtn" class="btn2 active">Sign In</button></div>
 				<div id="divCreateAccount">
-					<button id="createAccountBtn">Sign Up</button>
+					<button id="createAccountBtn" class="btn2 active">Sign Up</button>
 				</div>
-				<div id="divAccount"><button id="accountBtn">Account</button></div>
-				<div id="divSignOut"><button id="signOutBtn">Sign Out</button></div>
+				<div id="divAccount"><button id="accountBtn" class="btn2 active">Account</button></div>
+				<div id="divSignOut"><button id="signOutBtn" class="btn2 active">Sign Out</button></div>
 			</div>
 		</div>
 
-		<div id="signInModal">
-			<form id="signInModalContent">
+		<div id="signInModal" class="modal">
+			<form id="signInModalContent" class = "modalContent">
 				<h2>Enter your email and password to sign in:</h2>
 				<label for="signInEmail">Email: </label><br />
 				<input
 					type="email"
 					name="signInEmail"
 					id="signInEmail"
+					class="error"
 					required
 				/><br />
 				<label for="signInPassword">Password: </label><br />
@@ -74,41 +75,43 @@
 					type="password"
 					name="signInPassword"
 					id="signInPassword"
+					class="error"
 					required
 				/><br />
-				<p id="loginError"></p>
-				<input type="submit" value="Sign In" id="signInSubmitBtn" />
+				<p id="loginError" class="error"></p>
+				<input type="submit" value="Sign In" id="signInSubmitBtn" class="btn2 hover active" />
 			</form>
 		</div>
 
-		<div id="signOutWarningModal">
+		<div id="signOutWarningModal" class="modal">
 			<div id="signOutWarningModalContent">
 				<p>Are you sure you are ready to log out?</p>
-				<button id="yesSignOut">Yes</button>
-				<button id="noSignOut">No!</button><br />
+				<button id="yesSignOut" class="btn2 hover active">Yes</button>
+				<button id="noSignOut" class="btn2 hover active">No!</button><br />
 			</div>
 		</div>
 
-		<!-- <div id="deleteAccountWarningModal">
-			<div id="deleteAccountWarningModalContent">
+		<!-- <div id="deleteAccountWarningModal" class="modal">
+			<div id="deleteAccountWarningModalContent" class = "modalContent">
 				<p>Are you sure you want to delete your account?</p>
-				<p id="deleteAccountError"></p>
+				<p id="deleteAccountError" class="error"></p>
 				<p>
 					<i>(WARNING: this is permanent and cannot be undone!)</i><br />
-					<button id="yesDeleteAccountBtn">Yes</button>
-					<button id="noDeleteAccountBtn">No!</button>
+					<button id="yesDeleteAccountBtn" class="btn2 active">Yes</button>
+					<button id="noDeleteAccountBtn" class="btn2 active">No!</button>
 				</p>
 			</div>
 		</div> -->
 
-		<div id="createAccountModal">
-			<form id="createAccountModalContent">
+		<div id="createAccountModal" class="modal">
+			<form id="createAccountModalContent" class = "modalContent">
 				<h2>Enter your email and password to sign up:</h2>
 				<label for="email">Email: </label><br />
 				<input
 					type="email"
 					name="email"
 					id="createAccountEmail"
+					class="error"
 					required
 				/><br />
 				<label for="password">Password: </label><br />
@@ -116,6 +119,7 @@
 					type="password"
 					name="password"
 					id="createAccountPassword"
+					class="error"
 					required
 				/><br />
 				<label for="displayName">Choose a display name: </label><br />
@@ -123,68 +127,70 @@
 					type="text"
 					name="displayName"
 					id="createAccountDisplayName"
+					class="error"
 					required
 				/><br />
 				<input
 					type="submit"
 					value="Create Account"
 					id="createAccountSubmitBtn"
+					class="btn2 hover active"
 				/>
-				<p id="createAccountError"></p>
+				<p id="createAccountError" class="error"></p>
 			</form>
 		</div>
 
-		<div id="deleteWarningModal">
+		<div id="deleteWarningModal" class="modal">
 			<div id="deleteWarningModalContent">
 				<p>Are you sure that you want to delete this book from your library?</p>
-				<button id="yesDelete">Yes</button>
-				<button id="noDelete">No!</button><br />
+				<button id="yesDelete" class="btn2 hover active">Yes</button>
+				<button id="noDelete" class="btn2 hover active">No!</button><br />
 			</div>
 		</div>
 
-		<div id="updateBookModal">
-			<div id="updateBookModalContent">
+		<div id="updateBookModal" class="modal">
+			<div id="updateBookModalContent" class = "modalContent">
 				<p>Enter information to update your book:</p>
 				<form id="updateBookForm">
 					<label for="title">Title: </label><br />
-					<input type="text" name="title" id="updateBookTitle" required />
+					<input type="text" name="title" id="updateBookTitle" class="error" required />
 					<br />
 					<label for="author">Author: </label><br />
-					<input type="text" name="author" id="updateBookAuthor" required />
+					<input type="text" name="author" id="updateBookAuthor" class="error" required />
 					<br />
 					<label for="pages">Pages: </label><br />
-					<input type="number" name="pages" id="updateBookPages" />
+					<input type="number" name="pages" id="updateBookPages" class="error" />
 					<br />
 					<label for="read">Read: </label>
-					<input type="checkbox" name="read" id="updateBookRead" />
+					<input type="checkbox" name="read" id="updateBookRead" class="error" />
 					<br />
-					<input type="submit" value="Update Book" id="updateBookSubmitBtn" />
+					<input type="submit" value="Update Book" id="updateBookSubmitBtn" class="btn hover active" />
 				</form>
 			</div>
 		</div>
 
-		<div id="accountInfoModal">
-			<div id="accountInfoModalContent">
+		<div id="accountInfoModal" class="modal">
+			<div id="accountInfoModalContent" class = "modalContent">
 				<h2 id="accountInfoHeader">Account Details:</h2>
 				<p class="accountInfoTag">Display Name:</p>
 				<p id="accountDisplayName"></p>
-				<p><input type="text" id="editAccountDisplayName" required /></p>
-				<p><button id="editAccountDisplayNameBtn">Edit</button></p>
-				<p id="editAccountDisplayNameError"></p>
-				<p><button id="editAccountDisplayNameConfirmBtn">Submit</button></p>
+				<p><input type="text" id="editAccountDisplayName" class="error" required /></p>
+				<p><button id="editAccountDisplayNameBtn" class="btn hover active">Edit</button></p>
+				<p id="editAccountDisplayNameError" class="error"></p>
+				<p><button id="editAccountDisplayNameConfirmBtn" class="btn hover active">Submit</button></p>
 				<p class="accountInfoTag">Email Address:</p>
 				<p id="accountEmail"></p>
-				<p><input type="email" id="editAccountEmail" required /></p>
+				<p><input type="email" id="editAccountEmail" class="error" required /></p>
 				<p id="accountEmail"></p>
-				<p id="editAccountEmailError"></p>
-				<p><button id="editAccountEmailBtn">Edit</button></p>
-				<p><button id="editAccountEmailConfirmBtn">Submit</button></p>
+				<p id="editAccountEmailError" class="error"></p>
+				<p><button id="editAccountEmailBtn" class="btn hover active">Edit</button></p>
+				<p><button id="editAccountEmailConfirmBtn" class="btn hover active">Submit</button></p>
 				<p class="accountInfoTag">Password:</p>
 				<p id="accountPassword"></p>
-				<p><button id="editAccountPasswordBtn">Edit</button></p>
-				<p id="editAccountPasswordError"></p>
-				<p><button id="editAccountPasswordConfirmBtn">Okay</button></p>
-				<!-- <p><button id="deleteAccountBtn">Delete Account</button></p> -->
+				<p><button id="editAccountPasswordBtn" class="btn hover active">Edit</button></p>
+				<p id="editAccountPasswordError" class="error"></p>
+				<p><button id="editAccountPasswordConfirmBtn" class="btn hover active">Okay</button></p>
+				<!-- <p><button id="deleteAccountBtn" class="btn active">Delete Account</button></p> -->
 			</div>
 		</div>
 

@@ -76,11 +76,11 @@ editAccountDisplayNameConfirmBtn.addEventListener('click', () => {
 				displayName: editAccountDisplayName.value,
 			})
 			.then(() => {
-				(h1.textContent = `${auth.currentUser.displayName}'s Library`),
-					(editAccountDisplayNameBtn.style.display = 'inline-block'),
-					(editAccountDisplayName.style.display = 'none'),
-					(editAccountDisplayNameConfirmBtn.style.display = 'none'),
-					(accountDisplayName.textContent = `Your new display name is now ${editAccountDisplayName.value}.`);
+				h1.textContent = `${auth.currentUser.displayName}'s Library`;
+				editAccountDisplayNameBtn.style.display = 'inline-block';
+				editAccountDisplayName.style.display = 'none';
+				editAccountDisplayNameConfirmBtn.style.display = 'none';
+				accountDisplayName.textContent = `Your new display name is now ${editAccountDisplayName.value}.`;
 			})
 			.catch((err) => {
 				editAccountDisplayNameError.style.display = 'block';
@@ -97,11 +97,11 @@ editAccountEmailConfirmBtn.addEventListener('click', () => {
 	auth.currentUser
 		.updateEmail(editAccountEmail.value)
 		.then(() => {
-			(editAccountEmail.style.display = 'none'),
-				(editAccountEmailConfirmBtn.style.display = 'none'),
-				(accountEmail.textContent = editAccountEmail.value),
-				(editAccountEmailConfirmBtn.style.display = 'none'),
-				(accountEmail.textContent = `Your new email address is ${editAccountEmail.value}.`);
+			editAccountEmail.style.display = 'none';
+			editAccountEmailConfirmBtn.style.display = 'none';
+			accountEmail.textContent = editAccountEmail.value;
+			editAccountEmailConfirmBtn.style.display = 'none';
+			accountEmail.textContent = `Your new email address is ${editAccountEmail.value}.`;
 		})
 		.catch((err) => {
 			editAccountEmailError.style.display = 'inline-block';
