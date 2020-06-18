@@ -49,6 +49,7 @@ createAccountModalContent.addEventListener('submit', (e) => {
 	const password = createAccountModalContent['createAccountPassword'].value;
 	accountPasswordLength =
 		createAccountModalContent['createAccountPassword'].value.length;
+	window.localStorage.setItem('passwordLength', accountPasswordLength);
 	const displayName =
 		createAccountModalContent['createAccountDisplayName'].value;
 
@@ -127,6 +128,7 @@ signIn.addEventListener('submit', (e) => {
 	const email = signIn['signInEmail'].value;
 	const password = signIn['signInPassword'].value;
 	accountPasswordLength = signIn['signInPassword'].value.length;
+	window.localStorage.setItem('passwordLength', accountPasswordLength);
 
 	auth
 		.signInWithEmailAndPassword(email, password)
@@ -143,6 +145,7 @@ yesSignOut.addEventListener('click', () => {
 	auth
 		.signOut()
 		.then(
+			window.localStorage.clear(),
 			(signOutWarningModal.style.display = 'none'),
 			(loginMessage.textContent = 'You have been logged out of your library.')
 		);
