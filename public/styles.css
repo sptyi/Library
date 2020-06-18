@@ -1,4 +1,4 @@
-*{
+* {
 	margin: auto;
 	text-align: center;
 	padding: 0;
@@ -103,9 +103,9 @@ h1 {
 	float: left;
 }
 
-.deleteBtn:hover,
-#deleteAccountBtn:hover,
-#yesDeleteAccountBtn:hover {
+.deleteBtn:hover
+/* #deleteAccountBtn:hover,
+#yesDeleteAccountBtn:hover */ {
 	transform: scale(1.1);
 	background-color: crimson;
 	color: white;
@@ -117,14 +117,18 @@ h1 {
 	float: right;
 }
 
-.editBtn:hover,
-#noDeleteAccountBtn:hover {
+.editBtn:hover
+/* #noDeleteAccountBtn:hover */ {
 	transform: scale(1.1);
 	background-color: forestgreen;
 	color: white;
 	box-shadow: 0 0 10px 3px forestgreen;
 	transform: rotate(90deg);
 }
+
+/* #noDeleteAccountBtn:hover {
+	transform: rotate(0deg);
+} */
 
 .editBtn:active {
 	transform: scale(0.9) rotate(90deg);
@@ -151,8 +155,8 @@ h1 {
 #signInModal,
 #createAccountModal,
 #deleteWarningModal,
-#signOutWarningModal,
-#deleteAccountWarningModal {
+#signOutWarningModal
+/* #deleteAccountWarningModal */ {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -179,8 +183,8 @@ h1 {
 #updateBookModalContent,
 #accountInfoModalContent,
 #signInModalContent,
-#createAccountModalContent,
-#deleteAccountWarningModalContent {
+#createAccountModalContent
+/* #deleteAccountWarningModalContent */ {
 	margin-top: 10%;
 	max-width: 40%;
 	background-color: transparent;
@@ -192,17 +196,36 @@ h1 {
 
 #addBookModalContent > p,
 #updateBookModalContent > p,
-#signInModal p,
-#createAccountModal p,
 #deleteWarningModal p,
 #signOutWarningModal p,
 #accountInfoModalContent p,
-#accountInfoModalContent > h2,
-#deleteAccountWarningModal p {
+#accountInfoModalContent > h2
+/* #deleteAccountWarningModal p */ {
 	font-size: 1.5rem;
 	padding: 10px 5px;
 	border-radius: 10px 10px 0 0;
 	background-color: black;
+}
+
+/* #deleteAccountWarningModal p:last-child,
+#deleteAccountWarningModal i {
+	border-radius: 0 0 10px 10px;
+	background-color: black;
+	color: red;
+} */
+
+#loginError,
+#createAccountError,
+#editAccountPasswordError,
+#editAccountDisplayNameError,
+#editAccountEmailError
+/* #deleteAccountError */ {
+	background-color: black;
+	display: none;
+	font-size: 1rem !important;
+	color: red;
+	border-radius: 0 0 10px 10px;
+	padding-bottom: 20px;
 }
 
 #accountInfoModalContent button {
@@ -254,7 +277,8 @@ h1 {
 #createAccountEmail,
 #createAccountPassword,
 #createAccountDisplayName,
-#editAccountDisplayName {
+#editAccountDisplayName,
+#editAccountEmail {
 	margin: 5px 0 20px 0;
 	background-color: white;
 	border-radius: 20px;
@@ -279,8 +303,8 @@ h1 {
 #editAccountEmailBtn,
 #editAccountEmailConfirmBtn,
 #editAccountPasswordBtn,
-#editAccountPasswordConfirmBtn,
-#deleteAccountBtn:last-child {
+#editAccountPasswordConfirmBtn
+/* #deleteAccountBtn:last-child */ {
 	margin: 25px;
 	border-radius: 7px;
 	width: 110px;
@@ -291,11 +315,11 @@ h1 {
 	cursor: pointer;
 }
 
-#deleteAccountBtn:last-child {
+/* #deleteAccountBtn:last-child {
 	background-color: crimson;
 	width: 125px;
 	margin: 0 0 10px 0;
-}
+} */
 
 #menuModal {
 	display: none;
@@ -339,7 +363,9 @@ h1 {
 #yesDelete,
 #yesSignOut,
 #noDelete,
-#noSignOut {
+#noSignOut
+/* #noDeleteAccountBtn,
+#yesDeleteAccountBtn */ {
 	position: fixed;
 	outline: none;
 	text-shadow: none;
@@ -367,7 +393,9 @@ h1 {
 }
 
 #signInSubmitBtn,
-#createAccountSubmitBtn {
+#createAccountSubmitBtn
+/* #noDeleteAccountBtn,
+#yesDeleteAccountBtn */ {
 	margin: 25px;
 	position: relative;
 }
@@ -376,7 +404,8 @@ h1 {
 	width: 125px;
 }
 
-#signOutBtn {
+#signOutBtn
+/* #yesDeleteAccountBtn */ {
 	background-color: crimson;
 }
 
@@ -445,12 +474,14 @@ h1 {
 #noDelete:active,
 #yesSignOut:active,
 #noSignOut:active,
-#deleteAccountBtn:active,
 #editAccountDisplayNameBtn:active,
 #editAccountEmailBtn:active,
 #editAccountEmailConfirmBtn:active,
 #editAccountPasswordBtn:active,
 #editAccountPasswordConfirmBtn:active,
-#editAccountDisplayNameConfirmBtn:active {
+#editAccountDisplayNameConfirmBtn:active
+/* #deleteAccountBtn:active,
+#noDeleteAccountBtn:active,
+#yesDeleteAccountBtn:active */ {
 	transform: scale(0.9);
 }

@@ -11,6 +11,10 @@ const signInBtn = document.querySelector('#signInBtn');
 const createAccountBtn = document.querySelector('#createAccountBtn');
 const signInModal = document.querySelector('#signInModal');
 const createAccountModal = document.querySelector('#createAccountModal');
+const createAccountError = document.querySelector('#createAccountError');
+const editAccountUserNameError = document.querySelector('#editAccountUserNameError');
+const editAccountEmailError = document.querySelector('#editAccountEmail');
+const editAccountPasswordError = document.querySelector('#editAccountPasswordError');
 const accountInfoModal = document.querySelector('#accountInfoModal');
 const editAccountDisplayNameBtn = document.querySelector(
 	'#editAccountDisplayNameBtn'
@@ -33,8 +37,8 @@ const signOutWarningModal = document.querySelector('#signOutWarningModal');
 const createAccountModalContent = document.querySelector(
 	'#createAccountModalContent'
 );
-const yesDeleteAccountBtn = document.querySelector('#yesDeleteAccountBtn');
-const noDeleteAccountBtn = document.querySelector('#noDeleteAccountBtn');
+// const yesDeleteAccountBtn = document.querySelector('#yesDeleteAccountBtn');
+// const noDeleteAccountBtn = document.querySelector('#noDeleteAccountBtn');
 let accountPasswordLength = '';
 let accountPasswordDots = '';
 let bookId = '';

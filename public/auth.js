@@ -53,55 +53,73 @@ createAccountModalContent.addEventListener('submit', (e) => {
 	const displayName =
 		createAccountModalContent['createAccountDisplayName'].value;
 
-	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-		const modal = document.querySelector('#createAccountModal');
-
-		auth.currentUser.updateProfile({
-			displayName: displayName,
+	auth
+		.createUserWithEmailAndPassword(email, password)
+		.then(() => {
+			auth.currentUser.updateProfile({
+				displayName: displayName,
+			}),
+				(h1.textContent = `${auth.currentUser.displayName}'s Library`),
+				auth.currentUser.sendEmailVerification(),
+				closeCreateAccountModal();
+		})
+		.catch((err) => {
+			createAccountError.style.display = 'block';
+			createAccountError.textContent = err.message;
 		});
-		h1.textContent = `${auth.currentUser.displayName}'s Library`;
-
-		auth.currentUser.sendEmailVerification();
-
-		closeCreateAccountModal();
-	});
 });
 
 editAccountDisplayNameConfirmBtn.addEventListener('click', () => {
-	auth.currentUser
-		.updateProfile({
-			displayName: editAccountDisplayName.value,
-		})
-		.then(
-			(h1.textContent = `${auth.currentUser.displayName}'s Library`),
-			(editAccountDisplayNameBtn.style.display = 'inline-block'),
-			(editAccountDisplayName.style.display = 'none'),
-			(editAccountDisplayNameConfirmBtn.style.display = 'none'),
-			(accountDisplayName.textContent = `Your new display name is now ${editAccountDisplayName.value}.`)
-		);
+	if (editAccountDisplayName.value.length > 0) {
+		auth.currentUser
+			.updateProfile({
+				displayName: editAccountDisplayName.value,
+			})
+			.then(() => {
+				(h1.textContent = `${auth.currentUser.displayName}'s Library`),
+					(editAccountDisplayNameBtn.style.display = 'inline-block'),
+					(editAccountDisplayName.style.display = 'none'),
+					(editAccountDisplayNameConfirmBtn.style.display = 'none'),
+					(accountDisplayName.textContent = `Your new display name is now ${editAccountDisplayName.value}.`);
+			})
+			.catch((err) => {
+				editAccountDisplayNameError.style.display = 'block';
+				editAccountDisplayNameError.textContent = err.message;
+			});
+	} else {
+		editAccountDisplayNameError.style.display = 'block';
+		editAccountDisplayNameError.textContent =
+			'Display name must have at least 3 characters.';
+	}
 });
 
 editAccountEmailConfirmBtn.addEventListener('click', () => {
 	auth.currentUser
-		.updateProfile({
-			email: editAccountEmail.value,
-		})
-		.then(
-			(editAccountEmailBtn.style.display = 'inline-block'),
+		.updateEmail(editAccountEmail.value)
+		.then(() => {
 			(editAccountEmail.style.display = 'none'),
-			(editAccountEmailConfirmBtn.style.display = 'none'),
-			(accountEmail.textContent = auth.currentUser.email),
-			(editAccountEmailConfirmBtn.style.display = 'none')
-		);
+				(editAccountEmailConfirmBtn.style.display = 'none'),
+				(accountEmail.textContent = editAccountEmail.value),
+				(editAccountEmailConfirmBtn.style.display = 'none'),
+				(accountEmail.textContent = `Your new email address is ${editAccountEmail.value}.`);
+		})
+		.catch((err) => {
+			editAccountEmailError.style.display = 'inline-block';
+			editAccountEmailError.textContent = err.message;
+		});
 });
 
 editAccountPasswordConfirmBtn.addEventListener('click', (currentUser) => {
 	auth
 		.sendPasswordResetEmail(auth.currentUser.email)
 		.then(
-			(accountPassword.textContent = accountPasswordDots),
+			(accountPassword.textContent = 'Password reset email sent.'),
 			(editAccountPasswordConfirmBtn.style.display = 'none')
-		);
+		)
+		.catch((err) => {
+			editAccountPasswordError.style.display = 'block';
+			editAccountPasswordError.textContent = err.message;
+		});
 });
 
 signIn.addEventListener('submit', (e) => {
@@ -111,7 +129,15 @@ signIn.addEventListener('submit', (e) => {
 	const password = signIn['signInPassword'].value;
 	accountPasswordLength = signIn['signInPassword'].value.length;
 
-	auth.signInWithEmailAndPassword(email, password);
+	auth
+		.signInWithEmailAndPassword(email, password)
+		.then(() => {
+			closeSignInModal();
+		})
+		.catch((err) => {
+			loginError.style.display = 'block';
+			loginError.textContent = err.message;
+		});
 });
 
 yesSignOut.addEventListener('click', () => {
@@ -123,14 +149,16 @@ yesSignOut.addEventListener('click', () => {
 		);
 });
 
-yesDeleteAccountBtn.addEventListener('click', () => {
-	admin
-		.auth()
-		.deleteUser(firebase.auth().currentUser.uid)
-		.then(function () {
-			deleteAccountWarningModal.style.display = 'none';
-		})
-		.catch(function (error) {
-			console.log('Error deleting user:', error);
-		});
-});
+// yesDeleteAccountBtn.addEventListener('click', () => {
+// 	auth
+// 		.deleteUser(firebase.auth().currentUser.uid)
+// 		.then(() => {
+// 			deleteAccountWarningModal.style.display = 'none';
+// 			auth.signOut();
+// 			loginMessage.textContent = 'Your account has been permanently deleted.';
+// 		})
+// 		.catch((err) => {
+// 			deleteAccountError.style.display = 'block';
+// 			deleteAccountError.textContent = err.message;
+// 		});
+// });

@@ -134,6 +134,7 @@ function outsideModalClick(e) {
 		(e.target == deleteWarningModal) |
 		(e.target == signOutWarningModal) |
 		(e.target == updateBookModal)
+		// (e.target == deleteAccountWarningModal)
 	) {
 		closeAddBookModal();
 		closeUpdateBookModal();
@@ -143,6 +144,7 @@ function outsideModalClick(e) {
 		closeAccountModal();
 		closeDeleteWarningModal();
 		closeSignOutWarningModal();
+		// closeDeleteAccountWarningModal();
 	}
 }
 
@@ -184,6 +186,10 @@ function closeSignOutWarningModal() {
 	signOutWarningModal.style.display = 'none';
 }
 
+// function closeDeleteAccountWarningModal() {
+// 	deleteAccountWarningModal.style.display = 'none';
+// }
+
 menuBtn.addEventListener('click', () => {
 	if (menuBtn.classList.contains('menuModalOpen')) {
 		menuBtn.classList.remove('menuModalOpen');
@@ -196,11 +202,13 @@ menuBtn.addEventListener('click', () => {
 signInBtn.addEventListener('click', () => {
 	closeMenuModal();
 	signInModal.style.display = 'block';
+	loginError.style.display = 'none';
 });
 
 createAccountBtn.addEventListener('click', () => {
 	closeMenuModal();
 	createAccountModal.style.display = 'block';
+	createAccountError.style.display = 'none';
 });
 
 accountBtn.addEventListener('click', () => {
@@ -221,11 +229,18 @@ accountBtn.addEventListener('click', () => {
 	editAccountDisplayNameBtn.style.display = 'inline-block';
 	accountDisplayName.style.display = 'block';
 	accountDisplayName.textContent = auth.currentUser.displayName;
+	editAccountEmail.style.display = 'none';
+	loginError.style.display = 'none';
+	createAccountError.style.display = 'none';
+	editAccountDisplayNameError.style.display = 'none';
+	editAccountEmailError.style.display = 'none';
+	editAccountPasswordError.style.display = 'none';
+	// deleteAccountError.style.display = 'none';
 	accountInfoModal.style.display = 'block';
 });
 
 editAccountDisplayNameBtn.addEventListener('click', () => {
-	accountDisplayName.textContent = 'Enter new display name below:';
+	accountDisplayName.textContent = 'Enter new display name:';
 	editAccountDisplayNameBtn.style.display = 'none';
 	editAccountDisplayName.style.display = 'inline-block';
 	editAccountDisplayNameConfirmBtn.style.display = 'inline-block';
@@ -236,8 +251,8 @@ editAccountDisplayNameConfirmBtn.addEventListener('click', (e) => {
 });
 
 editAccountEmailBtn.addEventListener('click', () => {
-	accountEmail.textContent =
-		'Click Okay below to receive an email at your current email address to change to a new email address.';
+	accountEmail.textContent = 'Enter new email address:';
+	editAccountEmail.style.display = 'inline-block';
 	editAccountEmailBtn.style.display = 'none';
 	editAccountEmailConfirmBtn.style.display = 'inline-block';
 });
@@ -260,11 +275,11 @@ noSignOut.addEventListener('click', () => {
 	signOutWarningModal.style.display = 'none';
 });
 
-deleteAccountBtn.addEventListener('click', () => {
-	closeAccountModal();
-	deleteAccountWarningModal.style.display = 'block';
-});
+// deleteAccountBtn.addEventListener('click', () => {
+// 	closeAccountModal();
+// 	deleteAccountWarningModal.style.display = 'block';
+// });
 
-noDeleteAccountBtn.addEventListener('click', () => {
-	deleteAccountWarningModal.style.display = 'none';
-});
+// noDeleteAccountBtn.addEventListener('click', () => {
+// 	deleteAccountWarningModal.style.display = 'none';
+// });
