@@ -10,7 +10,6 @@
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
-		<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 
 		<link rel="stylesheet" href="styles.css" />
 		<link
@@ -22,9 +21,11 @@
 		<header id="navbar">
 			<span id="menuBtn">&equiv;</span>
 			<h1 id="h1">My Library</h1>
-			<button id="addBookBtn">Add a Book</button>
+			<button id="addBookBtn">Add Book</button>
 		</header>
-		<h2 id="loginMessage">Sign in to create and save your own library of books!</h2>
+		<h2 id="loginMessage">
+			Sign in to create and save your own library of books!
+		</h2>
 		<div id="bookGrid"></div>
 		<div id="addBookModal">
 			<div id="addBookModalContent">
@@ -60,7 +61,7 @@
 
 		<div id="signInModal">
 			<form id="signInModalContent">
-				<p>Enter your email and password to sign in.</p>
+				<h2>Enter your email and password to sign in:</h2>
 				<label for="signInEmail">Email: </label><br />
 				<input
 					type="email"
@@ -75,13 +76,34 @@
 					id="signInPassword"
 					required
 				/><br />
+				<p id="loginError"></p>
 				<input type="submit" value="Sign In" id="signInSubmitBtn" />
 			</form>
 		</div>
 
+		<div id="signOutWarningModal">
+			<div id="signOutWarningModalContent">
+				<p>Are you sure you are ready to log out?</p>
+				<button id="yesSignOut">Yes</button>
+				<button id="noSignOut">No!</button><br />
+			</div>
+		</div>
+
+		<!-- <div id="deleteAccountWarningModal">
+			<div id="deleteAccountWarningModalContent">
+				<p>Are you sure you want to delete your account?</p>
+				<p id="deleteAccountError"></p>
+				<p>
+					<i>(WARNING: this is permanent and cannot be undone!)</i><br />
+					<button id="yesDeleteAccountBtn">Yes</button>
+					<button id="noDeleteAccountBtn">No!</button>
+				</p>
+			</div>
+		</div> -->
+
 		<div id="createAccountModal">
 			<form id="createAccountModalContent">
-				<p>Enter your email and password to sign up.</p>
+				<h2>Enter your email and password to sign up:</h2>
 				<label for="email">Email: </label><br />
 				<input
 					type="email"
@@ -108,6 +130,7 @@
 					value="Create Account"
 					id="createAccountSubmitBtn"
 				/>
+				<p id="createAccountError"></p>
 			</form>
 		</div>
 
@@ -142,15 +165,26 @@
 
 		<div id="accountInfoModal">
 			<div id="accountInfoModalContent">
-				<h2 id="accountInfoHeader">Your Account Details:</h2>
-				<span>
-					<p class="accountInfoTag">Display Name:</p>
-					<p id="accountDisplayName"></h3>
-				</span>
-				<span>
-					<p class="accountInfoTag">Email Address:</p>
-					<p id="accountEmail"></p>
-				</span>
+				<h2 id="accountInfoHeader">Account Details:</h2>
+				<p class="accountInfoTag">Display Name:</p>
+				<p id="accountDisplayName"></p>
+				<p><input type="text" id="editAccountDisplayName" required /></p>
+				<p><button id="editAccountDisplayNameBtn">Edit</button></p>
+				<p id="editAccountDisplayNameError"></p>
+				<p><button id="editAccountDisplayNameConfirmBtn">Submit</button></p>
+				<p class="accountInfoTag">Email Address:</p>
+				<p id="accountEmail"></p>
+				<p><input type="email" id="editAccountEmail" required /></p>
+				<p id="accountEmail"></p>
+				<p id="editAccountEmailError"></p>
+				<p><button id="editAccountEmailBtn">Edit</button></p>
+				<p><button id="editAccountEmailConfirmBtn">Submit</button></p>
+				<p class="accountInfoTag">Password:</p>
+				<p id="accountPassword"></p>
+				<p><button id="editAccountPasswordBtn">Edit</button></p>
+				<p id="editAccountPasswordError"></p>
+				<p><button id="editAccountPasswordConfirmBtn">Okay</button></p>
+				<!-- <p><button id="deleteAccountBtn">Delete Account</button></p> -->
 			</div>
 		</div>
 
@@ -170,6 +204,7 @@
 			const db = firebase.firestore();
 			const auth = firebase.auth();
 		</script>
+		<script type="text/javascript" src="globals.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="auth.js"></script>
 	</body>
