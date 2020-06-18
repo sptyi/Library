@@ -35,13 +35,13 @@
 					<input type="text" name="title" id="bookTitle" class="textField" required />
 					<br />
 					<label for="author">Author: </label><br />
-					<input type="text" name="author" id="bookAuthor" class="error" required />
+					<input type="text" name="author" id="bookAuthor" class="textField" required />
 					<br />
 					<label for="pages">Pages: </label><br />
-					<input type="number" name="pages" id="bookPages" class="error" />
+					<input type="number" name="pages" id="bookPages" class="textField" />
 					<br />
 					<label for="read">Read: </label>
-					<input type="checkbox" name="read" id="bookRead" class="error" />
+					<input type="checkbox" name="read" id="bookRead" class="textField" />
 					<br />
 					<input type="submit" value="Submit Book" id="bookSubmitBtn" class="btn active" />
 				</form>
@@ -67,7 +67,7 @@
 					type="email"
 					name="signInEmail"
 					id="signInEmail"
-					class="error"
+					class="textField"
 					required
 				/><br />
 				<label for="signInPassword">Password: </label><br />
@@ -75,7 +75,7 @@
 					type="password"
 					name="signInPassword"
 					id="signInPassword"
-					class="error"
+					class="textField"
 					required
 				/><br />
 				<p id="loginError" class="error"></p>
@@ -111,7 +111,7 @@
 					type="email"
 					name="email"
 					id="createAccountEmail"
-					class="error"
+					class="textField"
 					required
 				/><br />
 				<label for="password">Password: </label><br />
@@ -119,7 +119,7 @@
 					type="password"
 					name="password"
 					id="createAccountPassword"
-					class="error"
+					class="textField"
 					required
 				/><br />
 				<label for="displayName">Choose a display name: </label><br />
@@ -127,7 +127,7 @@
 					type="text"
 					name="displayName"
 					id="createAccountDisplayName"
-					class="error"
+					class="textField"
 					required
 				/><br />
 				<input
@@ -153,16 +153,16 @@
 				<p>Enter information to update your book:</p>
 				<form id="updateBookForm">
 					<label for="title">Title: </label><br />
-					<input type="text" name="title" id="updateBookTitle" class="error" required />
+					<input type="text" name="title" id="updateBookTitle" class="textField" required />
 					<br />
 					<label for="author">Author: </label><br />
-					<input type="text" name="author" id="updateBookAuthor" class="error" required />
+					<input type="text" name="author" id="updateBookAuthor" class="textField" required />
 					<br />
 					<label for="pages">Pages: </label><br />
-					<input type="number" name="pages" id="updateBookPages" class="error" />
+					<input type="number" name="pages" id="updateBookPages" class="textField" />
 					<br />
 					<label for="read">Read: </label>
-					<input type="checkbox" name="read" id="updateBookRead" class="error" />
+					<input type="checkbox" name="read" id="updateBookRead" class="textField" />
 					<br />
 					<input type="submit" value="Update Book" id="updateBookSubmitBtn" class="btn hover active" />
 				</form>
@@ -174,13 +174,13 @@
 				<h2 id="accountInfoHeader">Account Details:</h2>
 				<p class="accountInfoTag">Display Name:</p>
 				<p id="accountDisplayName"></p>
-				<p><input type="text" id="editAccountDisplayName" class="error" required /></p>
+				<p><input type="text" id="editAccountDisplayName" class="textField" required /></p>
 				<p><button id="editAccountDisplayNameBtn" class="btn hover active">Edit</button></p>
 				<p id="editAccountDisplayNameError" class="error"></p>
 				<p><button id="editAccountDisplayNameConfirmBtn" class="btn hover active">Submit</button></p>
 				<p class="accountInfoTag">Email Address:</p>
 				<p id="accountEmail"></p>
-				<p><input type="email" id="editAccountEmail" class="error" required /></p>
+				<p><input type="email" id="editAccountEmail" class="textField" required /></p>
 				<p id="accountEmail"></p>
 				<p id="editAccountEmailError" class="error"></p>
 				<p><button id="editAccountEmailBtn" class="btn hover active">Edit</button></p>
