@@ -390,19 +390,11 @@ h1 {
 	height: 110px;
 }
 
-.hover {
+.hover:hover {
 	transform: scale(1.1);
 }
 
-#signInBtn:hover,
-#createAccountBtn:hover,
-#signOutBtn:hover,
-#accountBtn:hover {
-	transform: scale(1.1);
-	box-shadow: 0 0 10px 3px white;
-}
-
-.active {
+.active:active {
 /* #deleteAccountBtn:active,
 #noDeleteAccountBtn:active,
 #yesDeleteAccountBtn:active */
