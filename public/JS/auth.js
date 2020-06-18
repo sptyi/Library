@@ -1,4 +1,3 @@
-const userAuth = firebase.auth();
 auth.onAuthStateChanged((user) => {
 	if (user) {
 		closeSignInModal();
@@ -109,7 +108,7 @@ editAccountEmailConfirmBtn.addEventListener('click', () => {
 		});
 });
 
-editAccountPasswordConfirmBtn.addEventListener('click', (currentUser) => {
+editAccountPasswordConfirmBtn.addEventListener('click', () => {
 	auth
 		.sendPasswordResetEmail(auth.currentUser.email)
 		.then(
