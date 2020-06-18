@@ -31,6 +31,8 @@ function renderBook(doc) {
 		let read = document.createElement('div');
 		if (doc.data().read) {
 			read.textContent = 'I have already read this book!';
+			let card = div.parentElement;
+			div.setAttribute('class', 'cardRead');
 		} else {
 			read.textContent = 'I should read this book...';
 		}
@@ -220,7 +222,7 @@ accountBtn.addEventListener('click', () => {
 	editAccountPasswordConfirmBtn.style.display = 'none';
 	editAccountPasswordBtn.style.display = 'inline-block';
 	accountPasswordDots = '';
-	for (let i = accountPasswordLength; i > 0; i--) {
+	for (let i = window.localStorage.getItem('passwordLength'); i > 0; i--) {
 		accountPasswordDots += '\u{000B7}';
 	}
 	accountPassword.textContent = accountPasswordDots;
