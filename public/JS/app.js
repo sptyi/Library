@@ -3,7 +3,7 @@ function renderBook(doc) {
 		let div = document.createElement('div');
 		div.setAttribute('data-id', doc.id);
 		div.setAttribute('class', 'card');
-		div.setAttribute('draggable', 'true')
+		div.setAttribute('draggable', 'true');
 		bookGrid.appendChild(div);
 		div.addEventListener('mouseenter', () => {
 			deleteBtn.style.display = 'block';

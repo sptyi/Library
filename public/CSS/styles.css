@@ -399,9 +399,10 @@ h1 {
 }
 
 footer {
- position: absolute;
- width: 100vw;
- bottom: 50px;
+	position: absolute;
+	width: 100vw;
+	bottom: 50px;
+	background-color: transparent;
 }
 
 a {
