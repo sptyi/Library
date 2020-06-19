@@ -3,6 +3,7 @@ function renderBook(doc) {
 		let div = document.createElement('div');
 		div.setAttribute('data-id', doc.id);
 		div.setAttribute('class', 'card');
+		div.setAttribute('draggable', 'true')
 		bookGrid.appendChild(div);
 		div.addEventListener('mouseenter', () => {
 			deleteBtn.style.display = 'block';
@@ -196,7 +197,7 @@ menuBtn.addEventListener('click', () => {
 	if (menuBtn.classList.contains('menuModalOpen')) {
 		menuBtn.classList.remove('menuModalOpen');
 	} else {
-		menuBtn.setAttribute('class', 'menuModalOpen');
+		menuBtn.setAttribute('class', 'menuModalOpen hover active');
 		menuModal.style.display = 'block';
 	}
 });

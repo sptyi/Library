@@ -26,14 +26,12 @@
 #menuBtn {
 	position: relative;
 	left: 40px;
-	bottom: 0.5rem;
+	bottom: -0.4rem;
 	float: left;
 	background-color: transparent;
-	font-size: 4rem;
 	cursor: pointer;
-	transition: all 0.5s ease-in-out;
-	text-shadow: none;
-	transition-duration: 0.3s;
+	transition: ease-in-out;
+	transition-duration: 0.2s;
 }
 
 .menuModalOpen {
@@ -115,6 +113,8 @@ h1 {
 	background-color: crimson;
 	color: white;
 	box-shadow: 0 0 10px 3px crimson;
+	transition: ease-in-out;
+	transition-duration: 0.2s;
 }
 
 .editBtn {
@@ -124,11 +124,12 @@ h1 {
 
 .editBtn:hover
 /* #noDeleteAccountBtn:hover */ {
-	transform: scale(1.1);
+	transform: scale(1.1) rotate(90deg);
 	background-color: forestgreen;
 	color: white;
 	box-shadow: 0 0 10px 3px forestgreen;
-	transform: rotate(90deg);
+	transition: ease-in-out;
+	transition-duration: 0.2s;
 }
 
 /* #noDeleteAccountBtn:hover {
@@ -137,6 +138,8 @@ h1 {
 
 .editBtn:active {
 	transform: scale(0.9) rotate(90deg);
+	transition: ease-in-out;
+	transition-duration: 0.2s;
 }
 
 #booksForm,
@@ -310,7 +313,7 @@ h1 {
 	place-content: center;
 	margin: 70px 10px;
 	animation-name: menuModalAnimation;
-	animation-duration: 0.3s;
+	animation-duration: 0.2s;
 }
 
 @keyframes menuModalAnimation {
@@ -397,11 +400,15 @@ h1 {
 
 .hover:hover {
 	transform: scale(1.1);
+	transition: ease-in-out;
+	transition-duration: 0.2s;
 }
 
 .active:active {
-/* #deleteAccountBtn:active,
+	/* #deleteAccountBtn:active,
 #noDeleteAccountBtn:active,
 #yesDeleteAccountBtn:active */
 	transform: scale(0.9);
+	transition: ease-in-out;
+	transition-duration: 0.2s;
 }
