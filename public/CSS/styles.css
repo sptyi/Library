@@ -398,6 +398,22 @@ h1 {
 	height: 110px;
 }
 
+footer {
+ position: absolute;
+ width: 100vw;
+ bottom: 50px;
+}
+
+a {
+	text-decoration: none;
+	position: relative;
+	font-size: 1.15rem;
+}
+
+a:hover {
+	color: royalblue;
+}
+
 .hover:hover {
 	transform: scale(1.1);
 	transition: ease-in-out;
