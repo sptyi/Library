@@ -1,3 +1,4 @@
+ ![Logo](https://library-sptyi.web.app/favicon.ico)
 # *[Library](https://library-sptyi.web.app/)*
   
 ## My Library project for *[The Odin Project](https://www.theodinproject.com/home)* course.  
