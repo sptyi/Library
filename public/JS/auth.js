@@ -1,6 +1,6 @@
 auth.onAuthStateChanged((user) => {
 	if (user) {
-		closeSignInModal();
+		closeModal();
 		h2.style.display = 'none';
 		h1.textContent = `${auth.currentUser.displayName}'s Library`;
 		addBookBtn.style.display = 'block';
@@ -28,7 +28,7 @@ auth.onAuthStateChanged((user) => {
 				});
 			});
 	} else {
-		closeMenuModal();
+		closeModal();
 		bookGrid.innerHTML = '';
 		h1.textContent = 'My Library';
 		h2.style.display = 'block';
@@ -61,7 +61,7 @@ createAccountModalContent.addEventListener('submit', (e) => {
 			}),
 				(h1.textContent = `${auth.currentUser.displayName}'s Library`),
 				auth.currentUser.sendEmailVerification(),
-				closeCreateAccountModal();
+				closeModal();
 		})
 		.catch((err) => {
 			createAccountError.style.display = 'block';
@@ -133,7 +133,7 @@ signIn.addEventListener('submit', (e) => {
 	auth
 		.signInWithEmailAndPassword(email, password)
 		.then(() => {
-			closeSignInModal();
+			closeModal();
 		})
 		.catch((err) => {
 			loginError.style.display = 'block';
@@ -151,16 +151,33 @@ yesSignOut.addEventListener('click', () => {
 		);
 });
 
-// yesDeleteAccountBtn.addEventListener('click', () => {
-// 	auth
-// 		.deleteUser(firebase.auth().currentUser.uid)
-// 		.then(() => {
-// 			deleteAccountWarningModal.style.display = 'none';
-// 			auth.signOut();
-// 			loginMessage.textContent = 'Your account has been permanently deleted.';
-// 		})
-// 		.catch((err) => {
-// 			deleteAccountError.style.display = 'block';
-// 			deleteAccountError.textContent = err.message;
-// 		});
+yesDeleteAccountBtn.addEventListener('click', (doc) => {
+	let uid = auth.currentUser.uid;
+	let deleteUser = firebase.functions().httpsCallable('deleteUser');
+	deleteUser(uid).then(function (result) {
+		console.log(result);
+		deleteAccountWarningModal.style.display = 'none';
+		loginMessage.textContent = 'Your account has been permanently deleted.';
+	});
+});
+
+// auth.deleteUser(uid)
+//     .then(function () {
+//         deleteAccountWarningModal.style.display = 'none';
+//         loginMessage.textContent = 'Your account has been permanently deleted.';
+//         console.log('Successfully deleted user');
+//     })
+//     .catch(function (error) {
+//         console.log('Error deleting user:', error);
+//     });
+// auth
+// 	.deleteUser(firebase.auth().currentUser.uid)
+// 	.then(() => {
+// 		deleteAccountWarningModal.style.display = 'none';
+// 		auth.signOut();
+// 		loginMessage.textContent = 'Your account has been permanently deleted.';
+// 	})
+// 	.catch((err) => {
+// 		deleteAccountError.style.display = 'block';
+// 		deleteAccountError.textContent = err.message;
 // });

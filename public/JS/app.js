@@ -79,13 +79,13 @@ function renderBook(doc) {
 }
 
 addBookBtn.addEventListener('click', () => {
-	openAddBookModal();
+	addBookModal.style.display = 'block';
 });
 
 booksForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	addBookToLibrary();
-	closeAddBookModal();
+	closeModal();
 });
 
 function addBookToLibrary() {
@@ -105,7 +105,7 @@ function addBookToLibrary() {
 updateBookForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	updateBook();
-	closeUpdateBookModal();
+	closeModal();
 });
 
 function updateBook() {
@@ -123,10 +123,6 @@ function updateBook() {
 
 window.addEventListener('click', outsideModalClick);
 
-function closeAddBookModal() {
-	addBookModal.style.display = 'none';
-}
-
 function outsideModalClick(e) {
 	if (
 		(e.target == addBookModal) |
@@ -136,62 +132,30 @@ function outsideModalClick(e) {
 		(e.target == accountInfoModal) |
 		(e.target == deleteWarningModal) |
 		(e.target == signOutWarningModal) |
-		(e.target == updateBookModal)
-		// (e.target == deleteAccountWarningModal)
+		(e.target == updateBookModal) |
+		(e.target == deleteAccountWarningModal)
 	) {
-		closeAddBookModal();
-		closeUpdateBookModal();
-		closeMenuModal();
-		closeSignInModal();
-		closeCreateAccountModal();
-		closeAccountModal();
-		closeDeleteWarningModal();
-		closeSignOutWarningModal();
-		// closeDeleteAccountWarningModal();
+		closeModal();
 	}
 }
 
-function openAddBookModal() {
-	addBookModal.style.display = 'block';
-}
-
-function closeUpdateBookModal() {
+function closeModal() {
+	addBookModal.style.display = 'none';
 	updateBookModal.style.display = 'none';
-}
-
-function closeMenuModal() {
 	menuModal.style.display = 'none';
 	menuBtn.classList.remove('menuModalOpen');
-}
-
-function closeSignInModal() {
 	signInModalContent.signInEmail.value = '';
 	signInModalContent.signInPassword.value = '';
 	signInModal.style.display = 'none';
-}
-
-function closeCreateAccountModal() {
 	createAccountModal.style.display = 'none';
 	createAccountModalContent.email.value = '';
 	createAccountModalContent.password.value = '';
 	createAccountModalContent.displayName.value = '';
-}
-
-function closeAccountModal() {
 	accountInfoModal.style.display = 'none';
-}
-
-function closeDeleteWarningModal() {
 	deleteWarningModal.style.display = 'none';
-}
-
-function closeSignOutWarningModal() {
 	signOutWarningModal.style.display = 'none';
+	deleteAccountWarningModal.style.display = 'none';
 }
-
-// function closeDeleteAccountWarningModal() {
-// 	deleteAccountWarningModal.style.display = 'none';
-// }
 
 menuBtn.addEventListener('click', () => {
 	if (menuBtn.classList.contains('menuModalOpen')) {
@@ -203,19 +167,19 @@ menuBtn.addEventListener('click', () => {
 });
 
 signInBtn.addEventListener('click', () => {
-	closeMenuModal();
+	closeModal();
 	signInModal.style.display = 'block';
 	loginError.style.display = 'none';
 });
 
 createAccountBtn.addEventListener('click', () => {
-	closeMenuModal();
+	closeModal();
 	createAccountModal.style.display = 'block';
 	createAccountError.style.display = 'none';
 });
 
 accountBtn.addEventListener('click', () => {
-	closeMenuModal();
+	closeModal();
 	accountDisplayName.textContent = auth.currentUser.displayName;
 	accountEmail.textContent = auth.currentUser.email;
 	editAccountEmailConfirmBtn.style.display = 'none';
@@ -238,7 +202,7 @@ accountBtn.addEventListener('click', () => {
 	editAccountDisplayNameError.style.display = 'none';
 	editAccountEmailError.style.display = 'none';
 	editAccountPasswordError.style.display = 'none';
-	// deleteAccountError.style.display = 'none';
+	deleteAccountError.style.display = 'none';
 	accountInfoModal.style.display = 'block';
 });
 
@@ -278,11 +242,67 @@ noSignOut.addEventListener('click', () => {
 	signOutWarningModal.style.display = 'none';
 });
 
-// deleteAccountBtn.addEventListener('click', () => {
-// 	closeAccountModal();
-// 	deleteAccountWarningModal.style.display = 'block';
-// });
+deleteAccountBtn.addEventListener('click', () => {
+	closeModal();
+	deleteAccountWarningModal.style.display = 'block';
+});
 
-// noDeleteAccountBtn.addEventListener('click', () => {
-// 	deleteAccountWarningModal.style.display = 'none';
-// });
+noDeleteAccountBtn.addEventListener('click', () => {
+	deleteAccountWarningModal.style.display = 'none';
+});
+
+function createGridPositionForCards() {
+	// const cards = document.querySelectorAll('.card');
+	cards.forEach(function (element, index) {
+		let id = element.getAttribute('data-id');
+		console.log(id);
+		db.collection('books').doc(id).update({
+			gridPosition: index,
+		});
+	});
+}
+
+createGridPositionForCards();
+
+document.querySelector('#bookTitle').addEventListener('focus', () => {
+	focusedFormInput = bookTitle;
+	focusedFormAnimation.play;
+});
+
+document.querySelector('#updateBookTitle').addEventListener('focus', () => {
+	focusedFormInput = updateBookTitle;
+	focusedFormAnimation.play;
+});
+
+document.querySelector('#bookAuthor').addEventListener('focus', () => {
+	focusedFormInput = bookAuthor;
+	focusedFormAnimation.play;
+});
+
+document.querySelector('#updateBookAuthor').addEventListener('focus', () => {
+	focusedFormInput = updateBookAuthor;
+	focusedFormAnimation.play;
+});
+
+document
+	.querySelector('#createAccountDisplayName')
+	.addEventListener('focus', () => {
+		focusedFormInput = createAccountDisplayName;
+		focusedFormAnimation.play;
+	});
+
+document
+	.querySelector('#editAccountDisplayName')
+	.addEventListener('focus', () => {
+		focusedFormInput = editAccountDisplayName;
+		focusedFormAnimation.play;
+	});
+
+var focusedFormAnimation = anime({
+	targets: focusedFormInput,
+	borderColor: 'red',
+	scale: ['1%', '100%'],
+	easing: 'easeOutBounce',
+	duration: 500,
+	autoplay: false,
+});

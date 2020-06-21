@@ -12,16 +12,24 @@ const createAccountBtn = document.querySelector('#createAccountBtn');
 const signInModal = document.querySelector('#signInModal');
 const createAccountModal = document.querySelector('#createAccountModal');
 const createAccountError = document.querySelector('#createAccountError');
-const editAccountUserNameError = document.querySelector('#editAccountUserNameError');
+const editAccountUserNameError = document.querySelector(
+	'#editAccountUserNameError'
+);
 const editAccountEmailError = document.querySelector('#editAccountEmail');
-const editAccountPasswordError = document.querySelector('#editAccountPasswordError');
+const editAccountPasswordError = document.querySelector(
+	'#editAccountPasswordError'
+);
 const accountInfoModal = document.querySelector('#accountInfoModal');
 const editAccountDisplayNameBtn = document.querySelector(
 	'#editAccountDisplayNameBtn'
 );
-const editAccountDisplayNameConfirmBtn = document.querySelector('#editAccountDisplayNameConfirmBtn')
+const editAccountDisplayNameConfirmBtn = document.querySelector(
+	'#editAccountDisplayNameConfirmBtn'
+);
 const editAccountEmailBtn = document.querySelector('#editAccountEmailBtn');
-const editAccountPasswordBtn = document.querySelector('#editAccountPasswordBtn');
+const editAccountPasswordBtn = document.querySelector(
+	'#editAccountPasswordBtn'
+);
 const accountBtn = document.querySelector('#accountBtn');
 const accountDisplayName = document.querySelector('#accountDisplayName');
 const accountEmail = document.querySelector('#accountEmail');
@@ -37,8 +45,20 @@ const signOutWarningModal = document.querySelector('#signOutWarningModal');
 const createAccountModalContent = document.querySelector(
 	'#createAccountModalContent'
 );
-// const yesDeleteAccountBtn = document.querySelector('#yesDeleteAccountBtn');
-// const noDeleteAccountBtn = document.querySelector('#noDeleteAccountBtn');
+const cards = document.querySelectorAll('.card');
+const yesDeleteAccountBtn = document.querySelector('#yesDeleteAccountBtn');
+const noDeleteAccountBtn = document.querySelector('#noDeleteAccountBtn');
+const bookTitle = document.querySelector('#bookTitle');
+const updateBookTitle = document.querySelector('#updateBookTitle');
+const bookAuthor = document.querySelector('#bookAuthor');
+const updateBookAuthor = document.querySelector('#updateBookAuthor');
+const createAccountDisplayName = document.querySelector(
+	'#createAccountDisplayName'
+);
+const editAccountDisplayName = document.querySelector(
+	'#editAccountDisplayName'
+);
+let focusedFormInput = '';
 let accountPasswordLength = '';
 let accountPasswordDots = '';
 let bookId = '';
