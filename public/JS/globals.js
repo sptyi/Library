@@ -45,7 +45,7 @@ const signOutWarningModal = document.querySelector('#signOutWarningModal');
 const createAccountModalContent = document.querySelector(
 	'#createAccountModalContent'
 );
-const cards = document.querySelectorAll('.card');
+const cards = document.querySelector('#bookGrid').children;
 const yesDeleteAccountBtn = document.querySelector('#yesDeleteAccountBtn');
 const noDeleteAccountBtn = document.querySelector('#noDeleteAccountBtn');
 const bookTitle = document.querySelector('#bookTitle');

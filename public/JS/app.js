@@ -251,19 +251,6 @@ noDeleteAccountBtn.addEventListener('click', () => {
 	deleteAccountWarningModal.style.display = 'none';
 });
 
-function createGridPositionForCards() {
-	// const cards = document.querySelectorAll('.card');
-	cards.forEach(function (element, index) {
-		let id = element.getAttribute('data-id');
-		console.log(id);
-		db.collection('books').doc(id).update({
-			gridPosition: index,
-		});
-	});
-}
-
-createGridPositionForCards();
-
 document.querySelector('#bookTitle').addEventListener('focus', () => {
 	focusedFormInput = bookTitle;
 	focusedFormAnimation.play;
@@ -297,6 +284,21 @@ document
 		focusedFormInput = editAccountDisplayName;
 		focusedFormAnimation.play;
 	});
+
+setTimeout(() => {
+	this.createGridPositionForCards();
+}, 2000);
+
+function createGridPositionForCards() {
+	let i = 0;
+	for (card of cards) {
+		let id = card.dataset.id;
+		i++;
+		db.collection('books').doc(id).update({
+			gridPosition: i,
+		});
+	}
+}
 
 var focusedFormAnimation = anime({
 	targets: focusedFormInput,

@@ -6,15 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>My Library</title>
 	<link rel="icon" href="/favicon.ico">
-
-	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-
 	<link rel="stylesheet" href="CSS/styles.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet" />
 </head>
@@ -298,7 +289,14 @@
 				<a href='https://github.com/sptyi' target="_blank">created by sptyi</a>
 			</footer>
 
-			<script>
+			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+			<script defer>
 				var firebaseConfig = {
 				apiKey: 'AIzaSyCR7ctwDeT3SvS4OqZXzqsi8FypBlumA2A',
 				authDomain: 'library-sptyi.firebaseapp.com',
@@ -314,9 +312,9 @@
 			const db = firebase.firestore();
 			const auth = firebase.auth();
 			</script>
-			<script type="text/javascript" src="JS/globals.js"></script>
-			<script type="text/javascript" src="JS/app.js"></script>
-			<script type="text/javascript" src="JS/auth.js"></script>
+            <script type="text/javascript" src="JS/globals.js"></script>
+			<script type="text/javascript" src="JS/app.js" defer></script>
+            <script type="text/javascript" src="JS/auth.js"></script>
 </body>
 
 </html>

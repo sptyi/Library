@@ -1,45 +1,51 @@
 auth.onAuthStateChanged((user) => {
-	if (user) {
-		closeModal();
-		h2.style.display = 'none';
-		h1.textContent = `${auth.currentUser.displayName}'s Library`;
-		addBookBtn.style.display = 'block';
-		signInBtn.style.display = 'none';
-		createAccountBtn.style.display = 'none';
-		signOutBtn.style.display = 'block';
-		divSignOut.style.gridRow = '2 / 2';
-		accountBtn.style.display = 'block';
-		divAccount.style.gridRow = '1 / 1';
-		db.collection('books')
-			.orderBy('author')
-			.onSnapshot((snapshot) => {
-				let changes = snapshot.docChanges();
-				changes.forEach((change) => {
-					if (change.type == 'added') {
-						renderBook(change.doc);
-					} else if (change.type == 'removed') {
-						let div = bookGrid.querySelector('[data-id=' + change.doc.id + ']');
-						bookGrid.removeChild(div);
-					} else if (change.type == 'modified') {
-						let div = bookGrid.querySelector('[data-id=' + change.doc.id + ']');
-						bookGrid.removeChild(div);
-						renderBook(change.doc);
-					}
+	setTimeout(() => {
+		if (user) {
+			closeModal();
+			h2.style.display = 'none';
+			h1.textContent = `${auth.currentUser.displayName}'s Library`;
+			addBookBtn.style.display = 'block';
+			signInBtn.style.display = 'none';
+			createAccountBtn.style.display = 'none';
+			signOutBtn.style.display = 'block';
+			divSignOut.style.gridRow = '2 / 2';
+			accountBtn.style.display = 'block';
+			divAccount.style.gridRow = '1 / 1';
+			db.collection('books')
+				.orderBy('author')
+				.onSnapshot((snapshot) => {
+					let changes = snapshot.docChanges();
+					changes.forEach((change) => {
+						if (change.type == 'added') {
+							renderBook(change.doc);
+						} else if (change.type == 'removed') {
+							let div = bookGrid.querySelector(
+								'[data-id=' + change.doc.id + ']'
+							);
+							bookGrid.removeChild(div);
+						} else if (change.type == 'modified') {
+							let div = bookGrid.querySelector(
+								'[data-id=' + change.doc.id + ']'
+							);
+							bookGrid.removeChild(div);
+							renderBook(change.doc);
+						}
+					});
 				});
-			});
-	} else {
-		closeModal();
-		bookGrid.innerHTML = '';
-		h1.textContent = 'My Library';
-		h2.style.display = 'block';
-		addBookBtn.style.display = 'none';
-		signInBtn.style.display = 'block';
-		createAccountBtn.style.display = 'block';
-		signOutBtn.style.display = 'none';
-		divSignOut.style.gridRow = '3 / 3';
-		accountBtn.style.display = 'none';
-		divAccount.style.gridRow = '4 / 4';
-	}
+		} else {
+			closeModal();
+			bookGrid.innerHTML = '';
+			h1.textContent = 'My Library';
+			h2.style.display = 'block';
+			addBookBtn.style.display = 'none';
+			signInBtn.style.display = 'block';
+			createAccountBtn.style.display = 'block';
+			signOutBtn.style.display = 'none';
+			divSignOut.style.gridRow = '3 / 3';
+			accountBtn.style.display = 'none';
+			divAccount.style.gridRow = '4 / 4';
+		}
+	});
 });
 
 createAccountModalContent.addEventListener('submit', (e) => {
