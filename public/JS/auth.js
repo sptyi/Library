@@ -12,7 +12,7 @@ auth.onAuthStateChanged((user) => {
 			accountBtn.style.display = 'block';
 			divAccount.style.gridRow = '1 / 1';
 			db.collection('books')
-				.orderBy('author')
+				.orderBy('gridPosition')
 				.onSnapshot((snapshot) => {
 					let changes = snapshot.docChanges();
 					changes.forEach((change) => {

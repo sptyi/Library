@@ -76,6 +76,7 @@ function renderBook(doc) {
 			updateBookModal.style.display = 'block';
 		});
 	}
+	return (booksLoaded = true);
 }
 
 addBookBtn.addEventListener('click', () => {
@@ -290,13 +291,17 @@ setTimeout(() => {
 }, 2000);
 
 function createGridPositionForCards() {
-	let i = 0;
-	for (card of cards) {
-		let id = card.dataset.id;
-		i++;
-		db.collection('books').doc(id).update({
-			gridPosition: i,
-		});
+	if (booksLoaded) {
+		let i = 0;
+		for (card of cards) {
+			let id = card.dataset.id;
+			// if (db.collection('books').doc(id).gridPosition.exists == true) {
+			i++;
+			db.collection('books').doc(id).update({
+				gridPosition: i,
+			});
+			// }
+		}
 	}
 }
 
