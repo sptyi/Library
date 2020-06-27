@@ -287,21 +287,28 @@ document
 	});
 
 setTimeout(() => {
-	this.createGridPositionForCards();
+	createGridPositionForCards();
 }, 2000);
 
-function createGridPositionForCards() {
+function createGridPositionForCards(doc) {
 	if (booksLoaded) {
 		let i = 0;
-		for (card of cards) {
-			let id = card.dataset.id;
-			// if (db.collection('books').doc(id).gridPosition.exists == true) {
-			i++;
-			db.collection('books').doc(id).update({
-				gridPosition: i,
-			});
-			// }
-		}
+		db.collection('books').onSnapshot((snapshot) => {
+			for (card of cards) {
+				let id = card.dataset.id;
+				db.collection('books')
+					.doc(id)
+					.get()
+					.then(() => {
+						if (doc.data().gridPosition.exists == true) {
+							i++;
+							db.collection('books').doc(id).update({
+								gridPosition: i,
+							});
+						}
+					});
+			}
+		});
 	}
 }
 
