@@ -79,14 +79,50 @@ h1 {
 	margin: 0.25rem;
 }
 
+.empty {
+	cursor: pointer;
+}
+
+.empty:hover {
+	transform: scale(1.1);
+	transition: ease-in-out;
+	transition-duration: 0.2s;
+}
+
+.empty:active {
+	transform: scale(0.9);
+	transition: ease-in-out;
+	transition-duration: 0.2s;
+}
+
+.hold {
+	border: none;
+}
+
+.hovered {
+	background: #f4f4f4;
+	border-style: dashed;
+}
+
+.invisible {
+	display: none;
+}
+
 .card {
-	min-height: 10px;
 	box-shadow: 0 0 10px 3px white;
+	cursor: pointer;
 }
 
 .cardRead {
-	min-height: 10px;
 	box-shadow: 0 0 10px 3px black;
+	cursor: pointer;
+}
+
+#bookGrid .addBookCard {
+	background-color: transparent;
+	font-size: 3rem;
+	padding: 40px 0;
+	border: 2px dashed grey;
 }
 
 .deleteBtn,

@@ -1,3 +1,4 @@
+// Render current user's cards
 function renderBook(doc) {
 	if (firebase.auth().currentUser.uid == doc.data().user) {
 		let div = document.createElement('div');
@@ -76,8 +77,29 @@ function renderBook(doc) {
 			updateBookModal.style.display = 'block';
 		});
 	}
-	return (booksLoaded = true);
 }
+
+// Create empty clickable card for adding a new book
+let divAddBookCard = document.createElement('div');
+divAddBookCard.setAttribute('class', 'addBookCard');
+divAddBookCard.textContent = '\uFF0B';
+bookGrid.appendChild(divAddBookCard);
+
+divAddBookCard.addEventListener('click', () => {
+	addBookModal.style.display = 'block';
+});
+
+// Get current user's cards
+db.collection('books')
+	.get()
+	.then(function (querySnapshot) {
+		querySnapshot.forEach(function (doc) {
+			if (firebase.auth().currentUser.uid == doc.data().user) {
+				// doc.data() is never undefined for query doc snapshots
+				console.log(doc.id, ' => ', doc.data().gridPosition);
+			}
+		});
+	});
 
 addBookBtn.addEventListener('click', () => {
 	addBookModal.style.display = 'block';
@@ -286,30 +308,80 @@ document
 		focusedFormAnimation.play;
 	});
 
+/*
+Drag and hold card
+Hover over other cards and reorder
+Drop card and keep in place
+*/
+
+// Begin drag and drop code.
+
+// Loop through cards and add listeners
+for (const card of cards) {
+	card.addEventListener('dragstart', dragStart);
+	card.addEventListener('dragend', dragEnd);
+	card.addEventListener('dragover', dragOver);
+	card.addEventListener('dragenter', dragEnter);
+	card.addEventListener('dragleave', dragLeave);
+	card.addEventListener('drop', dragDrop);
+}
+
+// Drag Functions
+
+function dragStart() {
+	this.className += ' hold';
+	setTimeout(() => (this.className = 'invisible'), 0);
+}
+
+function dragEnd() {
+	this.style.gridColumn = 1;
+	// this.className = 'fill';
+}
+
+function dragOver(e) {
+	e.preventDefault();
+}
+
+function dragEnter(e) {
+	e.preventDefault();
+	this.className += ' hovered';
+}
+
+function dragLeave() {
+	this.className -= ' hovered';
+	// this.className = 'empty';
+}
+
+function dragDrop() {
+	this.style.gridColumn = 1;
+	// this.className = 'empty';
+	// this.append(fill);
+}
+
+// End drag and drop code.
+
 setTimeout(() => {
 	createGridPositionForCards();
 }, 2000);
 
 function createGridPositionForCards(doc) {
-	if (booksLoaded) {
-		let i = 0;
-		db.collection('books').onSnapshot((snapshot) => {
-			for (card of cards) {
-				let id = card.dataset.id;
-				db.collection('books')
-					.doc(id)
-					.get()
-					.then(() => {
-						if (doc.data().gridPosition.exists == true) {
-							i++;
-							db.collection('books').doc(id).update({
-								gridPosition: i,
-							});
-						}
-					});
-			}
-		});
-	}
+	let i = 0;
+	db.collection('books').onSnapshot((snapshot) => {
+		for (card of cards) {
+			let id = card.dataset.id;
+			db.collection('books')
+				.doc(id)
+				.get()
+				.then(() => {
+					if (doc.data().gridPosition.exists == true) {
+						i++;
+						db.collection('books').doc(id).update({
+							gridPosition: i,
+						});
+					}
+				});
+		}
+	});
 }
 
 var focusedFormAnimation = anime({
