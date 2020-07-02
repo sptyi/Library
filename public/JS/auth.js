@@ -3,13 +3,14 @@ auth.onAuthStateChanged((user) => {
 		closeModal();
 		h2.style.display = 'none';
 		h1.textContent = `${auth.currentUser.displayName}'s Library`;
-		addBookBtn.style.display = 'block';
-		signInBtn.style.display = 'none';
 		createAccountBtn.style.display = 'none';
+		signInBtn.style.display = 'none';
+		backBtn.style.display = 'none';
+		logo.style.display = 'none';
+		icon.style.display = 'block';
 		signOutBtn.style.display = 'block';
-		divSignOut.style.gridRow = '2 / 2';
 		accountBtn.style.display = 'block';
-		divAccount.style.gridRow = '1 / 1';
+		addBookCard.style.display = 'inline-block';
 		db.collection('books')
 			.orderBy('gridPosition')
 			.onSnapshot((snapshot) => {
@@ -28,21 +29,19 @@ auth.onAuthStateChanged((user) => {
 				});
 			});
 	} else {
-		closeModal();
 		bookGrid.innerHTML = '';
 		h1.textContent = 'My Library';
 		h2.style.display = 'block';
-		addBookBtn.style.display = 'none';
-		signInBtn.style.display = 'block';
-		createAccountBtn.style.display = 'block';
+		signInBtn.style.display = 'inline-block';
 		signOutBtn.style.display = 'none';
-		divSignOut.style.gridRow = '3 / 3';
 		accountBtn.style.display = 'none';
-		divAccount.style.gridRow = '4 / 4';
+		logo.style.display = 'block';
+		icon.style.display = 'none';
+		addBookCard.style.display = 'none';
 	}
 });
 
-createAccountModalContent.addEventListener('submit', (e) => {
+createAccountFormContent.addEventListener('submit', (e) => {
 	e.preventDefault();
 
 	const email = createAccountModalContent['createAccountEmail'].value;
@@ -61,7 +60,8 @@ createAccountModalContent.addEventListener('submit', (e) => {
 			}),
 				(h1.textContent = `${auth.currentUser.displayName}'s Library`),
 				auth.currentUser.sendEmailVerification(),
-				closeModal();
+				(signIn.style.display = 'none'),
+				(backBtn.style.display = 'none');
 		})
 		.catch((err) => {
 			createAccountError.style.display = 'block';
@@ -133,7 +133,7 @@ signIn.addEventListener('submit', (e) => {
 	auth
 		.signInWithEmailAndPassword(email, password)
 		.then(() => {
-			closeModal();
+			(signIn.style.display = 'none'), (backBtn.style.display = 'none');
 		})
 		.catch((err) => {
 			loginError.style.display = 'block';
@@ -147,7 +147,7 @@ yesSignOut.addEventListener('click', () => {
 		.then(
 			window.localStorage.clear(),
 			(signOutWarningModal.style.display = 'none'),
-			(loginMessage.textContent = 'You have been logged out of your library.')
+			(loginMessage.textContent = 'You have been logged out of your library.'),
 		);
 });
 

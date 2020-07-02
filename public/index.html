@@ -1,116 +1,118 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>My Library</title>
+		<link rel="icon" href="Assets/favicon.ico" />
+		<link rel="stylesheet" href="CSS/styles.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
 
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>My Library</title>
-	<link rel="icon" href="/favicon.ico">
-	<link rel="stylesheet" href="CSS/styles.css" />
-	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet" />
-</head>
-
-<body id="body">
-	<header id="navbar">
-		<img src="/favicon.ico" id="menuBtn" class="hover active"></img>
-		<h1 id="h1">My Library</h1>
-		<button id="addBookBtn" class="hover active">Add Book</button>
-	</header>
-	<h2 id="loginMessage">
-		Sign in to create and save your own library of books!
-	</h2>
-	<div id="bookGrid"></div>
-	<div id="addBookModal" class="modal">
-		<div id="addBookModalContent" class="modalContent">
-			<p>Enter information for your new book:</p>
-			<form id="booksForm">
-				<label for="title">Title: </label><br />
-				<input
+	<body id="body">
+		<header id="navbar">
+			<img src="Assets/favicon.ico" id="icon" />
+			<h1 id="h1">My Library</h1>
+				<button id="signOutBtn" class="btn2 hover active">Sign Out</button>
+				<button id="accountBtn" class="btn2 hover active">Account</button>
+		</header>
+		<img src="Assets/favicon.ico" id="logo" />
+		<h2 id="loginMessage">
+			Sign in or create an account below to save and keep track of your library!
+		</h2>
+		<span>
+			<button id="signInBtn" class="btn hover active">Sign In</button>
+			<button id="createAccountBtn" class="btn hover active">
+				CreateAccount
+			</button>
+		</span>
+		<div id="bookGrid">
+			<div class="addBookCard hover active">&#xFF0B</div>
+		</div>
+		<div id="addBookModal" class="modal">
+			<div id="addBookModalContent" class="modalContent">
+				<p>Enter information for your new book:</p>
+				<form id="booksForm">
+					<label for="title">Title: </label><br />
+					<input
 						type="text"
 						name="title"
 						id="bookTitle"
 						class="textField"
+						placeholder="Title"
 						required
 					/>
-				<br />
-				<label for="author">Author: </label><br />
-				<input
+					<br />
+					<label for="author">Author: </label><br />
+					<input
 						type="text"
 						name="author"
 						id="bookAuthor"
 						class="textField"
+						placeholder="Author"
 						required
 					/>
-				<br />
-				<label for="pages">Pages: </label><br />
-				<input type="number" name="pages" id="bookPages" class="textField" />
-				<br />
-				<label for="read">Read: </label>
-				<input type="checkbox" name="read" id="bookRead" class="textField" />
-				<br />
-				<input
+					<br />
+					<label for="pages">Pages: </label><br />
+					<input
+						type="number"
+						name="pages"
+						id="bookPages"
+						class="textField"
+						placeholder="Pages"
+					/>
+					<br />
+					<label for="read">Read: </label>
+					<input type="checkbox" name="read" id="bookRead" class="textField" />
+					<br />
+					<input
 						type="submit"
 						value="Submit Book"
 						id="bookSubmitBtn"
 						class="btn hover active"
 					/>
 				</form>
-		</div>
-	</div>
-
-	<div id="menuModal">
-		<div id="menuModalContent">
-			<div id="divSignIn">
-				<button id="signInBtn" class="btn2 hover active">Sign In</button>
-			</div>
-			<div id="divCreateAccount">
-				<button id="createAccountBtn" class="btn2 hover active">
-						Sign Up
-					</button>
-			</div>
-			<div id="divAccount">
-				<button id="accountBtn" class="btn2 hover active">Account</button>
-			</div>
-			<div id="divSignOut">
-				<button id="signOutBtn" class="btn2 hover active">Sign Out</button>
 			</div>
 		</div>
-	</div>
 
-	<div id="signInModal" class="modal">
-		<form id="signInModalContent" class="modalContent">
-			<h2>Enter your email and password to sign in:</h2>
-			<label for="signInEmail">Email: </label><br />
-			<input
+		<div id="signInForm">
+			<form id="signInFormContent">
+				<label for="signInEmail">Email: </label><br />
+				<input
 					type="email"
 					name="signInEmail"
 					id="signInEmail"
 					class="textField"
+					placeholder="Email"
 					required
 				/><br />
-			<label for="signInPassword">Password: </label><br />
-			<input
+				<label for="signInPassword">Password: </label><br />
+				<input
 					type="password"
 					name="signInPassword"
 					id="signInPassword"
 					class="textField"
+					placeholder="Password"
 					required
 				/><br />
-			<p id="loginError" class="error"></p>
-			<input
+				<p id="loginError" class="error"></p>
+				<input
 					type="submit"
 					value="Sign In"
 					id="signInSubmitBtn"
 					class="btn2 hover active"
 				/>
 			</form>
-	</div>
+		</div>
 
-	<div id="signOutWarningModal" class="modal">
-		<div id="signOutWarningModalContent">
-			<p>Are you sure you are ready to log out?</p>
-			<button id="yesSignOut" class="btn2 hover active">Yes</button>
-			<button id="noSignOut" class="btn2 hover active">Not Yet</button><br />
+		<div id="signOutWarningModal" class="modal">
+			<div id="signOutWarningModalContent">
+				<p>Are you sure you are ready to log out?</p>
+				<button id="yesSignOut" class="btn2 hover active">Yes</button>
+				<button id="noSignOut" class="btn2 hover active">Not Yet</button><br />
 			</div>
 		</div>
 
@@ -126,15 +128,15 @@
 			</div>
 		</div>
 
-		<div id="createAccountModal" class="modal">
-			<form id="createAccountModalContent" class="modalContent">
-				<h2>Enter your email, password, and a display name to sign up:</h2>
+		<div id="createAccountForm">
+			<form id="createAccountFormContent">
 				<label for="email">Email: </label><br />
 				<input
 					type="email"
 					name="email"
 					id="createAccountEmail"
 					class="textField"
+					placeholder="Email"
 					required
 				/><br />
 				<label for="password">Password: </label><br />
@@ -143,6 +145,7 @@
 					name="password"
 					id="createAccountPassword"
 					class="textField"
+					placeholder="Password"
 					required
 				/><br />
 				<label for="displayName">Display Name: </label><br />
@@ -151,6 +154,7 @@
 					name="displayName"
 					id="createAccountDisplayName"
 					class="textField"
+					placeholder="Display Name"
 					required
 				/><br />
 				<input
@@ -163,141 +167,151 @@
 			</form>
 		</div>
 
+		<button id="backBtn" class="btn">Back</button>
+
 		<div id="deleteWarningModal" class="modal">
 			<div id="deleteWarningModalContent">
 				<p>Are you sure that you want to delete this book from your library?</p>
 				<button id="yesDelete" class="btn2 hover active">Yes</button>
 				<button id="noDelete" class="btn2 hover active">No!</button><br />
 			</div>
-			</div>
+		</div>
 
-			<div id="updateBookModal" class="modal">
-				<div id="updateBookModalContent" class="modalContent">
-					<p>Enter information to update your book:</p>
-					<form id="updateBookForm">
-						<label for="title">Title: </label><br />
-						<input
+		<div id="updateBookModal" class="modal">
+			<div id="updateBookModalContent" class="modalContent">
+				<p>Enter information to update your book:</p>
+				<form id="updateBookForm">
+					<label for="title">Title: </label><br />
+					<input
 						type="text"
 						name="title"
 						id="updateBookTitle"
 						class="textField"
+						placeholder="Title"
 						required
 					/>
-						<br />
-						<label for="author">Author: </label><br />
-						<input
+					<br />
+					<label for="author">Author: </label><br />
+					<input
 						type="text"
 						name="author"
 						id="updateBookAuthor"
 						class="textField"
+						placeholder="Author"
 						required
 					/>
-						<br />
-						<label for="pages">Pages: </label><br />
-						<input
+					<br />
+					<label for="pages">Pages: </label><br />
+					<input
 						type="number"
 						name="pages"
 						id="updateBookPages"
 						class="textField"
+						placeholder="Pages"
 					/>
-						<br />
-						<label for="read">Read: </label>
-						<input
+					<br />
+					<label for="read">Read: </label>
+					<input
 						type="checkbox"
 						name="read"
 						id="updateBookRead"
 						class="textField"
 					/>
-						<br />
-						<input
+					<br />
+					<input
 						type="submit"
 						value="Update Book"
 						id="updateBookSubmitBtn"
 						class="btn hover active"
 					/>
 				</form>
-				</div>
 			</div>
+		</div>
 
-			<div id="accountInfoModal" class="modal">
-				<div id="accountInfoModalContent" class="modalContent">
-					<h2 id="accountInfoHeader">Account Details:</h2>
-					<p class="accountInfoTag">Display Name:</p>
-					<p id="accountDisplayName"></p>
-					<p>
-						<input
+		<div id="accountInfoModal" class="modal">
+			<div id="accountInfoModalContent" class="modalContent">
+				<h2 id="accountInfoHeader">Account Details:</h2>
+				<p class="accountInfoTag">Display Name:</p>
+				<p id="accountDisplayName"></p>
+				<p>
+					<input
 						type="text"
 						id="editAccountDisplayName"
 						class="textField"
+						placeholder="Diplay Name"
 						required
 					/>
 				</p>
-						<p>
-							<button id="editAccountDisplayNameBtn" class="btn hover active">
+				<p>
+					<button id="editAccountDisplayNameBtn" class="btn hover active">
 						Edit
 					</button>
-						</p>
-						<p id="editAccountDisplayNameError" class="error"></p>
-						<p>
-							<button
+				</p>
+				<p id="editAccountDisplayNameError" class="error"></p>
+				<p>
+					<button
 						id="editAccountDisplayNameConfirmBtn"
 						class="btn hover active"
 					>
 						Submit
 					</button>
-						</p>
-						<p class="accountInfoTag">Email Address:</p>
-						<p id="accountEmail"></p>
-						<p>
-							<input
+				</p>
+				<p class="accountInfoTag">Email Address:</p>
+				<p id="accountEmail"></p>
+				<p>
+					<input
 						type="email"
 						id="editAccountEmail"
 						class="textField"
+						placeholder="Email"
 						required
 					/>
 				</p>
-							<p id="accountEmail"></p>
-							<p id="editAccountEmailError" class="error"></p>
-							<p>
-								<button id="editAccountEmailBtn" class="btn hover active">
+				<p id="accountEmail"></p>
+				<p id="editAccountEmailError" class="error"></p>
+				<p>
+					<button id="editAccountEmailBtn" class="btn hover active">
 						Edit
 					</button>
-							</p>
-							<p>
-								<button id="editAccountEmailConfirmBtn" class="btn hover active">
+				</p>
+				<p>
+					<button id="editAccountEmailConfirmBtn" class="btn hover active">
 						Submit
 					</button>
-							</p>
-							<p class="accountInfoTag">Password:</p>
-							<p id="accountPassword"></p>
-							<p>
-								<button id="editAccountPasswordBtn" class="btn hover active">
+				</p>
+				<p class="accountInfoTag">Password:</p>
+				<p id="accountPassword"></p>
+				<p>
+					<button id="editAccountPasswordBtn" class="btn hover active">
 						Edit
 					</button>
-							</p>
-							<p id="editAccountPasswordError" class="error"></p>
-							<p>
-								<button id="editAccountPasswordConfirmBtn" class="btn hover active">
+				</p>
+				<p id="editAccountPasswordError" class="error"></p>
+				<p>
+					<button id="editAccountPasswordConfirmBtn" class="btn hover active">
 						Okay
 					</button>
-							</p>
-							<p><button id="deleteAccountBtn" class="btn active">Delete Account</button></p>
-				</div>
+				</p>
+				<p>
+					<button id="deleteAccountBtn" class="btn active">
+						Delete Account
+					</button>
+				</p>
 			</div>
+		</div>
 
-			<footer>
-				<a href='https://github.com/sptyi' target="_blank">created by sptyi</a>
-			</footer>
+		<footer>
+			<a href="https://github.com/sptyi" target="_blank">created by sptyi</a>
+		</footer>
 
-			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
-			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
-			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
-			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
-			<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
-			<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-			<script defer>
-				var firebaseConfig = {
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
+		<script defer>
+			var firebaseConfig = {
 				apiKey: 'AIzaSyCR7ctwDeT3SvS4OqZXzqsi8FypBlumA2A',
 				authDomain: 'library-sptyi.firebaseapp.com',
 				databaseURL: 'https://library-sptyi.firebaseio.com',
@@ -311,10 +325,9 @@
 			firebase.analytics();
 			const db = firebase.firestore();
 			const auth = firebase.auth();
-			</script>
-            <script type="text/javascript" src="JS/globals.js"></script>
-			<script type="text/javascript" src="JS/app.js" defer></script>
-            <script type="text/javascript" src="JS/auth.js"></script>
-</body>
-
+		</script>
+		<script type="text/javascript" src="JS/globals.js"></script>
+		<script type="text/javascript" src="JS/app.js"></script>
+		<script type="text/javascript" src="JS/auth.js"></script>
+	</body>
 </html>

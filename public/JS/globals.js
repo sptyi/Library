@@ -1,16 +1,12 @@
 const h1 = document.querySelector('#h1');
+const icon = document.querySelector('#icon');
 const bookGrid = document.querySelector('#bookGrid');
-const addBookBtn = document.querySelector('#addBookBtn');
 const addBookModal = document.querySelector('#addBookModal');
 const updateBookModal = document.querySelector('#updateBookModal');
 const updateBookForm = document.querySelector('#updateBookForm');
 const booksForm = document.querySelector('#booksForm');
-const menuBtn = document.querySelector('#menuBtn');
-const menuModal = document.querySelector('#menuModal');
-const signInBtn = document.querySelector('#signInBtn');
 const createAccountBtn = document.querySelector('#createAccountBtn');
-const signInModal = document.querySelector('#signInModal');
-const createAccountModal = document.querySelector('#createAccountModal');
+const createAccountForm = document.querySelector('#createAccountForm');
 const createAccountError = document.querySelector('#createAccountError');
 const editAccountUserNameError = document.querySelector(
 	'#editAccountUserNameError'
@@ -39,12 +35,15 @@ const noDelete = document.querySelector('#noDelete');
 const h2 = document.querySelector('h2');
 const divSignOut = document.querySelector('#divSignOut');
 const divAccount = document.querySelector('#divAccount');
-const signIn = document.querySelector('#signInModalContent');
+const signIn = document.querySelector('#signInFormContent');
+const signInBtn = document.querySelector('#signInBtn');
+const backBtn = document.querySelector('#backBtn');
 const signOutBtn = document.querySelector('#signOutBtn');
 const signOutWarningModal = document.querySelector('#signOutWarningModal');
-const createAccountModalContent = document.querySelector(
-	'#createAccountModalContent'
+const createAccountFormContent = document.querySelector(
+	'#createAccountFormContent'
 );
+const addBookCard = document.querySelector('.addBookCard');
 const cards = document.querySelector('#bookGrid').children;
 const yesDeleteAccountBtn = document.querySelector('#yesDeleteAccountBtn');
 const noDeleteAccountBtn = document.querySelector('#noDeleteAccountBtn');

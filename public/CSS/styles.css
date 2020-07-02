@@ -2,11 +2,20 @@
 	margin: auto;
 	text-align: center;
 	padding: 0;
-	background-color: #333;
 	color: white;
 	text-shadow: 2px 2px 5px black;
 	font-family: 'Cormorant Garamond', serif;
 	font-size: 18px;
+}
+
+body {
+	background-image: url('/Assets/librarybg.jpg');
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-blend-mode: soft-light;
+	background-color: #333;
 }
 
 #navbar {
@@ -16,40 +25,81 @@
 	margin-bottom: 50px;
 }
 
-#loginMessage {
-	display: none;
-	color: cadetblue;
-	margin: 100px 25px;
-	font-size: 1.5rem;
+#logo {
+	width: 75px;
+	height: 75px;
+	margin-bottom: 2rem;
 }
 
-#menuBtn {
+::placeholder {
+	padding-right: 75%;
+	color: black;
+	opacity: 0.9;
+	font-size: 0.8rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.textField:focus::placeholder {
+	animation-name: placeholderAnimation;
+	animation-duration: 0.2s;
+	animation-timing-function: ease-in-out;
+	animation-play-state: running;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-delay: 0.2s;
+}
+
+@keyframes placeholderAnimation {
+	0% {
+		opacity: 1;
+		padding-left: 100%;
+		padding-right: 0%;
+	}
+	50% {
+		opacity: 0.75;
+		padding: 0;
+	}
+	100% {
+		opacity: 0.5;
+		padding-left: 0%;
+		padding-right: 100%;
+	}
+}
+
+#loginMessage {
+	color: deepskyblue;
+	margin-bottom: 4rem;
+	font-size: 1.5rem;
+	width: 50%;
+}
+
+#icon {
+	display: none;
 	position: relative;
 	left: 40px;
 	bottom: -0.4rem;
 	float: left;
 	background-color: transparent;
-	cursor: pointer;
-	transition: ease-in-out;
-	transition-duration: 0.2s;
-}
-
-.menuModalOpen {
-	transform: translate(0, -100px);
 }
 
 h1 {
-	font-size: 2.5rem;
+	font-size: 2.7rem;
 	background-color: transparent;
 	width: max-content;
 	max-width: 1000px;
 }
 
-#addBookBtn {
+#accountBtn,
+#signOutBtn {
 	display: none;
 	position: relative;
 	bottom: 2rem;
-	right: 25px;
+	right: 1rem;
 	float: right;
 	outline: none;
 	text-shadow: none;
@@ -57,9 +107,12 @@ h1 {
 	border: none;
 	width: 100px;
 	height: 1.5rem;
-	background-color: forestgreen;
 	cursor: pointer;
 	box-shadow: 2px 2px 5px black;
+}
+
+#accountBtn {
+	right: 2rem;
 }
 
 #bookGrid {
@@ -119,6 +172,8 @@ h1 {
 }
 
 #bookGrid .addBookCard {
+	display: none;
+	cursor: pointer;
 	background-color: transparent;
 	font-size: 3rem;
 	padding: 40px 0;
@@ -184,13 +239,21 @@ h1 {
 	background-color: black;
 }
 
-#signInModal label,
-#createAccountModal label,
 #booksForm > label,
 #updateBookForm > label {
 	background-color: black;
 	text-shadow: none;
 	color: grey;
+}
+
+#signInForm label,
+#createAccountForm label {
+	text-shadow: none;
+}
+
+#signInForm,
+#createAccountForm {
+	display: none;
 }
 
 .modal,
@@ -286,23 +349,19 @@ h1 {
 	color: grey;
 }
 
-#signInModalContent > h2,
-#createAccountModalContent > h2 {
-	font-size: 1.5rem;
-	opacity: 0.9;
-	background-color: black;
-	padding: 20px 0 20px 0;
-	border-radius: 10px;
+#signInFormContent > h2,
+#createAccountFormContent > h2 {
+	font-size: 1.2rem;
+	font-weight: normal;
+	margin-bottom: 30px;
 }
 
 .textField {
 	margin: 5px 0 20px 0;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	border-bottom: solid 1px white;
-	background-color: transparent;
-	color: white;
+	border-radius: 1rem;
+	border: none;
+	background-color: white;
+	color: black;
 	outline: none;
 	height: 1.5rem;
 	width: 50%;
@@ -327,43 +386,20 @@ h1 {
 	cursor: pointer;
 }
 
+#createAccountBtn {
+	margin: 0 0 0 25px;
+	width: 125px;
+}
+
+#backBtn {
+	display: none;
+	background-color: royalblue;
+}
+
 #deleteAccountBtn:last-child {
 	background-color: crimson;
 	width: 125px;
 	margin: 0 0 10px 0;
-}
-
-#menuModal {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-#menuModalContent {
-	width: min-content;
-	display: grid;
-	grid-gap: 50px;
-	place-content: center;
-	margin: 70px 10px;
-	animation-name: menuModalAnimation;
-	animation-duration: 0.2s;
-}
-
-@keyframes menuModalAnimation {
-	from {
-		opacity: 0;
-		transform: translate(0px, -25px);
-	}
-	to {
-		opacity: 1;
-		transform: translate(0px, 0px);
-	}
 }
 
 .btn2,
@@ -416,11 +452,9 @@ h1 {
 	background-color: royalblue;
 }
 
-#signInModal form,
-#createAccountModal form {
-	border-radius: 10px;
-	background-color: black;
-	opacity: 0.9;
+#signInForm form,
+#createAccountForm form {
+	width: 40%;
 }
 
 #deleteWarningModalContent,
@@ -438,10 +472,12 @@ h1 {
 }
 
 footer {
-	position: absolute;
-	width: 100vw;
-	bottom: 50px;
-	background-color: transparent;
+	position: fixed;
+	left: 0;
+	bottom: 1rem;
+	width: 100%;
+	color: white;
+	text-align: center;
 }
 
 a {
@@ -460,10 +496,7 @@ a:hover {
 	transition-duration: 0.2s;
 }
 
-.active:active,
-#deleteAccountBtn:active,
-#noDeleteAccountBtn:active,
-#yesDeleteAccountBtn:active {
+.active:active {
 	transform: scale(0.9);
 	transition: ease-in-out;
 	transition-duration: 0.2s;
