@@ -1,7 +1,15 @@
 // Render current user's cards
 function renderBook(doc) {
 	if (firebase.auth().currentUser.uid == doc.data().user) {
+		column++;
 		let div = document.createElement('div');
+		if ((firstRow = true && column > 3)) {
+			column = 1;
+			firstRow = false;
+		} else {
+			column > 3 ? (column = 1) : column;
+		}
+		div.setAttribute('data-column', column);
 		div.setAttribute('data-id', doc.id);
 		div.setAttribute('class', 'card');
 		div.setAttribute('draggable', 'true');
@@ -85,8 +93,7 @@ signInBtn.addEventListener('click', (e) => {
 	signInBtn.style.display = 'none';
 	createAccountBtn.style.display = 'none';
 	backBtn.style.display = 'inline-block';
-	loginMessage.textContent =
-		'Enter your email and password to sign in:';
+	loginMessage.textContent = 'Enter your email and password to sign in:';
 });
 
 createAccountBtn.addEventListener('click', (e) => {
@@ -116,10 +123,10 @@ backBtn.addEventListener('click', () => {
 // 		querySnapshot.forEach(function (doc) {
 // 			if (firebase.auth().currentUser.uid == doc.data().user) {
 // 				// doc.data() is never undefined for query doc snapshots
-// 				console.log(doc.id, ' => ', doc.data().gridPosition);
+// 				console.log(doc.id, ' => ', doc.data().user);
 // 			}
 // 		});
-// 	});
+// });
 
 addBookCard.addEventListener('click', () => {
 	addBookModal.style.display = 'block';
@@ -193,7 +200,7 @@ createAccountBtn.addEventListener('click', () => {
 	createAccountError.style.display = 'none';
 });
 
-accountBtn.addEventListener('click', () => {
+function openAccountInfoModal() {
 	accountDisplayName.textContent = auth.currentUser.displayName;
 	accountEmail.textContent = auth.currentUser.email;
 	editAccountEmailConfirmBtn.style.display = 'none';
@@ -218,6 +225,10 @@ accountBtn.addEventListener('click', () => {
 	editAccountPasswordError.style.display = 'none';
 	deleteAccountError.style.display = 'none';
 	accountInfoModal.style.display = 'block';
+}
+
+accountBtn.addEventListener('click', () => {
+	openAccountInfoModal();
 });
 
 editAccountDisplayNameBtn.addEventListener('click', () => {
@@ -225,7 +236,16 @@ editAccountDisplayNameBtn.addEventListener('click', () => {
 	editAccountDisplayNameBtn.style.display = 'none';
 	editAccountDisplayName.style.display = 'inline-block';
 	editAccountDisplayNameConfirmBtn.style.display = 'inline-block';
+	closeAccountEmail();
+	closeAccountPassword();
 });
+
+function closeAccountDisplayName() {
+	accountDisplayName.textContent = auth.currentUser.displayName;
+	editAccountDisplayNameBtn.style.display = 'inline-block';
+	editAccountDisplayName.style.display = 'none';
+	editAccountDisplayNameConfirmBtn.style.display = 'none';
+}
 
 editAccountDisplayNameConfirmBtn.addEventListener('click', (e) => {
 	e.preventDefault();
@@ -236,14 +256,31 @@ editAccountEmailBtn.addEventListener('click', () => {
 	editAccountEmail.style.display = 'inline-block';
 	editAccountEmailBtn.style.display = 'none';
 	editAccountEmailConfirmBtn.style.display = 'inline-block';
+	closeAccountDisplayName();
+	closeAccountPassword();
 });
+
+function closeAccountEmail() {
+	accountEmail.textContent = auth.currentUser.email;
+	editAccountEmail.style.display = 'none';
+	editAccountEmailBtn.style.display = 'inline-block';
+	editAccountEmailConfirmBtn.style.display = 'none';
+}
 
 editAccountPasswordBtn.addEventListener('click', () => {
 	accountPassword.textContent =
 		'Click Okay below to receive an email with a link to change your password.';
 	editAccountPasswordBtn.style.display = 'none';
 	editAccountPasswordConfirmBtn.style.display = 'inline-block';
+	closeAccountDisplayName();
+	closeAccountEmail();
 });
+
+function closeAccountPassword() {
+	accountPassword.textContent = accountPasswordDots;
+	editAccountPasswordBtn.style.display = 'inline-block';
+	editAccountPasswordConfirmBtn.style.display = 'none';
+}
 
 signOutBtn.addEventListener('click', (e) => {
 	signOutWarningModal.style.display = 'block';
@@ -260,35 +297,8 @@ deleteAccountBtn.addEventListener('click', () => {
 
 noDeleteAccountBtn.addEventListener('click', () => {
 	deleteAccountWarningModal.style.display = 'none';
+	openAccountInfoModal();
 });
-
-document.querySelector('#bookTitle').addEventListener('focus', () => {
-	focusedFormInput = bookTitle;
-});
-
-document.querySelector('#updateBookTitle').addEventListener('focus', () => {
-	focusedFormInput = updateBookTitle;
-});
-
-document.querySelector('#bookAuthor').addEventListener('focus', () => {
-	focusedFormInput = bookAuthor;
-});
-
-document.querySelector('#updateBookAuthor').addEventListener('focus', () => {
-	focusedFormInput = updateBookAuthor;
-});
-
-document
-	.querySelector('#createAccountDisplayName')
-	.addEventListener('focus', () => {
-		focusedFormInput = createAccountDisplayName;
-	});
-
-document
-	.querySelector('#editAccountDisplayName')
-	.addEventListener('focus', () => {
-		focusedFormInput = editAccountDisplayName;
-	});
 
 /*
 Drag and hold card
@@ -300,7 +310,7 @@ Update grid positions in firestore
 // Begin drag and drop code.
 
 // Loop through cards and add listeners
-for (const card of cards) {
+for (card of cards) {
 	card.addEventListener('dragstart', dragStart);
 	card.addEventListener('dragend', dragEnd);
 	card.addEventListener('dragover', dragOver);
@@ -312,6 +322,7 @@ for (const card of cards) {
 // Drag Functions
 
 function dragStart() {
+	console.log('holding');
 	this.className += ' hold';
 	setTimeout(() => (this.className = 'invisible'), 0);
 }
@@ -347,22 +358,22 @@ function dragDrop() {
 // 	createGridPositionForCards();
 // }, 2000);
 
-function createGridPositionForCards(doc) {
-	let i = 0;
-	db.collection('books').onSnapshot((snapshot) => {
-		for (card of cards) {
-			let id = card.dataset.id;
-			db.collection('books')
-				.doc(id)
-				.get()
-				.then(() => {
-					if (doc.data().gridPosition.exists == true) {
-						i++;
-						db.collection('books').doc(id).update({
-							gridPosition: i,
-						});
-					}
-				});
-		}
-	});
-}
+// function createGridPositionForCards(doc) {
+// 	let i = 0;
+// 	db.collection('books').onSnapshot((snapshot) => {
+// 		for (card of cards) {
+// 			let id = card.dataset.id;
+// 			db.collection('books')
+// 				.doc(id)
+// 				.get()
+// 				.then(() => {
+// 					if (doc.data().gridPosition.exists == false) {
+// 						i++;
+// 						db.collection('books').doc(id).update({
+// 							gridPosition: i,
+// 						});
+// 					}
+// 				});
+// 		}
+// 	});
+// }

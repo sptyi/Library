@@ -57,7 +57,8 @@ const createAccountDisplayName = document.querySelector(
 const editAccountDisplayName = document.querySelector(
 	'#editAccountDisplayName'
 );
-let focusedFormInput = '';
 let accountPasswordLength = '';
 let accountPasswordDots = '';
 let bookId = '';
+let column = 1;
+let firstRow = true;

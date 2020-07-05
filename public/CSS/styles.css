@@ -1,5 +1,6 @@
 * {
 	margin: auto;
+	box-sizing: border-box;
 	text-align: center;
 	padding: 0;
 	color: white;
@@ -9,6 +10,7 @@
 }
 
 body {
+	overflow-x: hidden;
 	background-image: url('/Assets/librarybg.jpg');
 	background-position: bottom left;
 	background-repeat: no-repeat;
@@ -19,16 +21,20 @@ body {
 }
 
 #navbar {
-	background-color: grey;
-	height: 3.5rem;
+	height: 4.5rem;
 	width: 100vw;
-	margin-bottom: 50px;
+	margin-bottom: 2rem;
+	background: linear-gradient(
+		0deg,
+		rgba(0, 0, 0, 0) 0%,
+		rgba(51, 51, 51, 1) 20%
+	);
 }
 
 #logo {
 	width: 75px;
 	height: 75px;
-	margin-bottom: 2rem;
+	margin-bottom: 1.5rem;
 }
 
 ::placeholder {
@@ -82,12 +88,13 @@ input::-webkit-inner-spin-button {
 	display: none;
 	position: relative;
 	left: 40px;
-	bottom: -0.4rem;
+	top: 0.5rem;
 	float: left;
 	background-color: transparent;
 }
 
 h1 {
+	color: lightgray;
 	font-size: 2.7rem;
 	background-color: transparent;
 	width: max-content;
@@ -98,8 +105,8 @@ h1 {
 #signOutBtn {
 	display: none;
 	position: relative;
-	bottom: 2rem;
-	right: 1rem;
+	bottom: 2.3rem;
+	right: 2rem;
 	float: right;
 	outline: none;
 	text-shadow: none;
@@ -112,7 +119,7 @@ h1 {
 }
 
 #accountBtn {
-	right: 2rem;
+	right: 3rem;
 }
 
 #bookGrid {
@@ -122,6 +129,7 @@ h1 {
 	gap: 2rem;
 	align-items: center;
 	justify-items: center;
+	margin-bottom: 3rem;
 }
 
 #bookGrid div {
@@ -130,22 +138,6 @@ h1 {
 	min-width: 75%;
 	border-radius: 10px;
 	margin: 0.25rem;
-}
-
-.empty {
-	cursor: pointer;
-}
-
-.empty:hover {
-	transform: scale(1.1);
-	transition: ease-in-out;
-	transition-duration: 0.2s;
-}
-
-.empty:active {
-	transform: scale(0.9);
-	transition: ease-in-out;
-	transition-duration: 0.2s;
 }
 
 .hold {
@@ -473,11 +465,11 @@ h1 {
 
 footer {
 	position: fixed;
-	left: 0;
+	right: 2rem;
 	bottom: 1rem;
 	width: 100%;
 	color: white;
-	text-align: center;
+	text-align: right;
 }
 
 a {

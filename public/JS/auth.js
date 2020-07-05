@@ -12,7 +12,7 @@ auth.onAuthStateChanged((user) => {
 		accountBtn.style.display = 'block';
 		addBookCard.style.display = 'inline-block';
 		db.collection('books')
-			.orderBy('gridPosition')
+			// .orderBy('gridPosition')
 			.onSnapshot((snapshot) => {
 				let changes = snapshot.docChanges();
 				changes.forEach((change) => {
@@ -44,13 +44,13 @@ auth.onAuthStateChanged((user) => {
 createAccountFormContent.addEventListener('submit', (e) => {
 	e.preventDefault();
 
-	const email = createAccountModalContent['createAccountEmail'].value;
-	const password = createAccountModalContent['createAccountPassword'].value;
+	const email = createAccountFormContent['createAccountEmail'].value;
+	const password = createAccountFormContent['createAccountPassword'].value;
 	accountPasswordLength =
-		createAccountModalContent['createAccountPassword'].value.length;
+		createAccountFormContent['createAccountPassword'].value.length;
 	window.localStorage.setItem('passwordLength', accountPasswordLength);
 	const displayName =
-		createAccountModalContent['createAccountDisplayName'].value;
+		createAccountFormContent['createAccountDisplayName'].value;
 
 	auth
 		.createUserWithEmailAndPassword(email, password)
@@ -60,6 +60,7 @@ createAccountFormContent.addEventListener('submit', (e) => {
 			}),
 				(h1.textContent = `${auth.currentUser.displayName}'s Library`),
 				auth.currentUser.sendEmailVerification(),
+				(createAccountFormContent.style.display = 'none'),
 				(signIn.style.display = 'none'),
 				(backBtn.style.display = 'none');
 		})
@@ -147,37 +148,22 @@ yesSignOut.addEventListener('click', () => {
 		.then(
 			window.localStorage.clear(),
 			(signOutWarningModal.style.display = 'none'),
-			(loginMessage.textContent = 'You have been logged out of your library.'),
+			(loginMessage.textContent = 'You have been logged out of your library.')
 		);
 });
 
-yesDeleteAccountBtn.addEventListener('click', (doc) => {
-	let uid = auth.currentUser.uid;
-	let deleteUser = firebase.functions().httpsCallable('deleteUser');
-	deleteUser(uid).then(function (result) {
-		console.log(result);
-		deleteAccountWarningModal.style.display = 'none';
-		loginMessage.textContent = 'Your account has been permanently deleted.';
-	});
+yesDeleteAccountBtn.addEventListener('click', () => {
+	firebase
+		.auth()
+		.currentUser.delete()
+		.then(function () {
+			window.localStorage.clear();
+			deleteAccountWarningModal.style.display = 'none';
+			loginMessage.textContent = 'Your account has been permanently deleted.';
+			createAccountBtn.style.display = 'inline-block';
+			signInBtn.style.display = 'none';
+		})
+		.catch(function (err) {
+			console.log(err);
+		});
 });
-
-// auth.deleteUser(uid)
-//     .then(function () {
-//         deleteAccountWarningModal.style.display = 'none';
-//         loginMessage.textContent = 'Your account has been permanently deleted.';
-//         console.log('Successfully deleted user');
-//     })
-//     .catch(function (error) {
-//         console.log('Error deleting user:', error);
-//     });
-// auth
-// 	.deleteUser(firebase.auth().currentUser.uid)
-// 	.then(() => {
-// 		deleteAccountWarningModal.style.display = 'none';
-// 		auth.signOut();
-// 		loginMessage.textContent = 'Your account has been permanently deleted.';
-// 	})
-// 	.catch((err) => {
-// 		deleteAccountError.style.display = 'block';
-// 		deleteAccountError.textContent = err.message;
-// });
