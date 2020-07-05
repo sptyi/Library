@@ -191,7 +191,8 @@ h1 {
 
 .deleteBtn:hover,
 #deleteAccountBtn:hover,
-#yesDeleteAccountBtn:hover {
+#yesDeleteAccountBtn:hover,
+.notReadBtn:hover {
 	transform: scale(1.1);
 	background-color: crimson;
 	color: white;
@@ -206,7 +207,8 @@ h1 {
 }
 
 .editBtn:hover,
-#noDeleteAccountBtn:hover {
+#noDeleteAccountBtn:hover,
+.readBtn:hover {
 	transform: scale(1.1) rotate(90deg);
 	background-color: forestgreen;
 	color: white;
@@ -215,7 +217,8 @@ h1 {
 	transition-duration: 0.2s;
 }
 
-#noDeleteAccountBtn:hover {
+#noDeleteAccountBtn:hover,
+.readBtn:hover {
 	transform: rotate(0deg);
 }
 
@@ -378,6 +381,32 @@ h1 {
 	cursor: pointer;
 }
 
+.readBtn,
+.notReadBtn {
+	margin: 0;
+	width: 85px;
+	height: 25px;
+	text-shadow: none;
+}
+
+.readBtn:hover,
+.notReadBtn:hover {
+	transform: translate(0, 18px) scale(1.1);
+	transition: ease-in-out;
+	transition-duration: 0.2s;
+}
+
+.readBtn:active,
+.notReadBtn:active {
+	transform: translate(0, 18px) scale(0.9);
+	transition: ease-in-out;
+	transition-duration: 0.2s;
+}
+
+.shiftDown {
+	transform: translate(0, 18px);
+}
+
 #createAccountBtn {
 	margin: 0 0 0 25px;
 	width: 125px;
@@ -436,7 +465,8 @@ h1 {
 }
 
 #signOutBtn,
-#yesDeleteAccountBtn {
+#yesDeleteAccountBtn,
+.notReadBtn {
 	background-color: crimson;
 }
 

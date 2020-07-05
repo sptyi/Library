@@ -17,11 +17,13 @@ function renderBook(doc) {
 		div.addEventListener('mouseenter', () => {
 			deleteBtn.style.display = 'block';
 			editBtn.style.display = 'block';
+			read.classList.add('shiftDown');
 		});
 
 		div.addEventListener('mouseleave', () => {
 			deleteBtn.style.display = 'none';
 			editBtn.style.display = 'none';
+			read.classList.remove('shiftDown');
 		});
 
 		let title = document.createElement('div');
@@ -38,15 +40,34 @@ function renderBook(doc) {
 			div.appendChild(pages);
 		}
 
-		let read = document.createElement('div');
+		let read = document.createElement('button');
 		if (doc.data().read) {
-			read.textContent = 'I have already read this book!';
-			let card = div.parentElement;
+			read.textContent = 'Read';
+			read.setAttribute('class', 'readBtn btn');
 			div.setAttribute('class', 'cardRead');
 		} else {
-			read.textContent = 'I should read this book...';
+			read.textContent = 'Not Read';
+			read.setAttribute('class', 'notReadBtn btn');
 		}
 		div.appendChild(read);
+
+		read.addEventListener('click', (e) => {
+			let id = e.target.parentElement.getAttribute('data-id');
+			bookId = id;
+			if (read.classList.contains('readBtn')) {
+				db.collection('books').doc(bookId).update({
+					read: false,
+				});
+				read.textContent = 'Not Read';
+				read.setAttribute('class', 'notReadBtn btn');
+			} else {
+				db.collection('books').doc(bookId).update({
+					read: true,
+				});
+				read.textContent = 'Read';
+				read.setAttribute('class', 'readBtn btn');
+			}
+		});
 
 		let deleteBtn = document.createElement('button');
 		deleteBtn.setAttribute('class', 'deleteBtn active');
@@ -81,7 +102,6 @@ function renderBook(doc) {
 			updateBookForm.title.value = doc.data().title;
 			updateBookForm.author.value = doc.data().author;
 			updateBookForm.pages.value = doc.data().pages;
-			updateBookForm.read.checked = doc.data().read;
 			updateBookModal.style.display = 'block';
 		});
 	}
@@ -163,12 +183,10 @@ function updateBook() {
 		title: updateBookForm.title.value,
 		author: updateBookForm.author.value,
 		pages: updateBookForm.pages.value,
-		read: updateBookForm.read.checked,
 	});
 	updateBookForm.title.value = '';
 	updateBookForm.author.value = '';
 	updateBookForm.pages.value = '';
-	updateBookForm.read.checked = false;
 }
 
 window.addEventListener('click', outsideModalClick);
