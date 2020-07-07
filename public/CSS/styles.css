@@ -24,10 +24,11 @@ body {
 	height: 4.5rem;
 	width: 100vw;
 	margin-bottom: 2rem;
+	background: rgb(51, 51, 51);
 	background: linear-gradient(
 		0deg,
-		rgba(0, 0, 0, 0) 0%,
-		rgba(51, 51, 51, 1) 20%
+		rgba(51, 51, 51, 0) 0%,
+		rgba(51, 51, 51, 1) 60%
 	);
 }
 
@@ -79,7 +80,7 @@ input::-webkit-inner-spin-button {
 
 #loginMessage {
 	color: deepskyblue;
-	margin-bottom: 4rem;
+	margin-bottom: 1rem;
 	font-size: 1.5rem;
 	width: 50%;
 }
@@ -140,13 +141,9 @@ h1 {
 	margin: 0.25rem;
 }
 
-.hold {
-	border: none;
-}
-
 .hovered {
-	background: #f4f4f4;
-	border-style: dashed;
+	border: dashed 2px #f4f4f4;
+	opacity: 0.5;
 }
 
 .invisible {
@@ -255,7 +252,6 @@ h1 {
 #deleteAccountWarningModal {
 	display: none;
 	position: fixed;
-	z-index: 1;
 	left: 0;
 	top: 0;
 	height: 100%;
@@ -307,14 +303,19 @@ h1 {
 	color: red;
 }
 
-.error,
-#deleteAccountError {
+.error {
 	background-color: black;
 	display: none;
 	font-size: 1rem !important;
 	color: red;
 	border-radius: 0 0 10px 10px;
 	padding-bottom: 20px;
+}
+
+#createAccountError,
+#loginError {
+	border-radius: 10px;
+	padding: 0.5rem;
 }
 
 #accountInfoModalContent button {
@@ -373,8 +374,8 @@ h1 {
 #deleteAccountBtn:last-child {
 	margin: 25px;
 	border-radius: 7px;
-	width: 110px;
-	height: 30px;
+	width: 7rem;
+	height: 1.7rem;
 	outline: none;
 	background-color: forestgreen;
 	border: none;
@@ -384,8 +385,8 @@ h1 {
 .readBtn,
 .notReadBtn {
 	margin: 0;
-	width: 85px;
-	height: 25px;
+	width: 4.5rem;
+	height: 1.5rem;
 	text-shadow: none;
 }
 
@@ -405,16 +406,6 @@ h1 {
 
 .shiftDown {
 	transform: translate(0, 18px);
-}
-
-#createAccountBtn {
-	margin: 0 0 0 25px;
-	width: 125px;
-}
-
-#backBtn {
-	display: none;
-	background-color: royalblue;
 }
 
 #deleteAccountBtn:last-child {
@@ -452,16 +443,29 @@ h1 {
 	float: right;
 }
 
-#signInSubmitBtn,
-#createAccountSubmitBtn,
 #noDeleteAccountBtn,
 #yesDeleteAccountBtn {
 	margin: 25px;
 	position: relative;
 }
 
-#createAccountSubmitBtn {
-	width: 125px;
+#createAccountBtn,
+#signInBtn {
+	margin: 0.5rem;
+	width: 7rem;
+}
+
+#signInSubmitBtn,
+#createAccountSubmitBtn,
+#backBtn {
+	margin: 0.5rem;
+	width: 7rem;
+	position: relative;
+}
+
+#backBtn {
+	display: none;
+	background-color: royalblue;
 }
 
 #signOutBtn,
@@ -497,7 +501,6 @@ footer {
 	position: fixed;
 	right: 2rem;
 	bottom: 1rem;
-	width: 100%;
 	color: white;
 	text-align: right;
 }

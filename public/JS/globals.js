@@ -1,3 +1,20 @@
+// Initialize Firebase
+const firebaseConfig = {
+	apiKey: 'AIzaSyCR7ctwDeT3SvS4OqZXzqsi8FypBlumA2A',
+	authDomain: 'library-sptyi.firebaseapp.com',
+	databaseURL: 'https://library-sptyi.firebaseio.com',
+	projectId: 'library-sptyi',
+	storageBucket: 'library-sptyi.appspot.com',
+	messagingSenderId: '917004024144',
+	appId: '1:917004024144:web:75ea723ad31de4f266d455',
+	measurementId: 'G-091E60BMHL',
+};
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+// Cache DOM
 const h1 = document.querySelector('#h1');
 const icon = document.querySelector('#icon');
 const bookGrid = document.querySelector('#bookGrid');
@@ -57,8 +74,12 @@ const createAccountDisplayName = document.querySelector(
 const editAccountDisplayName = document.querySelector(
 	'#editAccountDisplayName'
 );
+
+// Initialize Globals
 let accountPasswordLength = '';
 let accountPasswordDots = '';
 let bookId = '';
 let column = 1;
+let row = 1;
 let firstRow = true;
+let held;

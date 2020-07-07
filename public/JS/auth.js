@@ -1,3 +1,4 @@
+// Authentication
 auth.onAuthStateChanged((user) => {
 	if (user) {
 		closeModal();
@@ -12,7 +13,8 @@ auth.onAuthStateChanged((user) => {
 		accountBtn.style.display = 'block';
 		addBookCard.style.display = 'inline-block';
 		db.collection('books')
-			// .orderBy('gridPosition')
+			.orderBy('row')
+			.orderBy('column')
 			.onSnapshot((snapshot) => {
 				let changes = snapshot.docChanges();
 				changes.forEach((change) => {
@@ -41,11 +43,22 @@ auth.onAuthStateChanged((user) => {
 	}
 });
 
+// Create Account
 createAccountFormContent.addEventListener('submit', (e) => {
 	e.preventDefault();
 
 	const email = createAccountFormContent['createAccountEmail'].value;
-	const password = createAccountFormContent['createAccountPassword'].value;
+	let passwordInput = createAccountFormContent['createAccountPassword'].value;
+	let passwordVerify =
+		createAccountFormContent['createAccountPasswordVerify'].value;
+	let password;
+	if (passwordInput == passwordVerify) {
+		password = createAccountFormContent['createAccountPassword'].value;
+	} else {
+		createAccountError.style.display = 'inline-block';
+		createAccountError.textContent =
+			'The password does not match. Please check to be sure the password was entered correctly.';
+	}
 	accountPasswordLength =
 		createAccountFormContent['createAccountPassword'].value.length;
 	window.localStorage.setItem('passwordLength', accountPasswordLength);
@@ -58,8 +71,10 @@ createAccountFormContent.addEventListener('submit', (e) => {
 			auth.currentUser.updateProfile({
 				displayName: displayName,
 			}),
-				(h1.textContent = `${auth.currentUser.displayName}'s Library`),
-				auth.currentUser.sendEmailVerification(),
+				setTimeout(() => {
+					h1.textContent = `${auth.currentUser.displayName}'s Library`;
+				}, 2000);
+			auth.currentUser.sendEmailVerification(),
 				(createAccountFormContent.style.display = 'none'),
 				(signIn.style.display = 'none'),
 				(backBtn.style.display = 'none');
@@ -70,6 +85,7 @@ createAccountFormContent.addEventListener('submit', (e) => {
 		});
 });
 
+// Update Account
 editAccountDisplayNameConfirmBtn.addEventListener('click', () => {
 	if (editAccountDisplayName.value.length > 0) {
 		auth.currentUser
@@ -123,6 +139,7 @@ editAccountPasswordConfirmBtn.addEventListener('click', () => {
 		});
 });
 
+// Sign In
 signIn.addEventListener('submit', (e) => {
 	e.preventDefault();
 
@@ -138,10 +155,11 @@ signIn.addEventListener('submit', (e) => {
 		})
 		.catch((err) => {
 			loginError.style.display = 'block';
-			loginError.textContent = err.message;
+			loginError.textContent = 'Invalid email or password.';
 		});
 });
 
+// Sign Out
 yesSignOut.addEventListener('click', () => {
 	auth
 		.signOut()
@@ -152,6 +170,7 @@ yesSignOut.addEventListener('click', () => {
 		);
 });
 
+// Delete Account
 yesDeleteAccountBtn.addEventListener('click', () => {
 	firebase
 		.auth()
@@ -164,6 +183,7 @@ yesDeleteAccountBtn.addEventListener('click', () => {
 			signInBtn.style.display = 'none';
 		})
 		.catch(function (err) {
-			console.log(err);
+			deleteAccountError.textContent =
+				'There was an error deleting your account. Please log out and back in again to retry.';
 		});
 });

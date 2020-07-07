@@ -26,7 +26,7 @@
 		<span>
 			<button id="signInBtn" class="btn hover active">Sign In</button>
 			<button id="createAccountBtn" class="btn hover active">
-				CreateAccount
+				Create Account
 			</button>
 		</span>
 		<div id="bookGrid">
@@ -103,7 +103,7 @@
 					type="submit"
 					value="Sign In"
 					id="signInSubmitBtn"
-					class="btn2 hover active"
+					class="btn hover active"
 				/>
 			</form>
 		</div>
@@ -148,6 +148,15 @@
 					placeholder="Password"
 					required
 				/><br />
+				<label for="passwordVerify">Re-enter password: </label><br />
+				<input
+					type="password"
+					name="passwordVerify"
+					id="createAccountPasswordVerify"
+					class="textField"
+					placeholder="Re-enter Password"
+					required
+				/><br />
 				<label for="displayName">Display Name: </label><br />
 				<input
 					type="text"
@@ -157,17 +166,17 @@
 					placeholder="Display Name"
 					required
 				/><br />
+				<p id="createAccountError" class="error"></p>
 				<input
 					type="submit"
 					value="Create Account"
 					id="createAccountSubmitBtn"
-					class="btn2 hover active"
+					class="btn hover active"
 				/>
-				<p id="createAccountError" class="error"></p>
 			</form>
 		</div>
 
-		<button id="backBtn" class="btn">Back</button>
+		<button id="backBtn" class="btn hover active">Back</button>
 
 		<div id="deleteWarningModal" class="modal">
 			<div id="deleteWarningModalContent">
@@ -300,29 +309,12 @@
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/CSSRulePlugin.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/Draggable.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/ScrollTrigger.min.js"></script>
 
-		<script defer>
-			var firebaseConfig = {
-				apiKey: 'AIzaSyCR7ctwDeT3SvS4OqZXzqsi8FypBlumA2A',
-				authDomain: 'library-sptyi.firebaseapp.com',
-				databaseURL: 'https://library-sptyi.firebaseio.com',
-				projectId: 'library-sptyi',
-				storageBucket: 'library-sptyi.appspot.com',
-				messagingSenderId: '917004024144',
-				appId: '1:917004024144:web:75ea723ad31de4f266d455',
-				measurementId: 'G-091E60BMHL',
-			};
-			firebase.initializeApp(firebaseConfig);
-			firebase.analytics();
-			const db = firebase.firestore();
-			const auth = firebase.auth();
-		</script>
 		<script type="text/javascript" src="JS/globals.js"></script>
 		<script type="text/javascript" src="JS/app.js"></script>
 		<script type="text/javascript" src="JS/auth.js"></script>
