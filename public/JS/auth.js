@@ -9,9 +9,8 @@ auth.onAuthStateChanged((user) => {
 		backBtn.style.display = 'none';
 		logo.style.display = 'none';
 		icon.style.display = 'block';
-		signOutBtn.style.display = 'block';
-		accountBtn.style.display = 'block';
-		addBookCard.style.display = 'inline-block';
+		addBookCard.style.display = 'block';
+		burgerMenuContainer.style.display = 'block';
 		db.collection('books')
 			.orderBy('row')
 			.orderBy('column')
@@ -40,6 +39,7 @@ auth.onAuthStateChanged((user) => {
 		logo.style.display = 'block';
 		icon.style.display = 'none';
 		addBookCard.style.display = 'none';
+		burgerMenuContainer.style.display = 'none';
 	}
 });
 

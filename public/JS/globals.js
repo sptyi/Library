@@ -74,6 +74,9 @@ const createAccountDisplayName = document.querySelector(
 const editAccountDisplayName = document.querySelector(
 	'#editAccountDisplayName'
 );
+const burgerMenuContainer = document.querySelector('#burgerMenuContainer');
+const burgerMenu = document.querySelector('#burgerMenu');
+const mediaQuery = window.matchMedia('(max-width: 500px)');
 
 // Initialize Globals
 let accountPasswordLength = '';

@@ -89,6 +89,8 @@ function renderBook(doc) {
 				deleteWarningModal.style.display = 'none';
 				db.collection('books').doc(id).delete();
 			});
+			deleteBtn.style.display = 'none';
+			editBtn.style.display = 'none';
 		});
 
 		noDelete.addEventListener('click', () => {
@@ -109,6 +111,8 @@ function renderBook(doc) {
 			updateBookForm.author.value = doc.data().author;
 			updateBookForm.pages.value = doc.data().pages;
 			updateBookModal.style.display = 'block';
+			editBtn.style.display = 'none';
+			deleteBtn.style.display = 'none';
 		});
 	}
 }
@@ -147,11 +151,13 @@ backBtn.addEventListener('click', () => {
 
 // Add Book to Library
 addBookCard.addEventListener('click', () => {
+	addBookCard.style.zIndex = '-1';
 	addBookModal.style.display = 'block';
 });
 
 booksForm.addEventListener('submit', (e) => {
 	e.preventDefault();
+	bookTitle.focus();
 	addBookToLibrary();
 	closeModal();
 });
@@ -176,6 +182,7 @@ function addBookToLibrary() {
 // Update Books
 updateBookForm.addEventListener('submit', (e) => {
 	e.preventDefault();
+	updateBookTitle.focus();
 	updateBook();
 	closeModal();
 });
@@ -204,6 +211,7 @@ function outsideModalClick(e) {
 		(e.target == deleteAccountWarningModal)
 	) {
 		closeModal();
+		addBookCard.style.zIndex = '';
 	}
 }
 
@@ -318,6 +326,29 @@ noDeleteAccountBtn.addEventListener('click', () => {
 	deleteAccountWarningModal.style.display = 'none';
 	openAccountInfoModal();
 });
+
+// Burger Menu
+burgerMenuContainer.addEventListener('click', () => {
+	if (accountBtn.style.display == 'none') {
+		accountBtn.style.display = 'block';
+		signOutBtn.style.display = 'block';
+	} else {
+		accountBtn.style.display = 'none';
+		signOutBtn.style.display = 'none';
+	}
+});
+
+// Media Query for Burger Menu
+function isMobileDevice() {
+	return window.matchMedia('(max-width: 500px)').matches;
+}
+
+isMobileDevice();
+
+if (isMobileDevice == true) {
+	accountBtn.style.display = 'none';
+	signOutBtn.style.display = 'none';
+}
 
 // Drag and Drop
 setTimeout(() => {
