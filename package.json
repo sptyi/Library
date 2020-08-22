@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/sptyi/Library#readme",
   "dependencies": {
-    "firebase-admin": "^9.1.0",
+    "firebase-admin": "^9.1.1",
     "firebase-functions": "^3.9.1"
   }
 }
