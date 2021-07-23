@@ -57,7 +57,7 @@ function renderBook(doc) {
 		}
 		div.appendChild(read);
 
-		read.addEventListener('click', (e) => {
+		read.addEventListener('click', e => {
 			let id = e.target.parentElement.getAttribute('data-id');
 			bookId = id;
 			if (read.classList.contains('readBtn')) {
@@ -81,7 +81,7 @@ function renderBook(doc) {
 		deleteBtn.style.display = 'none';
 		div.appendChild(deleteBtn);
 
-		deleteBtn.addEventListener('click', (e) => {
+		deleteBtn.addEventListener('click', e => {
 			e.stopPropagation();
 			let id = e.target.parentElement.getAttribute('data-id');
 			deleteWarningModal.style.display = 'block';
@@ -103,7 +103,7 @@ function renderBook(doc) {
 		editBtn.style.display = 'none';
 		div.appendChild(editBtn);
 
-		editBtn.addEventListener('click', (e) => {
+		editBtn.addEventListener('click', e => {
 			e.stopPropagation();
 			let id = e.target.parentElement.getAttribute('data-id');
 			bookId = id;
@@ -118,7 +118,7 @@ function renderBook(doc) {
 }
 
 // Sign In
-signInBtn.addEventListener('click', (e) => {
+signInBtn.addEventListener('click', e => {
 	e.preventDefault();
 	signInForm.style.display = 'block';
 	signInBtn.style.display = 'none';
@@ -128,7 +128,7 @@ signInBtn.addEventListener('click', (e) => {
 });
 
 // Create Account
-createAccountBtn.addEventListener('click', (e) => {
+createAccountBtn.addEventListener('click', e => {
 	e.preventDefault();
 	createAccountForm.style.display = 'block';
 	signInBtn.style.display = 'none';
@@ -155,7 +155,7 @@ addBookCard.addEventListener('click', () => {
 	addBookModal.style.display = 'block';
 });
 
-booksForm.addEventListener('submit', (e) => {
+booksForm.addEventListener('submit', e => {
 	e.preventDefault();
 	bookTitle.focus();
 	addBookToLibrary();
@@ -180,7 +180,7 @@ function addBookToLibrary() {
 }
 
 // Update Books
-updateBookForm.addEventListener('submit', (e) => {
+updateBookForm.addEventListener('submit', e => {
 	e.preventDefault();
 	updateBookTitle.focus();
 	updateBook();
@@ -272,7 +272,7 @@ function closeAccountDisplayName() {
 	editAccountDisplayNameConfirmBtn.style.display = 'none';
 }
 
-editAccountDisplayNameConfirmBtn.addEventListener('click', (e) => {
+editAccountDisplayNameConfirmBtn.addEventListener('click', e => {
 	e.preventDefault();
 });
 
@@ -308,7 +308,7 @@ function closeAccountPassword() {
 }
 
 // Sign Out
-signOutBtn.addEventListener('click', (e) => {
+signOutBtn.addEventListener('click', e => {
 	signOutWarningModal.style.display = 'block';
 });
 
@@ -329,7 +329,10 @@ noDeleteAccountBtn.addEventListener('click', () => {
 
 // Burger Menu
 burgerMenuContainer.addEventListener('click', () => {
-	if (accountBtn.style.display == 'none') {
+	if (
+		accountBtn.style.display == 'none' &&
+		signOutBtn.style.display == 'none'
+	) {
 		accountBtn.style.display = 'block';
 		signOutBtn.style.display = 'block';
 	} else {
@@ -337,18 +340,6 @@ burgerMenuContainer.addEventListener('click', () => {
 		signOutBtn.style.display = 'none';
 	}
 });
-
-// Media Query for Burger Menu
-function isMobileDevice() {
-	return window.matchMedia('(max-width: 500px)').matches;
-}
-
-isMobileDevice();
-
-if (isMobileDevice == true) {
-	accountBtn.style.display = 'none';
-	signOutBtn.style.display = 'none';
-}
 
 // Drag and Drop
 setTimeout(() => {
